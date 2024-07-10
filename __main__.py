@@ -29,4 +29,11 @@ if __name__ == "__main__":
         GSettingGroup.SpinType.DOUBLE, True,
         Gtk.Adjustment(lower=50, upper=300, step_increment=25)
     )
+    app.builder.get_object("theming_group").add_font(
+        GSettingGroup.GSetting(
+            title="Interface Font",
+            subtitle="This is the primary font used by your system.",
+            schema="org.gnome.desktop.interface", key="font-name"
+        )
+    )
     app.run()
