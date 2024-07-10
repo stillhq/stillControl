@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.4 -->
+<interface>
+  <!-- interface-name stillcontrol.ui -->
+  <requires lib="gtk" version="4.6"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <object class="AdwApplicationWindow" id="main_window">
+    <property name="title">stillControl</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="AdwHeaderBar" id="header">
+            <property name="title-widget">
+              <object class="AdwViewSwitcher">
+                <property name="policy">wide</property>
+                <property name="stack">main_stack</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwViewStack" id="main_stack">
+            <child>
+              <object class="AdwViewStackPage">
+                <property name="child">
+                  <object class="AdwNavigationSplitView">
+                    <property name="content">
+                      <object class="AdwNavigationPage">
+                        <property name="child">
+                          <object class="GtkStack">
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="child">
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="AdwPreferencesGroup">
+                                        <property name="title">Theming</property>
+                                        <child>
+                                          <object class="GSettingsToggleRow">
+                                            <property name="subtitle">This shows the battery percentage in the top bar. This is only useful if you have a laptop.</property>
+                                            <property name="title">Show Battery Percentage</property>
+                                            <!-- Custom object fragments -->
+                                            <property name="schema">org.gnome.desktop.interface</property>
+                                            <property name="key">show-battery-percentage</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                                <property name="name">theming</property>
+                                <property name="title">Theming</property>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
+                      </object>
+                    </property>
+                  </object>
+                </property>
+                <property name="icon-name">preferences-desktop-appearance-symbolic</property>
+                <property name="name">desktop</property>
+                <property name="title">Desktop</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

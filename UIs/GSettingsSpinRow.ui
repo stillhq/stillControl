@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
+  <!-- interface-name GSettingsSpinRow.ui -->
   <requires lib="libadwaita" version="1.4"/>
   <template class="GSettingsSpinRow" parent="AdwSpinRow"/>
 </interface>
