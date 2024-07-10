@@ -2,35 +2,20 @@
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
   <!-- interface-name stillcontrol.ui -->
-  <requires lib="gtk" version="4.0"/>
   <requires lib="libadwaita" version="1.4"/>
+  <requires lib="gtk" version="4.6"/>
   <object class="AdwApplicationWindow" id="main_window">
-    <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="AdwViewStack" id="main_stack">
-            <child>
-              <object class="AdwViewStackPage">
-                <property name="name">Page 1</property>
-                <property name="title">Page 1</property>
-              </object>
-            </child>
+    <property name="content">
+      <object class="AdwViewStack" id="main_stack"/>
+    </property>
+    <property name="title">stillControl</property>
+    <child type="titlebar">
+      <object class="AdwHeaderBar">
+        <property name="title-widget">
+          <object class="AdwViewSwitcher">
+            <property name="policy">wide</property>
           </object>
-        </child>
-        <child>
-          <object class="AdwHeaderBar">
-            <property name="title-widget">
-              <object class="AdwViewSwitcherTitle">
-                <property name="stack">main_stack</property>
-                <property name="title">stillControl</property>
-                <child>
-                  <object class="AdwViewStack"/>
-                </child>
-              </object>
-            </property>
-          </object>
-        </child>
+        </property>
       </object>
     </child>
   </object>

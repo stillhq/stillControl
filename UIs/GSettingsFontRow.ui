@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.4 -->
+<interface>
+  <requires lib="gtk" version="4.10"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="GSettingsFontRow" parent="AdwActionRow">
+    <child>
+      <object class="GtkFontDialogButton" id="font_button">
+        <property name="halign">end</property>
+        <property name="use-font">True</property>
+        <property name="use-size">True</property>
+        <property name="valign">center</property>
+        <style>
+          <class name="flat"/>
+        </style>
+      </object>
+    </child>
+  </template>
+</interface>

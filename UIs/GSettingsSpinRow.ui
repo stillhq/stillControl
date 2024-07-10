@@ -2,5 +2,5 @@
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
   <requires lib="libadwaita" version="1.4"/>
-  <template class="GSettingsToggleRow" parent="AdwSwitchRow"/>
+  <template class="GSettingsSpinRow" parent="AdwSpinRow"/>
 </interface>
