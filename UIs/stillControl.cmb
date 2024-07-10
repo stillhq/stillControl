@@ -7,7 +7,8 @@
 	(4,1,"GSettingsFontRow.ui","GSettingsFontRow.ui",None,None,None,None,None,None,None),
 	(5,1,"GSettingsToggleRow.ui","GSettingsToggleRow.ui",None,None,None,None,None,None,None),
 	(6,1,"GSettingsComboRow.ui","GSettingsComboRow.ui",None,None,None,None,None,None,None),
-	(7,1,"GSettingsAdvancedRow.ui","GSettingsAdvancedRow.ui",None,None,None,None,None,None,None)
+	(7,1,"GSettingsAdvancedRow.ui","GSettingsAdvancedRow.ui",None,None,None,None,None,None,None),
+	(8,1,None,"GSettingsGroup.ui",None,None,None,None,None,None,None)
   </ui>
   <ui_library>
 	(2,"gtk","4.6",None),
@@ -31,14 +32,14 @@
 	(2,13,"GtkStack",None,12,None,None,None,-1,None,None),
 	(2,17,"GtkStackPage",None,13,None,None,None,-1,None,None),
 	(2,18,"GtkBox",None,17,None,None,None,-1,None,None),
-	(2,19,"AdwPreferencesGroup",None,18,None,None,None,-1,None,None),
-	(2,20,"GSettingsToggleRow",None,19,None,None,None,-1,"&lt;property name=\"schema\"&gt;org.gnome.desktop.interface&lt;/property&gt;\n&lt;property name=\"key\"&gt;show-battery-percentage&lt;/property&gt;",None),
+	(2,19,"GSettingsGroup","theming_group",18,None,None,None,-1,None,None),
 	(3,1,"AdwSpinRow","GSettingsSpinRow",None,None,None,None,None,None,None),
 	(4,1,"AdwActionRow","GSettingsFontRow",None,None,None,None,None,None,None),
 	(4,2,"GtkFontDialogButton","font_button",1,None,None,None,None,None,None),
 	(5,1,"AdwSwitchRow","GSettingsToggleRow",None,None,None,None,None,None,None),
 	(6,1,"AdwComboRow","GSettingsComboRow",None,None,None,None,None,None,None),
-	(7,1,"AdwExpanderRow","GSettingsAdvancedRow",None,None,None,None,None,None,None)
+	(7,1,"AdwExpanderRow","GSettingsAdvancedRow",None,None,None,None,None,None,None),
+	(8,1,"AdwPreferencesGroup","GSettingsGroup",None,None,None,None,-1,None,None)
   </object>
   <object_property>
 	(2,1,"GtkWindow","title","stillControl",None,None,None,None,None,None,None,None,None),
@@ -52,13 +53,12 @@
 	(2,10,"AdwViewStackPage","title","Desktop",None,None,None,None,None,None,None,None,None),
 	(2,11,"AdwNavigationSplitView","content",None,None,None,None,None,12,None,None,None,None),
 	(2,12,"AdwNavigationPage","child",None,None,None,None,None,13,None,None,None,None),
+	(2,12,"AdwNavigationPage","title","Desktop",None,None,None,None,None,None,None,None,None),
 	(2,17,"GtkStackPage","child",None,None,None,None,None,18,None,None,None,None),
 	(2,17,"GtkStackPage","name","theming",None,None,None,None,None,None,None,None,None),
 	(2,17,"GtkStackPage","title","Theming",None,None,None,None,None,None,None,None,None),
 	(2,18,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
 	(2,19,"AdwPreferencesGroup","title","Theming",None,None,None,None,None,None,None,None,None),
-	(2,20,"AdwActionRow","subtitle","This shows the battery percentage in the top bar. This is only useful if you have a laptop.",None,None,None,None,None,None,None,None,None),
-	(2,20,"AdwPreferencesRow","title","Show Battery Percentage",None,None,None,None,None,None,None,None,None),
 	(4,2,"GtkFontDialogButton","use-font","True",None,None,None,None,None,None,None,None,None),
 	(4,2,"GtkFontDialogButton","use-size","True",None,None,None,None,None,None,None,None,None),
 	(4,2,"GtkWidget","halign","end",None,None,None,None,None,None,None,None,None),

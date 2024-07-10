@@ -35,17 +35,8 @@
                                   <object class="GtkBox">
                                     <property name="orientation">vertical</property>
                                     <child>
-                                      <object class="AdwPreferencesGroup">
+                                      <object class="GSettingsGroup" id="theming_group">
                                         <property name="title">Theming</property>
-                                        <child>
-                                          <object class="GSettingsToggleRow">
-                                            <property name="subtitle">This shows the battery percentage in the top bar. This is only useful if you have a laptop.</property>
-                                            <property name="title">Show Battery Percentage</property>
-                                            <!-- Custom object fragments -->
-                                            <property name="schema">org.gnome.desktop.interface</property>
-                                            <property name="key">show-battery-percentage</property>
-                                          </object>
-                                        </child>
                                       </object>
                                     </child>
                                   </object>
@@ -56,6 +47,7 @@
                             </child>
                           </object>
                         </property>
+                        <property name="title">Desktop</property>
                       </object>
                     </property>
                   </object>
