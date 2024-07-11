@@ -36,4 +36,11 @@ if __name__ == "__main__":
             schema="org.gnome.desktop.interface", key="font-name"
         )
     )
+    app.builder.get_object("theming_group").add_combo(
+        GSettingGroup.GSetting(
+            title="Theme Styling",
+            subtitle="This is the same as the light and dark theme options in GNOME Control Center.",
+            schema="org.gnome.desktop.interface", key="color-scheme"
+        ), ["default", "prefer-dark"], ["Default", "Dark"]
+    )
     app.run()

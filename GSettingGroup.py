@@ -10,7 +10,10 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk, Pango
 
-from . import GSetting
+from GSettingDropdownRow import ComboRow
+
+from __init__ import GSetting  # FIXME: Change this to absolute import
+
 
 class SpinType(enum.Enum):
     INT = 0
@@ -71,14 +74,9 @@ class GSettingsGroup(Adw.PreferencesGroup):
         self.add(row)
 
 
-    def add_combo(self, gsetting: GSetting, model: List, factory: List):
-        row = Adw.ComboRow(title=gsetting.title, subtitle=gsetting.subtitle)
-        if gsetting.icon_name:
-            row.set_icon_name(gsetting.icon_name)
-
-
-
-
+    def add_combo(self, gsetting: GSetting, values: List, display: List):
+        row = ComboRow(gsetting, values, display)
+        self.add(row)
 
 def switch_row_changed(switch_row, _active, gsetting):
     gsetting.settings.set_boolean(gsetting.key, switch_row.get_active())
