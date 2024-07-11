@@ -10,7 +10,8 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk, Pango
 
-from GSettingDropdownRow import ComboRow
+from GSettingDetailedComboRow import GSettingDetailedComboRow
+from GSettingComboRow import GSettingComboRow
 
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
@@ -51,7 +52,6 @@ class GSettingsGroup(Adw.PreferencesGroup):
         gsetting.settings.connect("changed", spin_setting_changed, row, gsetting, spin_type, percent)
         self.add(row)
 
-
     def add_font(self, gsetting: GSetting):
         row = Adw.ActionRow(title=gsetting.title, subtitle=gsetting.subtitle, activatable=True)
         if gsetting.icon_name:
@@ -73,10 +73,14 @@ class GSettingsGroup(Adw.PreferencesGroup):
         row.set_activatable_widget(font_button)
         self.add(row)
 
-
     def add_combo(self, gsetting: GSetting, values: List, display: List):
-        row = ComboRow(gsetting, values, display)
+        row = GSettingComboRow(gsetting, values, display)
         self.add(row)
+
+    def add_detailed_combo(self, gsetting: GSetting, values: List, display: List, display_subtitles: List):
+        row = GSettingDetailedComboRow(gsetting, values, display, display_subtitles)
+        self.add(row)
+
 
 def switch_row_changed(switch_row, _active, gsetting):
     gsetting.settings.set_boolean(gsetting.key, switch_row.get_active())
@@ -111,6 +115,8 @@ def spin_setting_changed(settings, key, spin_row, gsetting, spin_type, percent):
                 new_value = settings.get_uint(key)
             case SpinType.DOUBLE:
                 new_value = settings.get_double(key)
+            case _:
+                return
 
         if spin_row.get_value() != float(new_value):
             if percent:

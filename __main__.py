@@ -43,4 +43,14 @@ if __name__ == "__main__":
             schema="org.gnome.desktop.interface", key="color-scheme"
         ), ["default", "prefer-dark"], ["Default", "Dark"]
     )
+    app.builder.get_object("theming_group").add_detailed_combo(
+        GSettingGroup.GSetting(
+            title="Mouse Click Emulation",
+            schema="org.gnome.desktop.interface", key="color-scheme"
+        ), ["default", "prefer-dark"], ["Default", "Dark"],
+        [
+            "Click the touchpad with two fingers for right-click, and three fingers for middle click.",
+            "Click the bottom right of the touchpad for right click and the bottom middle for middle click."
+        ]
+    )
     app.run()

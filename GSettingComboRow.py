@@ -10,7 +10,8 @@ from gi.repository import Adw, Gio, Gtk
 
 from __init__ import GSetting # FIXME: Change this to absolute import
 
-class ComboRow(Adw.ComboRow):
+
+class GSettingComboRow(Adw.ComboRow):
     def __init__(self, gsetting: GSetting, values: List[str], display: List[str]):
         self.gsetting = gsetting
 
