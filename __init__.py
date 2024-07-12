@@ -50,3 +50,13 @@ class GSetting(GObject.GObject):
     @key.setter
     def key(self, value):
         self._key = value
+
+    @classmethod
+    def from_dict(cls, data):
+        instance = cls()
+        instance.title = data.get("title")
+        instance.subtitle = data.get("subtitle")
+        instance.icon_name = data.get("icon_name")
+        instance.schema = data.get("schema")
+        instance.key = data.get("key")
+        return instance
