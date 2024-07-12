@@ -1,48 +1,258 @@
 {
-    "theming_group": [
-        {
-            "type": "combo",
-            "gsetting": {
-                "title": "Theme Styling",
-                "subtitle": "This is the same as the light and dark theme options in GNOME Control Center, except with the \"Light\" option which is a desktop light theme",
-                "schema": "org.gnome.desktop.interface",
-                "key": "color-scheme"
-            },
-            "options": [
-                ["Mixed (Default)", "default"],
-                ["Dark", "prefer-dark"],
-                ["Light", "prefer-light"]
-            ]
-        },
-        {
-            "type": "combo",
-            "gsetting": {
-                "title": "Legacy GTK3/GTK4 Theme",
-                "subtitle": "This is the theme used by legacy applications that don't use Libadwaita.",
-                "schema": "org.gnome.desktop.interface",
-                "key": "gtk-theme"
-            },
-            "python_options": "legacy_themes"
-        },
-        {
-            "type": "combo",
-            "gsetting": {
-                "title": "Icon Theme",
-                "subtitle": "This is the icon theme used by your system.",
-                "schema": "org.gnome.desktop.interface",
-                "key": "icon-theme"
-            },
-            "python_options": "icon_themes"
-        },
-        {
-            "type": "combo",
-            "gsetting": {
-                "title": "Cursor Theme",
-                "subtitle": "This is the theme used for your mouse pointer.",
-                "schema": "org.gnome.desktop.interface",
-                "key": "cursor-theme"
-            },
-            "python_options": "cursor_themes"
-        }
-    ]
+	"theming_group": [
+		{
+			"type": "combo",
+			"gsetting": {
+				"title": "Theme Styling",
+				"subtitle": "This is the same as the light and dark theme options in GNOME Control Center,\nexcept with the \"Light\" option which is an experimental desktop light theme.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "color-scheme"
+			},
+			"options": [
+				["Mixed (Default)", "default"],
+				["Dark", "prefer-dark"],
+				["Light", "prefer-light"]
+			]
+		},
+		{
+			"type": "combo",
+			"gsetting": {
+				"title": "Legacy GTK3/GTK4 Theme",
+				"subtitle": "This is the theme used by legacy applications that don't use Libadwaita.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "gtk-theme"
+			},
+			"python_options": "legacy_themes"
+		},
+		{
+			"type": "combo",
+			"gsetting": {
+				"title": "Icon Theme",
+				"subtitle": "This is the icon theme used by your system.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "icon-theme"
+			},
+			"python_options": "icon_themes"
+		},
+		{
+			"type": "combo",
+			"gsetting": {
+				"title": "Cursor Theme",
+				"subtitle": "This is the theme used for your mouse pointer.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "cursor-theme"
+			},
+			"python_options": "cursor_themes"
+		}
+	],
+	"font_group": [
+		{
+			"type": "font",
+			"gsetting": {
+				"title": "Interface Font",
+				"subtitle": "This is the primary font used by your system.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "font-name"
+			}
+		},
+		{
+			"type": "font",
+			"gsetting": {
+				"title": "Document Font",
+				"subtitle": "Font used for viewing documents.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "document-font-name"
+			}
+		},
+		{
+			"type": "font",
+			"gsetting": {
+				"title": "Monospace Font",
+				"subtitle": "Font used when all the letters need to be the same size. For example, terminals and text editors.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "monospace-font-name"
+			}
+		},
+		{
+			"type": "font",
+			"gsetting": {
+				"title": "Legacy Titlebar Font",
+				"subtitle": "Font used in the titlebar for apps that don't use header bars (old Gtk apps, non-Gtk apps).",
+				"schema": "org.gnome.desktop.wm.preferences",
+				"key": "titlebar-font"
+			}
+		},
+		{
+			"type": "combo",
+			"gsetting": {
+				"title": "Font Hinting",
+				"subtitle": "Adjusts font so that it lines up with a rasterized grid.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "font-hinting"
+			},
+			"options": [
+				["None", "none"],
+				["Slight", "slight"],
+				["Medium", "medium"],
+				["Full", "full"]
+			]
+		},
+		{
+			"type": "combo",
+			"gsetting": {
+				"title": "Font Antialiasing",
+				"subtitle": "The method of antialiasing used.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "font-antialiasing"
+			},
+			"options": [
+				["None", "none"],
+				["Subpixel (for LCD Screens)", "rgba"],
+				["Standard (Grayscale)", "grayscale"]
+			]
+		},
+		{
+			"type": "spin",
+			"gsetting": {
+				"title": "Font Scaling Factor (Percent)",
+				"subtitle": "The scaling factor for font sizes.",
+				"schema": "org.gnome.desktop.interface",
+				"key": "text-scaling-factor"
+			},
+			"spin_type": "double",
+			"percent": true,
+			"adjustment": {
+				"lower": 50,
+				"upper": 300,
+				"step_increment": 25
+			}
+		}
+	],
+	"panel_group": [
+    {
+      "type": "switch",
+      "gsetting": {
+        "title": "Allow Audio Volume Above 100%",
+        "subtitle": "This allows you to go above 100% volume in the top bar.\n\nWARNING: this may have an impact on audio quality, and potentially could damage your audio hardware.",
+        "schema": "org.gnome.desktop.sound",
+        "key": "allow-volume-above-100-percent"
+      }
+    },
+    {
+      "type": "switch",
+      "gsetting": {
+        "title": "Show Battery Percentage",
+        "subtitle": "This shows the battery percentage in the top bar. This is only useful if you have a laptop.",
+        "schema": "org.gnome.desktop.interface",
+        "key": "show-battery-percentage"
+      }
+    }
+  ],
+  "window_group": [
+    {
+      "type": "switch",
+      "gsetting": {
+        "title": "Attach Modal Dialogs",
+        "subtitle": "Decides whether dialogs that belong to the window can be moved separately to the parent window.",
+        "schema": "org.gnome.mutter",
+        "key": "attach-modal-dialogs"
+      }
+    },
+    {
+      "type": "switch",
+      "gsetting": {
+        "title": "Center New Windows",
+        "subtitle": "Whether or not to start new windows in the center of the screen.",
+        "schema": "org.gnome.mutter",
+        "key": "center-new-windows"
+      }
+    },
+    {
+      "type": "combo",
+      "gsetting": {
+        "title": "Window Action Key",
+        "subtitle": "Holding this key basically treats the whole window like the titlebar and allows moving it and right clicking it for options.",
+        "schema": "org.gnome.desktop.wm.preferences",
+        "key": "mouse-button-modifier"
+      },
+      "options": [
+        ["None", "none"],
+        ["Alt", "<Alt>"],
+        ["Super (Default)", "<Super>"]
+      ]
+    },
+    {
+      "type": "combo",
+      "gsetting": {
+        "title": "Titlebar Button Layout",
+        "subtitle": "This is the layout of the titlebar buttons.",
+        "schema": "org.gnome.desktop.wm.preferences",
+        "key": "button-layout"
+      },
+      "options": [
+        ["risiOS Left", "minimize,close:appmenu"],
+        ["risiOS Right", "appmenu:minimize,close"],
+        ["elementary", "close,appmenu:maximize"],
+        ["elementary inverted", "maximize,appmenu:close"],
+        ["minimentary", "close,appmenu:minimize"],
+        ["minimentary inverted", "minimize,appmenu:close"],
+        ["GNOME Left", "close:appmenu"],
+        ["GNOME Right", "appmenu:close"],
+        ["San Francisco Left", "close,minimize,maximize:appmenu"],
+        ["San Francisco Right", "appmenu:maximize,minimize,close"],
+        ["Seattle Left", "close,maximize,minimize:appmenu"],
+        ["Seattle Right (Default)", "appmenu:minimize,maximize,close"]
+      ]
+    }
+  ],
+  "titlebar_group": [
+    {
+      "type": "combo",
+      "gsetting": {
+        "title": "Double Click Action",
+        "subtitle": null,
+        "schema": "org.gnome.desktop.wm.preferences",
+        "key": "action-double-click-titlebar"
+      },
+      "options": [
+        ["Lower Window", "lower"],
+        ["Open Menu", "menu"],
+        ["Toggle Maximize", "toggle-maximize"],
+        ["Minimize", "minimize"],
+        ["Nothing", "none"]
+      ]
+    },
+    {
+      "type": "combo",
+      "gsetting": {
+        "title": "Middle Click Action",
+        "subtitle": null,
+        "schema": "org.gnome.desktop.wm.preferences",
+        "key": "action-middle-click-titlebar"
+      },
+      "options": [
+        ["Lower Window", "lower"],
+        ["Open Menu", "menu"],
+        ["Toggle Maximize", "toggle-maximize"],
+        ["Minimize", "minimize"],
+        ["Nothing", "none"]
+      ]
+    },
+    {
+      "type": "combo",
+      "gsetting": {
+        "title": "Right Click Action",
+        "subtitle": null,
+        "schema": "org.gnome.desktop.wm.preferences",
+        "key": "action-right-click-titlebar"
+      },
+      "options": [
+        ["Lower Window", "lower"],
+        ["Open Menu", "menu"],
+        ["Toggle Maximize", "toggle-maximize"],
+        ["Minimize", "minimize"],
+        ["Nothing", "none"]
+      ]
+    }
+  ]
 }

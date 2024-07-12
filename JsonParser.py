@@ -42,13 +42,13 @@ def parse_options(data):
 
 
 def parse_adjustment(data):
-    adjustment = Gtk.Adjustment
+    adjustment = Gtk.Adjustment()
     if data.get("lower"):
-        adjustment.lower = data["lower"]
+        adjustment.set_lower(data["lower"])
     if data.get("upper"):
-        adjustment.upper = data["upper"]
+        adjustment.set_upper(data["upper"])
     if data.get("step_increment"):
-        adjustment.step_increment = data["step_increment"]
+        adjustment.set_step_increment(data["step_increment"])
 
     return adjustment
 
@@ -80,7 +80,7 @@ def parse_json(builder):
                     group.add_combo(gsetting, values, displays)
                 case "detailed_combo":
                     if setting.get("python_options"):
-                        displays, values, _display_subtitles = function_ids[setting["python_options"]]()
+                        displays, values, display_subtitles = function_ids[setting["python_options"]]()
                     else:
                         values, displays, display_subtitles = parse_options(setting["options"])
                     group.add_detailed_combo(gsetting, values, displays, display_subtitles)

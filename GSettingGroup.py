@@ -40,9 +40,12 @@ class GSettingsGroup(Adw.PreferencesGroup):
         if gsetting.icon_name:
             row.set_icon_name(gsetting.icon_name)
 
+        if type(spin_type) is str:
+            spin_type = SpinType[spin_type.upper()]
+
         row.set_adjustment(adjustment)
         if not percent:
-            row.set_digits(3)
+            row.set_digits(2)
 
         spin_setting_changed(
             gsetting.settings, gsetting.key, row, gsetting, spin_type, percent
@@ -94,6 +97,7 @@ def switch_setting_changed(settings, key, switch_row, gsetting):
 
 def spin_row_changed(spin_row, _value, gsetting, spin_type, percent):
     value = spin_row.get_value()
+
     if percent:
         value /= 100
 
@@ -118,9 +122,10 @@ def spin_setting_changed(settings, key, spin_row, gsetting, spin_type, percent):
             case _:
                 return
 
+        if percent:
+            new_value *= 100
+
         if spin_row.get_value() != float(new_value):
-            if percent:
-                new_value *= 100
             spin_row.set_value(new_value)
 
 

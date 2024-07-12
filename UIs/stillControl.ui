@@ -5,6 +5,8 @@
   <requires lib="gtk" version="4.6"/>
   <requires lib="libadwaita" version="1.4"/>
   <object class="AdwApplicationWindow" id="main_window">
+    <property name="default-height">600</property>
+    <property name="default-width">1200</property>
     <property name="title">stillControl</property>
     <child>
       <object class="GtkBox">
@@ -28,7 +30,7 @@
                     <property name="content">
                       <object class="AdwNavigationPage">
                         <property name="child">
-                          <object class="GtkStack">
+                          <object class="GtkStack" id="desktop_stack">
                             <property name="vexpand">True</property>
                             <child>
                               <object class="GtkStackPage">
@@ -57,11 +59,111 @@
                                 <property name="title">Theming</property>
                               </object>
                             </child>
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="child">
+                                  <object class="GtkScrolledWindow">
+                                    <property name="hscrollbar-policy">never</property>
+                                    <property name="vexpand">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="halign">center</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="vexpand">True</property>
+                                        <child>
+                                          <object class="GSettingsGroup" id="font_group">
+                                            <property name="halign">center</property>
+                                            <property name="title">Fonts</property>
+                                            <property name="valign">start</property>
+                                            <property name="vexpand">True</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                                <property name="name">fonts</property>
+                                <property name="title">Fonts</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="child">
+                                  <object class="GtkScrolledWindow">
+                                    <property name="hscrollbar-policy">never</property>
+                                    <property name="vexpand">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="halign">center</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="vexpand">True</property>
+                                        <child>
+                                          <object class="GSettingsGroup" id="panel_group">
+                                            <property name="halign">center</property>
+                                            <property name="title">Panel</property>
+                                            <property name="valign">start</property>
+                                            <property name="vexpand">True</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                                <property name="name">panel</property>
+                                <property name="title">Panel</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="child">
+                                  <object class="GtkScrolledWindow">
+                                    <property name="hscrollbar-policy">never</property>
+                                    <property name="vexpand">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="halign">center</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="vexpand">True</property>
+                                        <child>
+                                          <object class="GSettingsGroup" id="window_group">
+                                            <property name="halign">center</property>
+                                            <property name="title">Windows</property>
+                                            <property name="valign">start</property>
+                                            <property name="vexpand">True</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GSettingsGroup" id="titlebar_group">
+                                            <property name="halign">center</property>
+                                            <property name="title">Titlebars</property>
+                                            <property name="valign">start</property>
+                                            <property name="vexpand">True</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                                <property name="name">windows</property>
+                                <property name="title">Windows</property>
+                              </object>
+                            </child>
                           </object>
                         </property>
                         <property name="title">Desktop</property>
                       </object>
                     </property>
+                    <property name="sidebar">
+                      <object class="AdwNavigationPage">
+                        <property name="title">Sidebar</property>
+                        <child>
+                          <object class="GtkStackSidebar">
+                            <property name="stack">desktop_stack</property>
+                          </object>
+                        </child>
+                      </object>
+                    </property>
+                    <property name="sidebar-width-fraction">0.2</property>
                     <property name="vexpand">True</property>
                   </object>
                 </property>
