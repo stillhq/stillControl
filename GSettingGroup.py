@@ -30,6 +30,7 @@ class GSettingsGroup(Adw.PreferencesGroup):
         row = Adw.SwitchRow(title=gsetting.title, subtitle=gsetting.subtitle)
         if gsetting.icon_name:
             row.set_icon_name(gsetting.icon_name)
+        print(gsetting.title)
         row.set_active(gsetting.settings.get_boolean(gsetting.key))
         row.connect("notify::active", switch_row_changed, gsetting)
         gsetting.settings.connect("changed", switch_setting_changed, row, gsetting)

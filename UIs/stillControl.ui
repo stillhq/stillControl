@@ -148,6 +148,52 @@
                                 <property name="title">Windows</property>
                               </object>
                             </child>
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="child">
+                                  <object class="GtkScrolledWindow">
+                                    <property name="hscrollbar-policy">never</property>
+                                    <property name="vexpand">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="halign">center</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="vexpand">True</property>
+                                        <child>
+                                          <object class="GSettingsGroup" id="mouse_group">
+                                            <property name="halign">center</property>
+                                            <property name="valign">start</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GSettingsGroup" id="touchpad_group">
+                                            <property name="halign">center</property>
+                                            <property name="title">Touchpad</property>
+                                            <property name="valign">start</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GSettingsGroup" id="pointing_stick_group">
+                                            <property name="halign">center</property>
+                                            <property name="title">Pointing Stick</property>
+                                            <property name="valign">start</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GSettingsGroup" id="keyboard_group">
+                                            <property name="halign">center</property>
+                                            <property name="title">Keyboard</property>
+                                            <property name="valign">start</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                                <property name="name">mouseandkeyboard</property>
+                                <property name="title">Mouse and Keyboard</property>
+                              </object>
+                            </child>
                           </object>
                         </property>
                         <property name="title">Desktop</property>

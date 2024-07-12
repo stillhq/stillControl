@@ -62,6 +62,7 @@ def parse_json(builder):
         for setting in data[group_name]:
             setting_type = setting["type"]
             gsetting = GSetting.from_dict(setting["gsetting"])
+            print(group_name)
             match setting_type:
                 case "switch":
                     group.add_switch(gsetting)
@@ -82,5 +83,5 @@ def parse_json(builder):
                     if setting.get("python_options"):
                         displays, values, display_subtitles = function_ids[setting["python_options"]]()
                     else:
-                        values, displays, display_subtitles = parse_options(setting["options"])
+                        displays, values, display_subtitles = parse_options(setting["options"])
                     group.add_detailed_combo(gsetting, values, displays, display_subtitles)

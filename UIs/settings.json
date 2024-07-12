@@ -171,16 +171,38 @@
       "type": "combo",
       "gsetting": {
         "title": "Window Action Key",
-        "subtitle": "Holding this key basically treats the whole window like the titlebar and allows moving it and right clicking it for options.",
+        "subtitle": "Holding this essentially key treats the whole window like the titlebar.",
         "schema": "org.gnome.desktop.wm.preferences",
         "key": "mouse-button-modifier"
       },
       "options": [
-        ["None", "none"],
         ["Alt", "<Alt>"],
         ["Super (Default)", "<Super>"]
       ]
     },
+    {
+      "type": "switch",
+      "gsetting": {
+        "title": "Resize with Secondary",
+        "schema": "org.gnome.desktop.wm.preferences",
+        "key": "resize-with-right-button"
+      }
+    },
+  {
+	  "type": "detailed_combo",
+	  "gsetting": {
+		  "title": "Window Focus Mode",
+		  "schema": "org.gnome.desktop.wm.preferences",
+		  "key": "focus-mode"
+	  },
+	  "options": [
+		  ["Click", "click", "Windows are focused when they are clicked."],
+		  ["Sloppy", "sloppy", "Window is focused when hovered with the pointer. Windows remain focused when the desktop is hovered."],
+		  ["Mouse", "mouse", "Window is focused when hovered with the pointer. Hovering the desktop removes focus from the previous window."]
+	  ]
+  }
+  ],
+  "titlebar_group": [
     {
       "type": "combo",
       "gsetting": {
@@ -203,9 +225,7 @@
         ["Seattle Left", "close,maximize,minimize:appmenu"],
         ["Seattle Right (Default)", "appmenu:minimize,maximize,close"]
       ]
-    }
-  ],
-  "titlebar_group": [
+    },
     {
       "type": "combo",
       "gsetting": {
@@ -254,5 +274,62 @@
         ["Nothing", "none"]
       ]
     }
-  ]
+  ],
+	"mouse_group": [{
+		"type": "switch",
+		"gsetting": {
+			"title": "Middle Click Paste",
+			"subtitle": "Whether or not to paste when you middle click.",
+			"schema": "org.gnome.desktop.interface",
+			"key": "gtk-enable-primary-paste"
+		}
+	}],
+	"touchpad_group": [{
+		"type": "combo",
+		"gsetting": {
+			"title": "Touchpad Acceleration",
+			"subtitle": "Turning acceleration off can allow faster and more precise movements, but can also make the touchpad more difficult to use.",
+			"schema": "org.gnome.desktop.peripherals.touchpad",
+			"key": "accel-profile"
+		},
+		"options": [
+			["Enabled", "default"],
+			["Disabled", "flat"]
+		]
+	}],
+	"pointing_stick_group": [{
+		"type": "combo",
+		"gsetting": {
+			"title": "Pointing Stick Acceleration",
+			"subtitle": "Turning acceleration off can allow faster and more precise movements, but can also make the stick more difficult to use.",
+			"schema": "org.gnome.desktop.peripherals.pointingstick",
+			"key": "accel-profile"
+		},
+		"options": [
+			["Enabled", "default"],
+			["Disabled", "flat"]
+		]
+	}, {
+		"type": "combo",
+		"gsetting": {
+			"title": "Pointing Stick Scrolling Method",
+			"schema": "org.gnome.desktop.peripherals.pointingstick",
+			"key": "scroll-method"
+		},
+		"options": [
+			["Default", "default"],
+			["On Button Down", "on-button-down"],
+			["None", "none"]
+		]
+	}],
+	"keyboard_group": [{
+		"type": "switch",
+		"gsetting": {
+			"title": "Show Extended Sources in Settings",
+			"subtitle": "Show extended input sources in GNOME Control Center's Keyboard settings.",
+			"schema": "org.gnome.desktop.input-sources",
+			"key": "show-all-sources"
+		}
+	}
+	]
 }
