@@ -1,0 +1,5 @@
+<key name="show-system-extensions" type="b">
+  <default>false</default>
+  <summary>Show system extensions in stillControl.</summary>
+  <description>If disabled (default), system extensions are hidden in the app.</description>
+</key>

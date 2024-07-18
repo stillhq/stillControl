@@ -2,7 +2,7 @@ from constants import UI_DIR
 import json
 import os
 
-from __init__ import GSetting # FIXME: Change this to absolute import
+from __init__ import GSetting  # FIXME: Change this to absolute import
 
 import gi
 gi.require_version("Gtk", "4.0")
@@ -62,10 +62,11 @@ def parse_json(builder):
         for setting in data[group_name]:
             setting_type = setting["type"]
             gsetting = GSetting.from_dict(setting["gsetting"])
-            print(group_name)
             match setting_type:
                 case "switch":
                     group.add_switch(gsetting)
+                case "switch-inverse":
+                    group.add_switch_inverse(gsetting)
                 case "spin":
                     group.add_spin(
                         gsetting, setting["spin_type"], setting["percent"],

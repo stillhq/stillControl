@@ -3,8 +3,7 @@
 <interface>
   <requires lib="libadwaita" version="1.0"/>
   <template class="GSettingsGroup" parent="AdwPreferencesGroup">
-    <property name="halign">center</property>
-    <property name="margin-bottom">20</property>
+    <property name="hexpand">True</property>
     <property name="margin-end">20</property>
     <property name="margin-start">20</property>
     <property name="margin-top">20</property>

@@ -133,7 +133,7 @@
       "type": "switch",
       "gsetting": {
         "title": "Allow Audio Volume Above 100%",
-        "subtitle": "This allows you to go above 100% volume in the top bar.\n\nWARNING: this may have an impact on audio quality, and potentially could damage your audio hardware.",
+        "subtitle": "This allows you to go above 100% volume in the top bar.\nWARNING: this may have an impact on audio quality, and potentially could damage your audio hardware.",
         "schema": "org.gnome.desktop.sound",
         "key": "allow-volume-above-100-percent"
       }
@@ -153,7 +153,7 @@
       "type": "switch",
       "gsetting": {
         "title": "Attach Modal Dialogs",
-        "subtitle": "Decides whether dialogs that belong to the window can be moved separately to the parent window.",
+		"subtitle": "Attaches a window's modal dialogs to itself. Disabling this allows you to move some dialogs separately from the parent window.",
         "schema": "org.gnome.mutter",
         "key": "attach-modal-dialogs"
       }
@@ -288,7 +288,7 @@
 		"type": "combo",
 		"gsetting": {
 			"title": "Touchpad Acceleration",
-			"subtitle": "Turning acceleration off can allow faster and more precise movements, but can also make the touchpad more difficult to use.",
+			"subtitle": "Turning acceleration off can allow faster and more precise movements,\nbut can also make the touchpad more difficult to use.",
 			"schema": "org.gnome.desktop.peripherals.touchpad",
 			"key": "accel-profile"
 		},
@@ -301,7 +301,7 @@
 		"type": "combo",
 		"gsetting": {
 			"title": "Pointing Stick Acceleration",
-			"subtitle": "Turning acceleration off can allow faster and more precise movements, but can also make the stick more difficult to use.",
+			"subtitle": "Turning acceleration off can allow faster and more precise movements,\nbut can also make the pointing stick more difficult to use.",
 			"schema": "org.gnome.desktop.peripherals.pointingstick",
 			"key": "accel-profile"
 		},
@@ -330,6 +330,5 @@
 			"schema": "org.gnome.desktop.input-sources",
 			"key": "show-all-sources"
 		}
-	}
-	]
+	}]
 }

@@ -30,11 +30,21 @@ class GSettingsGroup(Adw.PreferencesGroup):
         row = Adw.SwitchRow(title=gsetting.title, subtitle=gsetting.subtitle)
         if gsetting.icon_name:
             row.set_icon_name(gsetting.icon_name)
-        print(gsetting.title)
         row.set_active(gsetting.settings.get_boolean(gsetting.key))
         row.connect("notify::active", switch_row_changed, gsetting)
         gsetting.settings.connect("changed", switch_setting_changed, row, gsetting)
         self.add(row)
+        return row
+
+    def add_switch_inverse(self, gsetting: GSetting):
+        row = Adw.SwitchRow(title=gsetting.title, subtitle=gsetting.subtitle)
+        if gsetting.icon_name:
+            row.set_icon_name(gsetting.icon_name)
+        row.set_active(not gsetting.settings.get_boolean(gsetting.key))
+        row.connect("notify::active", switch_inverse_row_changed, gsetting)
+        gsetting.settings.connect("changed", switch_inverse_setting_changed, row, gsetting)
+        self.add(row)
+        return row
 
     def add_spin(self, gsetting: GSetting, spin_type, percent, adjustment):
         row = Adw.SpinRow(title=gsetting.title, subtitle=gsetting.subtitle)
@@ -55,6 +65,7 @@ class GSettingsGroup(Adw.PreferencesGroup):
         row.connect("notify::value", spin_row_changed, gsetting, spin_type, percent)
         gsetting.settings.connect("changed", spin_setting_changed, row, gsetting, spin_type, percent)
         self.add(row)
+        return row
 
     def add_font(self, gsetting: GSetting):
         row = Adw.ActionRow(title=gsetting.title, subtitle=gsetting.subtitle, activatable=True)
@@ -76,14 +87,17 @@ class GSettingsGroup(Adw.PreferencesGroup):
         row.add_suffix(font_button)
         row.set_activatable_widget(font_button)
         self.add(row)
+        return row
 
     def add_combo(self, gsetting: GSetting, values: List, display: List):
         row = GSettingComboRow(gsetting, values, display)
         self.add(row)
+        return row
 
     def add_detailed_combo(self, gsetting: GSetting, values: List, display: List, display_subtitles: List):
         row = GSettingDetailedComboRow(gsetting, values, display, display_subtitles)
         self.add(row)
+        return row
 
 
 def switch_row_changed(switch_row, _active, gsetting):
@@ -94,6 +108,16 @@ def switch_setting_changed(settings, key, switch_row, gsetting):
     if key == gsetting.key:
         if switch_row.get_active() != settings.get_boolean(key):
             switch_row.set_active(settings.get_boolean(key))
+
+
+def switch_inverse_row_changed(switch_row, _active, gsetting):
+    gsetting.settings.set_boolean(gsetting.key, not switch_row.get_active())
+
+
+def switch_inverse_setting_changed(settings, key, switch_row, gsetting):
+    if key == gsetting.key:
+        if switch_row.get_active() == settings.get_boolean(key):
+            switch_row.set_active(not settings.get_boolean(key))
 
 
 def spin_row_changed(spin_row, _value, gsetting, spin_type, percent):
