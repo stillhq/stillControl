@@ -1,5 +1,10 @@
-<key name="show-system-extensions" type="b">
-  <default>false</default>
-  <summary>Show system extensions in stillControl.</summary>
-  <description>If disabled (default), system extensions are hidden in the app.</description>
-</key>
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="io.stillhq.control" path="/io/stillhq/control/">
+    <key name="show-system-extensions" type="b">
+      <default>false</default>
+      <summary>Show system extensions in stillControl.</summary>
+      <description>If disabled (default), system extensions are hidden in the app.</description>
+    </key>
+  </schema>
+</schemalist>
