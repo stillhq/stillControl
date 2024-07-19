@@ -1,7 +1,9 @@
 from gi.repository import Gio
 
+
 class ExtensionProxy:
     def __init__(self):
+        self.window = ""
         self.proxy = Gio.DBusProxy.new_sync(
             Gio.bus_get_sync(Gio.BusType.SESSION, None),
             0, None,
@@ -10,6 +12,9 @@ class ExtensionProxy:
             'org.gnome.Shell.Extensions',
             None
         )
+
+    def set_window(self, window):
+        self.window = window.get_id()
 
     def get_extensions(self):
         return self.proxy.ListExtensions()
@@ -27,4 +32,11 @@ class ExtensionProxy:
         return self.proxy.InstallRemoteExtension('(s)', uuid)
 
     def open_extension_prefs(self, uuid):
-        return self.proxy.OpenExtensionPrefs(uuid, "io.stillhq.Control", {})
+        print(self.window)
+        return self.proxy.OpenExtensionPrefs("(ssa{sv})", uuid, str(self.window), {})
+
+    def enable_extension(self, uuid):
+        return self.proxy.EnableExtension('(s)', uuid)
+
+    def disable_extension(self, uuid):
+        return self.proxy.DisableExtension('(s)', uuid)

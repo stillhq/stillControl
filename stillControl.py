@@ -23,28 +23,7 @@ class StillControl(Adw.Application):
         # self.connect("activate", self.do_activate)
 
     def setup_manage_extension_page(self):
-        self.extension_group = self.builder.get_object("extension_group")
-        third_party_extensions = self.extension_group.add_switch_inverse(
-            GSetting(
-                title="Enable Third Party Extensions",
-                subtitle="Third party extensions are not supported by stillOS and may cause unforeseen issues. stillOS modifies GNOME Shell, so not every extension will work properly.",
-                schema="org.gnome.shell", key="disable-user-extensions"
-            )
-        )
-        system_extensions = self.extension_group.add_switch(
-            GSetting(
-                title="Show System Extensions",
-                subtitle="These extensions are used by stillOS's UI. Disabling them may cause problems.",
-                schema="io.stillhq.control", key="show-system-extensions"
-            )
-        )
-        third_party_warning_image = Gtk.Image.new_from_icon_name("dialog-warning-symbolic")
-        third_party_warning_image.add_css_class("warning")
-        system_extensions_warning_image = Gtk.Image.new_from_icon_name("dialog-warning-symbolic")
-        system_extensions_warning_image.add_css_class("warning")
-        system_extensions.add_prefix(system_extensions_warning_image)
-        third_party_extensions.add_prefix(third_party_warning_image)
-        ExtensionRow.add_extensions_to_group("user_extensions_group", False)
+        ExtensionRow.add_extensions_to_groups(self.builder)
 
 
 
