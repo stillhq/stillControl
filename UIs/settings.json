@@ -336,7 +336,7 @@
 		"type": "switch-inverse",
 		"gsetting": {
 		  "title": "Enable Third Party Extensions",
-		  "subtitle": "Third party extensions are not supported by stillOS and may cause unforeseen issues. stillOS modifies GNOME Shell, so not every extension will work properly.",
+		  "subtitle": "Third party extensions are not supported by stillOS and may cause unforeseen issues. stillOS modifies GNOME Shell, so not every extension will work properly. Some third-party extensions may also randomly break after stillOS updates.",
 		  "schema": "org.gnome.shell",
 		  "key": "disable-user-extensions",
 		  "icon_name": "dialog-warning-symbolic"

@@ -3,11 +3,7 @@
 <interface>
   <requires lib="libadwaita" version="1.3"/>
   <template class="ExtensionRow" parent="AdwExpanderRow">
-    <property name="enable-expansion">False</property>
     <property name="subtitle">Extension ID</property>
     <property name="title">Extension Name</property>
-    <child>
-      <object class="AdwActionRow"/>
-    </child>
   </template>
 </interface>

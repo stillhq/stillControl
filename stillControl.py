@@ -6,7 +6,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Gtk, Adw
 
-import ExtensionRow
+import ManageExtensionsPage
 
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
@@ -23,7 +23,8 @@ class StillControl(Adw.Application):
         # self.connect("activate", self.do_activate)
 
     def setup_manage_extension_page(self):
-        ExtensionRow.add_extensions_to_groups(self.builder)
+        ManageExtensionsPage.set_builder(self.builder)
+        ManageExtensionsPage.add_extensions_to_groups()
 
 
 

@@ -289,6 +289,14 @@
                                                 <property name="title">User Extensions</property>
                                               </object>
                                             </child>
+                                            <child>
+                                              <object class="AdwPreferencesGroup" id="system_extensions_group">
+                                                <property name="description">These extensions are used by stillOS to improve the user experience. Modify at your own risk.</property>
+                                                <property name="hexpand">True</property>
+                                                <property name="margin-top">20</property>
+                                                <property name="title">System Extensions (Advanced)</property>
+                                              </object>
+                                            </child>
                                           </object>
                                         </property>
                                       </object>

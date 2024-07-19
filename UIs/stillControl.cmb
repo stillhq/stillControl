@@ -61,11 +61,11 @@
 	(2,69,"GtkScrolledWindow",None,68,None,None,None,-1,None,None),
 	(2,70,"AdwClamp",None,69,None,None,None,-1,None,None),
 	(2,71,"GtkBox",None,70,None,None,None,-1,None,None),
-	(2,72,"GSettingsGroup","extension_group",71,None,None,None,-1,None,None),
-	(2,73,"AdwPreferencesGroup","user_extensions_group",71,None,None,None,-1,None,None),
+	(2,72,"GSettingsGroup","extension_group",71,None,None,None,None,None,None),
+	(2,73,"AdwPreferencesGroup","user_extensions_group",71,None,None,None,1,None,None),
+	(2,74,"AdwPreferencesGroup","system_extensions_group",71,None,None,None,2,None,None),
 	(8,1,"AdwPreferencesGroup","GSettingsGroup",None,None,None,None,-1,None,None),
-	(9,1,"AdwExpanderRow","ExtensionRow",None,None,None,None,-1,None,None),
-	(9,2,"AdwActionRow",None,1,None,None,None,-1,None,None)
+	(9,1,"AdwExpanderRow","ExtensionRow",None,None,None,None,-1,None,None)
   </object>
   <object_property>
 	(2,1,"GtkWindow","default-height","600",None,None,None,None,None,None,None,None,None),
@@ -203,13 +203,16 @@
 	(2,73,"AdwPreferencesGroup","title","User Extensions",None,None,None,None,None,None,None,None,None),
 	(2,73,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(2,73,"GtkWidget","margin-top","20",None,None,None,None,None,None,None,None,None),
+	(2,74,"AdwPreferencesGroup","description","These extensions are used by stillOS to improve the user experience. Modify at your own risk.",None,None,None,None,None,None,None,None,None),
+	(2,74,"AdwPreferencesGroup","title","System Extensions (Advanced)",None,None,None,None,None,None,None,None,None),
+	(2,74,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(2,74,"GtkWidget","margin-top","20",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","margin-end","20",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","margin-start","20",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","margin-top","20",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","width-request","300",None,None,None,None,None,None,None,None,None),
-	(9,1,"AdwExpanderRow","enable-expansion","False",None,None,None,None,None,None,None,None,None),
 	(9,1,"AdwExpanderRow","subtitle","Extension ID",None,None,None,None,None,None,None,None,None),
 	(9,1,"AdwPreferencesRow","title","Extension Name",None,None,None,None,None,None,None,None,None)
   </object_property>

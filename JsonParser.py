@@ -8,7 +8,7 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-JSON = os.path.join(UI_DIR, "settings.json")
+_SETTINGS_JSON = os.path.join(UI_DIR, "settings.json")
 
 
 def legacy_themes_placeholder():
@@ -54,7 +54,7 @@ def parse_adjustment(data):
 
 
 def parse_json(builder):
-    with open(JSON, "r") as file:
+    with open(_SETTINGS_JSON, "r") as file:
         data = json.load(file)
 
     for group_name in data:
