@@ -6,12 +6,14 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Gtk, Adw
 
+import ExtensionRow
+
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
 
 class StillControl(Adw.Application):
     def __init__(self):
-        super().__init__(application_id="io.stillhq.stillControl")
+        super().__init__(application_id="io.stillhq.Control")
 
         self.builder = Gtk.Builder()
         self.builder.add_from_file(os.path.join(constants.UI_DIR, "stillControl.ui"))
@@ -42,6 +44,7 @@ class StillControl(Adw.Application):
         system_extensions_warning_image.add_css_class("warning")
         system_extensions.add_prefix(system_extensions_warning_image)
         third_party_extensions.add_prefix(third_party_warning_image)
+        ExtensionRow.add_extensions_to_group("user_extensions_group", False)
 
 
 
