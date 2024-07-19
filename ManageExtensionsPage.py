@@ -1,13 +1,16 @@
 import os
+import subprocess
 
 import Utils
 import constants
+import requests
+import threading
 
 import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gtk, Gio, GdkX11
+from gi.repository import Adw, Gtk, Gio, GdkX11, GLib
 
 from __init__ import GSetting
 
@@ -24,6 +27,7 @@ class ExtensionRow(Adw.ExpanderRow):
     def __init__(self, extension_info, *args, **kwargs):
         super().__init__(*args, **kwargs)
         _extension_rows.append(self)
+        self.remote_extension = None
         self.extension_info = extension_info
         self.extension_uuid = extension_info["uuid"]
         self.system = _proxy.is_system_extension_from_data(extension_info)
@@ -86,11 +90,19 @@ class ExtensionRow(Adw.ExpanderRow):
 
         # Management Buttons
         if not self.system:
+            self.path_button = Gtk.Button.new_from_icon_name("folder-open-symbolic")
+            self.path_button.set_valign(Gtk.Align.CENTER)
+            self.path_button.add_css_class("circular")
+            self.path_button.add_css_class("flat")
+            self.path_button.connect("clicked", self.open_path)
+            self.management_row.add_suffix(self.path_button)
+
             self.info_button = Gtk.Button.new_from_icon_name("dialog-information-symbolic")
             self.info_button.set_valign(Gtk.Align.CENTER)
             self.info_button.add_css_class("circular")
             self.info_button.add_css_class("flat")
             self.info_button.set_margin_end(5)
+            self.info_button.set_visible(False)
             #self.info_button.connect("clicked", self.show_info)
             self.management_row.add_suffix(self.info_button)
 
@@ -100,9 +112,24 @@ class ExtensionRow(Adw.ExpanderRow):
             self.remove_button.connect("clicked", self.remove_extension)
             self.management_row.add_suffix(self.remove_button)
 
+        self.check_for_remote()
 
-    def get_info(self, button):
+    def open_path(self, button):
+        subprocess.Popen(["/bin/xdg-open", self.extension_info["path"]])
 
+    def check_for_remote(self):
+        thread = threading.Thread(target=self.check_for_remote_thread)
+        thread.start()
+
+    def check_for_remote_thread(self):
+        remote_extension = Utils.RemoteExtensionInfo.get_remote_from_uuid(self.extension_uuid)
+        if remote_extension:
+            self.remote_extension = remote_extension
+            if not self.system:
+                GLib.idle_add(lambda: self.info_button.set_visible(True))
+
+    def open_website(self, button):
+        pass
 
     def remove_extension(self, button):
         _proxy.remove_extension(self.extension_uuid)

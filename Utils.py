@@ -3,6 +3,8 @@ import os
 from gi.repository import Gio
 import json
 
+import requests
+
 
 class ExtensionProxy:
     def __init__(self):
@@ -62,3 +64,48 @@ class ExtensionProxy:
     # Faster way without requesting the extension info from dbus
     def is_system_extension_from_data(self, extension):
         return extension["path"].startswith("/usr/share/gnome-shell/extensions/")
+
+
+class RemoteExtensionInfo:
+    uuid: str = ""
+    name: str = ""
+    creator: str = ""
+    creator_url: str = ""
+    description: str = ""
+    link: str = ""
+    icon: str = ""
+    screenshot: str = ""
+    shell_versions: list = []
+    downloads: int = 0
+    url: str = ""
+    donate: str = None
+
+    @classmethod
+    def get_remote_from_uuid(cls, uuid):
+        response = requests.get(f"https://extensions.gnome.org/extension-query/?uuid={uuid}")
+        if response.status_code != 200:
+            return None
+
+        try:
+            data = response.json()["extensions"][0]
+        except IndexError:
+            return None
+        remote_extension = cls()
+
+        remote_extension.name = data["name"]
+        remote_extension.uuid = uuid
+        remote_extension.creator = data["creator"]
+        remote_extension.creator_url = data["creator_url"]
+        remote_extension.description = data["description"]
+        remote_extension.link = "https://extensions.gnome.org" + data["link"]
+        if data["icon"]:
+            remote_extension.icon = "https://extensions.gnome.org" + data["icon"]
+        if data["screenshot"]:
+            remote_extension.screenshot = "https://extensions.gnome.org" + data["screenshot"]
+        remote_extension.downloads = data["downloads"]
+        remote_extension.shell_versions = data["shell_version_map"].keys()
+        remote_extension.url = data["url"]
+        if "donate" in data:
+            remote_extension.donate = data["donate"][0]
+
+        return remote_extension
