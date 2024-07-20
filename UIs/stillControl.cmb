@@ -5,7 +5,7 @@
 	(2,None,"stillcontrol.ui","stillControl.ui",None,None,None,None,None,None,None),
 	(8,1,None,"GSettingsGroup.ui",None,None,None,None,None,None,None),
 	(9,1,None,"ExtensionRow.ui",None,None,None,None,None,None,None),
-	(11,None,None,"RemoteExtensionPage.ui",None,None,None,None,None,None,None)
+	(11,1,None,"RemoteExtensionPage.ui",None,None,None,None,None,None,None)
   </ui>
   <ui_library>
 	(2,"gtk","4.6",None),
@@ -13,7 +13,7 @@
   </ui_library>
   <object>
 	(2,1,"AdwApplicationWindow","main_window",None,None,None,None,None,None,None),
-	(2,2,"AdwNavigationView",None,1,None,None,None,-1,None,None),
+	(2,2,"AdwNavigationView","main_navigation",1,None,None,None,-1,None,None),
 	(2,3,"AdwNavigationPage",None,2,None,None,None,-1,None,None),
 	(2,4,"GtkBox",None,3,None,None,None,None,None,None),
 	(2,5,"AdwHeaderBar","header",4,None,None,None,None,None,None),
@@ -69,7 +69,7 @@
 	(2,55,"GtkStackSidebar",None,54,None,None,None,None,None,None),
 	(8,1,"AdwPreferencesGroup","GSettingsGroup",None,None,None,None,-1,None,None),
 	(9,1,"AdwExpanderRow","ExtensionRow",None,None,None,None,-1,None,None),
-	(11,1,"GtkBox",None,None,None,None,None,None,None,None),
+	(11,1,"GtkBox","RemoteExtensionPage",None,None,None,None,None,None,None),
 	(11,2,"AdwHeaderBar",None,1,None,None,None,None,None,None),
 	(11,13,"GtkScrolledWindow",None,1,None,None,None,1,None,None),
 	(11,14,"AdwClamp",None,13,None,None,None,None,None,None),
@@ -80,8 +80,15 @@
 	(11,19,"GtkBox",None,18,None,None,None,None,None,None),
 	(11,20,"GtkLabel","extension_name",19,None,None,None,None,None,None),
 	(11,21,"GtkLabel","extension_author",19,None,None,None,1,None,None),
-	(11,22,"GtkButton","extension_install",16,None,None,None,2,None,None),
-	(11,23,"GtkPicture","extension_screenshot",15,None,None,None,1,None,None)
+	(11,22,"GtkButton","extension_install",16,None,None,None,3,None,None),
+	(11,23,"GtkPicture","extension_screenshot",15,None,None,None,1,None,None),
+	(11,24,"AdwBin",None,15,None,None,None,3,None,None),
+	(11,26,"GtkLabel",None,15,None,None,None,2,None,None),
+	(11,27,"AdwPreferencesGroup",None,15,None,None,None,4,None,None),
+	(11,28,"GtkLabel","extension_description",24,None,None,None,-1,None,None),
+	(11,29,"AdwActionRow","extension_downloads",27,None,None,None,-1,None,None),
+	(11,30,"AdwActionRow","extension_version",27,None,None,None,1,None,None),
+	(11,31,"AdwActionRow","extension_shell_versions",27,None,None,None,2,None,None)
   </object>
   <object_property>
 	(2,1,"GtkWindow","default-height","600",None,None,None,None,None,None,None,None,None),
@@ -234,28 +241,67 @@
 	(9,1,"AdwExpanderRow","subtitle","Extension ID",None,None,None,None,None,None,None,None,None),
 	(9,1,"AdwPreferencesRow","title","Extension Name",None,None,None,None,None,None,None,None,None),
 	(11,1,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(11,2,"AdwHeaderBar","show-title","False",None,None,None,None,None,None,None,None,None),
 	(11,13,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(11,13,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
 	(11,15,"GtkBox","spacing","10",None,None,None,None,None,None,None,None,None),
+	(11,15,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(11,15,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(11,15,"GtkWidget","margin-bottom","10",None,None,None,None,None,None,None,None,None),
 	(11,15,"GtkWidget","margin-end","10",None,None,None,None,None,None,None,None,None),
 	(11,15,"GtkWidget","margin-start","10",None,None,None,None,None,None,None,None,None),
 	(11,15,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
+	(11,15,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
 	(11,16,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(11,17,"GtkImage","icon-name","image-loading-symbolic",None,None,None,None,None,None,None,None,None),
 	(11,17,"GtkImage","pixel-size","64",None,None,None,None,None,None,None,None,None),
 	(11,17,"GtkWidget","halign","start",None,None,None,None,None,None,None,None,None),
+	(11,17,"GtkWidget","margin-end","10",None,None,None,None,None,None,None,None,None),
 	(11,19,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
 	(11,19,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(11,22,"GtkButton","label","Install",None,None,None,None,None,None,None,None,None)
+	(11,20,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
+	(11,21,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
+	(11,22,"GtkButton","label","Install",None,None,None,None,None,None,None,None,None),
+	(11,22,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
+	(11,26,"GtkLabel","label","Description",None,None,None,None,None,None,None,None,None),
+	(11,26,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
+	(11,26,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
+	(11,27,"AdwPreferencesGroup","title","Extension Info",None,None,None,None,None,None,None,None,None),
+	(11,27,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
+	(11,28,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
+	(11,28,"GtkWidget","margin-bottom","10",None,None,None,None,None,None,None,None,None),
+	(11,28,"GtkWidget","margin-end","10",None,None,None,None,None,None,None,None,None),
+	(11,28,"GtkWidget","margin-start","10",None,None,None,None,None,None,None,None,None),
+	(11,28,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
+	(11,29,"AdwActionRow","icon-name","folder-download-symbolic",None,None,None,None,None,None,None,None,None),
+	(11,29,"AdwPreferencesRow","title","Downloads",None,None,None,None,None,None,None,None,None),
+	(11,30,"AdwActionRow","icon-name","package-x-generic-symbolic",None,None,None,None,None,None,None,None,None),
+	(11,30,"AdwPreferencesRow","title","Version",None,None,None,None,None,None,None,None,None),
+	(11,31,"AdwActionRow","icon-name","computer-symbolic",None,None,None,None,None,None,None,None,None),
+	(11,31,"AdwPreferencesRow","title","Supported GNOME Versions",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_data>
 	(11,20,"GtkWidget",1,1,None,None,None,None,None,None),
 	(11,20,"GtkWidget",2,2,None,1,None,None,None,None),
 	(11,21,"GtkWidget",1,1,None,None,None,None,None,None),
-	(11,21,"GtkWidget",2,2,None,1,None,None,None,None)
+	(11,21,"GtkWidget",2,2,None,1,None,None,None,None),
+	(11,22,"GtkWidget",1,1,None,None,None,None,None,None),
+	(11,22,"GtkWidget",2,2,None,1,None,None,None,None),
+	(11,2,"GtkWidget",1,1,None,None,None,None,None,None),
+	(11,2,"GtkWidget",2,2,None,1,None,None,None,None),
+	(11,24,"GtkWidget",1,1,None,None,None,None,None,None),
+	(11,24,"GtkWidget",2,2,None,1,None,None,None,None),
+	(11,26,"GtkWidget",1,1,None,None,None,None,None,None),
+	(11,26,"GtkWidget",2,2,None,1,None,None,None,None),
+	(11,26,"GtkWidget",2,3,None,1,None,None,None,None)
   </object_data>
   <object_data_arg>
 	(11,20,"GtkWidget",2,2,"name","title-3"),
-	(11,21,"GtkWidget",2,2,"name","dim-label")
+	(11,21,"GtkWidget",2,2,"name","dim-label"),
+	(11,22,"GtkWidget",2,2,"name","suggested-action"),
+	(11,2,"GtkWidget",2,2,"name","flat"),
+	(11,24,"GtkWidget",2,2,"name","card"),
+	(11,26,"GtkWidget",2,2,"name","heading"),
+	(11,26,"GtkWidget",2,3,"name","h4")
   </object_data_arg>
 </cambalache-project>

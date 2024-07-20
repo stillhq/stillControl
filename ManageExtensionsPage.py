@@ -8,6 +8,8 @@ import threading
 
 import gi
 
+from RemoteExtensionPage import RemoteExtensionPage
+
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk, Gio, GdkX11, GLib
@@ -103,7 +105,7 @@ class ExtensionRow(Adw.ExpanderRow):
             self.info_button.add_css_class("flat")
             self.info_button.set_margin_end(5)
             self.info_button.set_visible(False)
-            #self.info_button.connect("clicked", self.show_info)
+            self.info_button.connect("clicked", self.info_button_clicked)
             self.management_row.add_suffix(self.info_button)
 
             self.remove_button = Gtk.Button.new_with_label("Remove")
@@ -122,14 +124,14 @@ class ExtensionRow(Adw.ExpanderRow):
         thread.start()
 
     def check_for_remote_thread(self):
-        remote_extension = Utils.RemoteExtensionInfo.get_remote_from_uuid(self.extension_uuid)
+        remote_extension = Utils.RemoteExtensionInfo.get_remote_from_uuid(_proxy, self.extension_uuid)
         if remote_extension:
             self.remote_extension = remote_extension
             if not self.system:
                 GLib.idle_add(lambda: self.info_button.set_visible(True))
 
-    def open_website(self, button):
-        pass
+    def info_button_clicked(self, button):
+        RemoteExtensionPage(self.remote_extension).add_to_window(_builder)
 
     def remove_extension(self, button):
         _proxy.remove_extension(self.extension_uuid)

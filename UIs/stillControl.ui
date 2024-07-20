@@ -9,7 +9,7 @@
     <property name="default-width">1200</property>
     <property name="title">stillControl</property>
     <child>
-      <object class="AdwNavigationView">
+      <object class="AdwNavigationView" id="main_navigation">
         <child>
           <object class="AdwNavigationPage">
             <property name="can-pop">False</property>

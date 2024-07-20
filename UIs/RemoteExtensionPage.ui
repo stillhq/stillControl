@@ -2,11 +2,16 @@
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
   <requires lib="gtk" version="4.12"/>
-  <requires lib="libadwaita" version="1.0"/>
-  <object class="GtkBox">
+  <requires lib="libadwaita" version="1.4"/>
+  <template class="RemoteExtensionPage" parent="GtkBox">
     <property name="orientation">vertical</property>
     <child>
-      <object class="AdwHeaderBar"/>
+      <object class="AdwHeaderBar">
+        <property name="show-title">False</property>
+        <style>
+          <class name="flat"/>
+        </style>
+      </object>
     </child>
     <child>
       <object class="GtkScrolledWindow">
@@ -16,17 +21,22 @@
           <object class="AdwClamp">
             <child>
               <object class="GtkBox">
+                <property name="hexpand">True</property>
                 <property name="margin-bottom">10</property>
                 <property name="margin-end">10</property>
                 <property name="margin-start">10</property>
                 <property name="margin-top">10</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">10</property>
+                <property name="valign">start</property>
                 <child>
                   <object class="GtkBox">
                     <property name="hexpand">True</property>
                     <child>
                       <object class="GtkImage" id="extension_icon">
                         <property name="halign">start</property>
+                        <property name="icon-name">image-loading-symbolic</property>
+                        <property name="margin-end">10</property>
                         <property name="pixel-size">64</property>
                       </object>
                     </child>
@@ -38,6 +48,7 @@
                             <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkLabel" id="extension_name">
+                                <property name="xalign">0.0</property>
                                 <style>
                                   <class name="title-3"/>
                                 </style>
@@ -45,6 +56,7 @@
                             </child>
                             <child>
                               <object class="GtkLabel" id="extension_author">
+                                <property name="xalign">0.0</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -57,6 +69,10 @@
                     <child>
                       <object class="GtkButton" id="extension_install">
                         <property name="label">Install</property>
+                        <property name="valign">center</property>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
                       </object>
                     </child>
                   </object>
@@ -64,11 +80,62 @@
                 <child>
                   <object class="GtkPicture" id="extension_screenshot"/>
                 </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Description</property>
+                    <property name="margin-top">10</property>
+                    <property name="xalign">0.0</property>
+                    <style>
+                      <class name="heading"/>
+                      <class name="h4"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwBin">
+                    <child>
+                      <object class="GtkLabel" id="extension_description">
+                        <property name="margin-bottom">10</property>
+                        <property name="margin-end">10</property>
+                        <property name="margin-start">10</property>
+                        <property name="margin-top">10</property>
+                        <property name="xalign">0.0</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="card"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="margin-top">10</property>
+                    <property name="title">Extension Info</property>
+                    <child>
+                      <object class="AdwActionRow" id="extension_downloads">
+                        <property name="icon-name">folder-download-symbolic</property>
+                        <property name="title">Downloads</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow" id="extension_version">
+                        <property name="icon-name">package-x-generic-symbolic</property>
+                        <property name="title">Version</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow" id="extension_shell_versions">
+                        <property name="icon-name">computer-symbolic</property>
+                        <property name="title">Supported GNOME Versions</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>

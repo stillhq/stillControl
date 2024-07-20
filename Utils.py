@@ -1,3 +1,4 @@
+import math
 import os
 
 from gi.repository import Gio
@@ -17,6 +18,7 @@ class ExtensionProxy:
             'org.gnome.Shell.Extensions',
             None
         )
+        self._shell_version = self.proxy.get_cached_property("ShellVersion").get_string()
 
     # THIS CURRENTLY DOESN'T WORK
     def set_window(self, window):
@@ -37,14 +39,17 @@ class ExtensionProxy:
     def get_supported_shell_versions(self, uuid):
         return self.get_supported_shell_versions_from_data(self.get_extension_info(uuid))
 
-    def get_supported_shell_versions_from_data(self, extension):
+    def get_shell_version(self):
+        return self._shell_version
+
+    @staticmethod
+    def get_supported_shell_versions_from_data(extension):
         json_path = os.path.join(extension["path"], "metadata.json")
         if os.path.exists(json_path):
             with open(os.path.join(extension["path"], "metadata.json"), "r") as file:
                 metadata = json.load(file)
                 return metadata["shell-version"]
         return []
-
 
     def install_remote_extension(self, uuid):
         return self.proxy.InstallRemoteExtension('(s)', uuid)
@@ -62,7 +67,8 @@ class ExtensionProxy:
         return self.is_system_extension_from_data(self.get_extension_info(uuid))
 
     # Faster way without requesting the extension info from dbus
-    def is_system_extension_from_data(self, extension):
+    @staticmethod
+    def is_system_extension_from_data(extension):
         return extension["path"].startswith("/usr/share/gnome-shell/extensions/")
 
 
@@ -75,13 +81,14 @@ class RemoteExtensionInfo:
     link: str = ""
     icon: str = ""
     screenshot: str = ""
+    version: str = ""
     shell_versions: list = []
     downloads: int = 0
     url: str = ""
     donate: str = None
 
     @classmethod
-    def get_remote_from_uuid(cls, uuid):
+    def get_remote_from_uuid(cls, proxy, uuid):
         response = requests.get(f"https://extensions.gnome.org/extension-query/?uuid={uuid}")
         if response.status_code != 200:
             return None
@@ -103,6 +110,13 @@ class RemoteExtensionInfo:
         if data["screenshot"]:
             remote_extension.screenshot = "https://extensions.gnome.org" + data["screenshot"]
         remote_extension.downloads = data["downloads"]
+        try:
+            remote_extension.supported_version = data["shell_version_map"][proxy.get_shell_version()]["version"]
+        except KeyError:
+            try:
+                remote_extension.supported_version = data["shell_version_map"][math.floor(float(proxy.get_shell_version()))]["version"]
+            except KeyError:
+                remote_extension.supported_version = None
         remote_extension.shell_versions = data["shell_version_map"].keys()
         remote_extension.url = data["url"]
         if "donate" in data:
