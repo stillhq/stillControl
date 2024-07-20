@@ -126,14 +126,14 @@ class ExtensionRow(Adw.ExpanderRow):
         thread.start()
 
     def check_for_remote_thread(self):
-        remote_extension = Utils.RemoteExtensionInfo.get_remote_from_uuid(_proxy, self.extension_uuid)
+        remote_extension = Utils.RemoteExtensionInfo.new_remote_from_uuid(_proxy, self.extension_uuid)
         if remote_extension:
             self.remote_extension = remote_extension
             if not self.system:
                 GLib.idle_add(lambda: self.info_button.set_visible(True))
 
     def info_button_clicked(self, button):
-        RemoteExtensionPage(self.remote_extension).add_to_window(_builder)
+        RemoteExtensionPage(_proxy, self.remote_extension).add_to_window(_builder)
 
     def remove_extension(self, button):
         _proxy.remove_extension(self.extension_uuid)
@@ -173,13 +173,7 @@ def add_extensions_to_groups():
     user_group = _builder.get_object("user_extensions_group")
     system_group = _builder.get_object("system_extensions_group")
 
-    # Clear groups
-    for item in _user_rows:
-        user_group.remove(item)
-        _user_rows.remove(item)
-
     for extension in extensions:
-        print(extensions[extension])
         row = ExtensionRow(extensions[extension])
         if _proxy.is_system_extension_from_data(extensions[extension]):
             system_group.add(row)
@@ -188,7 +182,13 @@ def add_extensions_to_groups():
             user_group.add(row)
             _user_rows.append(row)
 
-    for item in _user_rows:
-        user_group.remove(item)
-        _user_rows.remove(item)
+def update_rows();
+    pass
 
+
+def proxy_signal_handler(proxy, sender_name, signal_name, parameters):
+    print(sender_name, signal_name, parameters)
+    if signal_name == "ExtensionStateChanged":
+        add_extensions_to_groups()
+
+_proxy.proxy.connect("g-signal", proxy_signal_handler)

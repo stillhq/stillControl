@@ -66,10 +66,20 @@ class ExtensionProxy:
     def is_system_extension(self, uuid):
         return self.is_system_extension_from_data(self.get_extension_info(uuid))
 
+    def get_installed(self, uuid):
+        extensions = self.get_extensions()
+        for extension in extensions:
+            if extensions[extension]["uuid"] == uuid:
+                return True
+        return False
+
     # Faster way without requesting the extension info from dbus
     @staticmethod
     def is_system_extension_from_data(extension):
-        return extension["path"].startswith("/usr/share/gnome-shell/extensions/")
+        try:
+            return extension["path"].startswith("/usr/share/gnome-shell/extensions/")
+        except KeyError:
+            return False
 
 
 def shell_version_supported(shell_version, supported_versions):
@@ -98,7 +108,7 @@ class RemoteExtensionInfo:
     donate: str = None
 
     @classmethod
-    def get_remote_from_uuid(cls, proxy, uuid):
+    def new_remote_from_uuid(cls, proxy, uuid):
         response = requests.get(f"https://extensions.gnome.org/extension-query/?uuid={uuid}")
         if response.status_code != 200:
             return None
@@ -120,7 +130,11 @@ class RemoteExtensionInfo:
         remote_extension.description = json["description"]
         remote_extension.link = json["link"]
         remote_extension.icon = json["icon"]
+        if remote_extension.icon is not None and remote_extension.icon.startswith("/"):
+            remote_extension.icon = f"https://extensions.gnome.org{remote_extension.icon}"
         remote_extension.screenshot = json["screenshot"]
+        if remote_extension.screenshot is not None and remote_extension.screenshot.startswith("/"):
+            remote_extension.screenshot = f"https://extensions.gnome.org{remote_extension.screenshot}"
         remote_extension.downloads = json["downloads"]
 
         remote_extension.is_supported = shell_version_supported(proxy.get_shell_version(), json["shell_version_map"].keys())
