@@ -115,6 +115,7 @@
                 </child>
                 <child>
                   <object class="AdwPreferencesGroup">
+                    <property name="margin-end">15</property>
                     <property name="margin-top">10</property>
                     <property name="title">Extension Info</property>
                     <child>

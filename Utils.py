@@ -107,31 +107,33 @@ class RemoteExtensionInfo:
             data = response.json()["extensions"][0]
         except IndexError:
             return None
+        return cls.from_json(proxy, data)
+
+
+    @classmethod
+    def from_json(cls, proxy, json):
         remote_extension = cls()
+        remote_extension.name = json["name"]
+        remote_extension.uuid = json["uuid"]
+        remote_extension.creator = json["creator"]
+        remote_extension.creator_url = json["creator_url"]
+        remote_extension.description = json["description"]
+        remote_extension.link = json["link"]
+        remote_extension.icon = json["icon"]
+        remote_extension.screenshot = json["screenshot"]
+        remote_extension.downloads = json["downloads"]
 
-        remote_extension.name = data["name"]
-        remote_extension.uuid = uuid
-        remote_extension.creator = data["creator"]
-        remote_extension.creator_url = data["creator_url"]
-        remote_extension.description = data["description"]
-        remote_extension.link = "https://extensions.gnome.org" + data["link"]
-        if data["icon"]:
-            remote_extension.icon = "https://extensions.gnome.org" + data["icon"]
-        if data["screenshot"]:
-            remote_extension.screenshot = "https://extensions.gnome.org" + data["screenshot"]
-        remote_extension.downloads = data["downloads"]
-
-        remote_extension.is_supported = shell_version_supported(proxy.get_shell_version(), data["shell_version_map"].keys())
+        remote_extension.is_supported = shell_version_supported(proxy.get_shell_version(), json["shell_version_map"].keys())
         try:
-            remote_extension.supported_version = data["shell_version_map"][str(float(proxy.get_shell_version()))]["version"]
+            remote_extension.supported_version = json["shell_version_map"][str(float(proxy.get_shell_version()))]["version"]
         except KeyError:
             try:
-                remote_extension.supported_version = data["shell_version_map"][str(math.floor(float(proxy.get_shell_version())))]["version"]
+                remote_extension.supported_version = json["shell_version_map"][str(math.floor(float(proxy.get_shell_version())))]["version"]
             except KeyError:
                 remote_extension.supported_version = None
-        remote_extension.shell_versions = data["shell_version_map"].keys()
-        remote_extension.homepage = data["url"]
-        if "donate" in data:
-            remote_extension.donate = data["donate"][0]
+        remote_extension.shell_versions = json["shell_version_map"].keys()
+        remote_extension.homepage = json["url"]
+        if "donate" in json:
+            remote_extension.donate = json["donate"][0]
 
         return remote_extension

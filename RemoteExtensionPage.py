@@ -11,9 +11,14 @@ from gi.repository import Gtk, Adw, Soup, Gdk, GLib
 import constants
 
 
+def url_row_clicked(widget, url):
+    subprocess.run(["xdg-open", url])
+
+
 @Gtk.Template(filename=os.path.join(constants.UI_DIR, "RemoteExtensionPage.ui"))
 class RemoteExtensionPage(Gtk.Box):
     __gtype_name__ = "RemoteExtensionPage"
+
     extension_name = Gtk.Template.Child()
     extension_author = Gtk.Template.Child()
     extension_icon = Gtk.Template.Child()
@@ -60,8 +65,8 @@ class RemoteExtensionPage(Gtk.Box):
 
         self.extension_homepage.set_activatable(True)
         self.extension_link.set_activatable(True)
-        self.extension_homepage.connect("activate", self.url_row_clicked, remote_extension.homepage)
-        self.extension_link.connect("activate", self.url_row_clicked, remote_extension.link)
+        self.extension_homepage.connect("activate", url_row_clicked, remote_extension.homepage)
+        self.extension_link.connect("activate", url_row_clicked, remote_extension.link)
 
     @staticmethod
     def set_row(row, value):
@@ -70,9 +75,6 @@ class RemoteExtensionPage(Gtk.Box):
             row.set_visible(True)
         else:
             row.set_visible(False)
-
-    def url_row_clicked(self, widget, url):
-        subprocess.run(["xdg-open", url])
 
     def add_to_window(self, builder):
         page = Adw.NavigationPage(title=self.extension_name.get_label())
@@ -95,7 +97,6 @@ class RemoteExtensionPage(Gtk.Box):
         self.extension_screenshot.set_size_request(
             -1, self.extension_screenshot.get_allocated_width() / texture.get_intrinsic_aspect_ratio()
         )
-
 
     def set_url_image(self, url, bytes_received):
         session = Soup.Session()

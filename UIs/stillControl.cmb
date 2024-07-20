@@ -6,7 +6,7 @@
 	(8,1,None,"GSettingsGroup.ui",None,None,None,None,None,None,None),
 	(9,1,None,"ExtensionRow.ui",None,None,None,None,None,None,None),
 	(11,1,None,"RemoteExtensionPage.ui",None,None,None,None,None,None,None),
-	(12,None,None,"ExtensionSearchPage.ui",None,None,None,None,None,None,None)
+	(12,1,None,"ExtensionSearchPage.ui",None,None,None,None,None,None,None)
   </ui>
   <ui_library>
 	(2,"gtk","4.6",None),
@@ -70,10 +70,7 @@
 	(2,55,"GtkStackSidebar",None,54,None,None,None,None,None,None),
 	(2,56,"GtkStackPage",None,46,None,None,None,1,None,None),
 	(2,57,"GtkScrolledWindow",None,56,None,None,None,None,None,None),
-	(2,58,"AdwClamp",None,57,None,None,None,None,None,None),
-	(2,59,"GtkBox",None,58,None,None,None,None,None,None),
-	(2,60,"GtkLabel",None,59,None,None,None,-1,None,None),
-	(2,61,"GtkBox",None,59,None,None,None,1,None,None),
+	(2,58,"AdwClamp","install_extensions_clamp",57,None,None,None,None,None,None),
 	(8,1,"AdwPreferencesGroup","GSettingsGroup",None,None,None,None,-1,None,None),
 	(9,1,"AdwExpanderRow","ExtensionRow",None,None,None,None,-1,None,None),
 	(11,1,"GtkBox","RemoteExtensionPage",None,None,None,None,None,None,None),
@@ -97,7 +94,14 @@
 	(11,30,"AdwActionRow","extension_version",27,None,None,None,1,None,None),
 	(11,31,"AdwActionRow","extension_shell_versions",27,None,None,None,2,None,None),
 	(11,32,"AdwActionRow","extension_homepage",27,None,None,None,3,None,None),
-	(11,33,"AdwActionRow","extension_link",27,None,None,None,4,None,None)
+	(11,33,"AdwActionRow","extension_link",27,None,None,None,4,None,None),
+	(12,1,"GtkBox","ExtensionSearchPage",None,None,None,None,None,None,None),
+	(12,2,"GtkLabel",None,1,None,None,None,None,None,None),
+	(12,3,"GtkBox",None,1,None,None,None,1,None,None),
+	(12,5,"GtkDropDown","sort_dropdown",3,None,None,None,1,None,None),
+	(12,6,"AdwPreferencesGroup","extensions_group",1,None,None,None,2,None,None),
+	(12,7,"GtkStringList",None,5,None,None,None,-1,None,None),
+	(12,8,"GtkSearchEntry","search_entry",3,None,None,None,-1,None,None)
   </object>
   <object_property>
 	(2,1,"GtkWindow","default-height","600",None,None,None,None,None,None,None,None,None),
@@ -252,15 +256,9 @@
 	(2,56,"GtkStackPage","name","install",None,None,None,None,None,None,None,None,None),
 	(2,56,"GtkStackPage","title","Install",None,None,None,None,None,None,None,None,None),
 	(2,57,"GtkScrolledWindow","child",None,None,None,None,None,58,None,None,None,None),
-	(2,58,"AdwClamp","child",None,None,None,None,None,59,None,None,None,None),
 	(2,58,"AdwClamp","maximum-size","700",None,None,None,None,None,None,None,None,None),
 	(2,58,"AdwClamp","tightening-threshold","300",None,None,None,None,None,None,None,None,None),
 	(2,58,"AdwClamp","unit","pt",None,None,None,None,None,None,None,None,None),
-	(2,59,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
-	(2,59,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(2,59,"GtkWidget","margin-bottom","20",None,None,None,None,None,None,None,None,None),
-	(2,59,"GtkWidget","margin-top","20",None,None,None,None,None,None,None,None,None),
-	(2,60,"GtkLabel","label","Search from extensions.gnome.org",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","margin-end","20",None,None,None,None,None,None,None,None,None),
 	(8,1,"GtkWidget","margin-start","20",None,None,None,None,None,None,None,None,None),
@@ -300,6 +298,7 @@
 	(11,26,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
 	(11,26,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
 	(11,27,"AdwPreferencesGroup","title","Extension Info",None,None,None,None,None,None,None,None,None),
+	(11,27,"GtkWidget","margin-end","15",None,None,None,None,None,None,None,None,None),
 	(11,27,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
 	(11,28,"GtkLabel","wrap","True",None,None,None,None,None,None,None,None,None),
 	(11,28,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
@@ -316,7 +315,18 @@
 	(11,32,"AdwActionRow","icon-name","user-home-symbolic",None,None,None,None,None,None,None,None,None),
 	(11,32,"AdwPreferencesRow","title","Extension Home Page",None,None,None,None,None,None,None,None,None),
 	(11,33,"AdwActionRow","icon-name","web-browser-symbolic",None,None,None,None,None,None,None,None,None),
-	(11,33,"AdwPreferencesRow","title","View on Extensions Web",None,None,None,None,None,None,None,None,None)
+	(11,33,"AdwPreferencesRow","title","View on Extensions Web",None,None,None,None,None,None,None,None,None),
+	(12,1,"GtkBox","spacing","10",None,None,None,None,None,None,None,None,None),
+	(12,1,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(12,1,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(12,1,"GtkWidget","margin-bottom","20",None,None,None,None,None,None,None,None,None),
+	(12,1,"GtkWidget","margin-top","20",None,None,None,None,None,None,None,None,None),
+	(12,2,"GtkLabel","label","Search from extensions.gnome.org",None,None,None,None,None,None,None,None,None),
+	(12,3,"GtkBox","spacing","5",None,None,None,None,None,None,None,None,None),
+	(12,3,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(12,5,"GtkDropDown","model",None,None,None,None,None,7,None,None,None,None),
+	(12,7,"GtkStringList","strings","Relevance\nDownloads\nRecent\nName",None,None,None,None,None,None,None,None,None),
+	(12,8,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_data>
 	(11,20,"GtkWidget",1,1,None,None,None,None,None,None),
@@ -332,8 +342,8 @@
 	(11,26,"GtkWidget",1,1,None,None,None,None,None,None),
 	(11,26,"GtkWidget",2,2,None,1,None,None,None,None),
 	(11,26,"GtkWidget",2,3,None,1,None,None,None,None),
-	(2,60,"GtkWidget",1,1,None,None,None,None,None,None),
-	(2,60,"GtkWidget",2,2,None,1,None,None,None,None)
+	(12,2,"GtkWidget",1,1,None,None,None,None,None,None),
+	(12,2,"GtkWidget",2,2,None,1,None,None,None,None)
   </object_data>
   <object_data_arg>
 	(11,20,"GtkWidget",2,2,"name","title-3"),
@@ -343,6 +353,6 @@
 	(11,24,"GtkWidget",2,2,"name","card"),
 	(11,26,"GtkWidget",2,2,"name","heading"),
 	(11,26,"GtkWidget",2,3,"name","h4"),
-	(2,60,"GtkWidget",2,2,"name","title-2")
+	(12,2,"GtkWidget",2,2,"name","title-2")
   </object_data_arg>
 </cambalache-project>

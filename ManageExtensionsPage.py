@@ -19,8 +19,10 @@ from __init__ import GSetting
 _shell_settings = Gio.Settings.new("org.gnome.shell")
 _control_settings = Gio.Settings.new("io.stillhq.control")
 _proxy = Utils.ExtensionProxy()
-_extension_rows = []
+_system_rows = []
+_user_rows = []
 _builder = None
+
 
 @Gtk.Template(filename=os.path.join(constants.UI_DIR, "ExtensionRow.ui"))
 class ExtensionRow(Adw.ExpanderRow):
@@ -28,7 +30,6 @@ class ExtensionRow(Adw.ExpanderRow):
 
     def __init__(self, extension_info, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        _extension_rows.append(self)
         self.remote_extension = None
         self.extension_info = extension_info
         self.extension_uuid = extension_info["uuid"]
@@ -145,6 +146,9 @@ class ExtensionRow(Adw.ExpanderRow):
     def open_prefs(self, button):
         _proxy.open_extension_prefs(self.extension_uuid)
 
+    def destroy(self):
+        self.super().destroy()
+
 
 def set_builder(builder):
     global _builder
@@ -169,12 +173,16 @@ def add_extensions_to_groups():
     system_group = _builder.get_object("system_extensions_group")
 
     # Clear groups
-    for row in _extension_rows:
-        row.destroy()
+    for row in _user_rows:
+        user_group.remove(row)
+    for row in _system_rows:
+        system_group.remove(row)
 
     for extension in extensions:
         print(extensions[extension])
         if _proxy.is_system_extension_from_data(extensions[extension]):
             system_group.add(ExtensionRow(extensions[extension]))
+            _system_rows.append(ExtensionRow(extensions[extension]))
         else:
             user_group.add(ExtensionRow(extensions[extension]))
+            _user_rows.append(ExtensionRow(extensions[extension]))
