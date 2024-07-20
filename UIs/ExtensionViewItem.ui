@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This ui file was created by hand, not with Cambalache.                  -->
+<!-- It may need to be pasted into a Cambalache template to be properly used -->
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="GtkBox">
+        <property name="valign">start</property>
+        <property name="vexpand">false</property>
+        <property name="halign">fill</property>
+        <property name="hexpand">true</property>
+        <property name="width-request">275</property>
+        <property name="height-request">-1</property>
+        <property name="orientation">horizontal</property>
+        <property name="spacing">15</property>
+        <property name="hexpand">false</property>
+        <property name="halign">fill</property>
+        <property name="vexpand">false</property>
+        <property name="valign">start</property>
+        <style>
+          <class name="card"/>
+        </style>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="valign">start</property>
+            <property name="vexpand">True</property>
+            <property name="halign">fill</property>
+            <property name="hexpand">true</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            <child>
+              <object class="GtkLabel" id="name">
+                <property name="halign">fill</property>
+                <property name="hexpand">true</property>
+                <property name="ellipsize">end</property>
+                <property name="wrap">True</property>
+                <property name="lines">2</property>
+                <property name="xalign">0</property>
+                <binding name="label">
+                  <lookup name="name" type="RemoteExtensionItem">
+                    <lookup name="item" type="GtkListItem">
+                      <constant>GtkListItem</constant>
+                    </lookup>
+                  </lookup>
+                </binding>
+                <style>
+                  <class name="title-4"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="author">
+                <property name="halign">fill</property>
+                <property name="hexpand">true</property>
+                <property name="ellipsize">end</property>
+                <property name="xalign">0</property>
+                <property name="wrap">False</property>
+                <property name="lines">1</property>
+                <binding name="label">
+                  <lookup name="author" type="RemoteExtensionItem">
+                    <lookup name="item" type="GtkListItem">
+                      <constant>GtkListItem</constant>
+                    </lookup>
+                  </lookup>
+                </binding>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="icon-name">go-next-symbolic</property>
+            <property name="halign">end</property>
+            <property name="margin-end">10</property>
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>

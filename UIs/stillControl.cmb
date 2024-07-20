@@ -99,9 +99,11 @@
 	(12,2,"GtkLabel",None,1,None,None,None,None,None,None),
 	(12,3,"GtkBox",None,1,None,None,None,1,None,None),
 	(12,5,"GtkDropDown","sort_dropdown",3,None,None,None,1,None,None),
-	(12,6,"AdwPreferencesGroup","extensions_group",1,None,None,None,2,None,None),
 	(12,7,"GtkStringList",None,5,None,None,None,-1,None,None),
-	(12,8,"GtkSearchEntry","search_entry",3,None,None,None,-1,None,None)
+	(12,8,"GtkSearchEntry","search_entry",3,None,None,None,-1,None,None),
+	(12,11,"AdwBin",None,1,None,None,None,3,None,None),
+	(12,12,"GtkListView","extension_view",11,None,None,None,None,None,None),
+	(12,13,"GtkBuilderListItemFactory",None,12,None,None,None,None,None,None)
   </object>
   <object_property>
 	(2,1,"GtkWindow","default-height","600",None,None,None,None,None,None,None,None,None),
@@ -298,7 +300,7 @@
 	(11,26,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
 	(11,26,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
 	(11,27,"AdwPreferencesGroup","title","Extension Info",None,None,None,None,None,None,None,None,None),
-	(11,27,"GtkWidget","margin-end","15",None,None,None,None,None,None,None,None,None),
+	(11,27,"GtkWidget","margin-end","9",None,None,None,None,None,None,None,None,None),
 	(11,27,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
 	(11,28,"GtkLabel","wrap","True",None,None,None,None,None,None,None,None,None),
 	(11,28,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
@@ -309,7 +311,7 @@
 	(11,29,"AdwActionRow","icon-name","folder-download-symbolic",None,None,None,None,None,None,None,None,None),
 	(11,29,"AdwPreferencesRow","title","Downloads",None,None,None,None,None,None,None,None,None),
 	(11,30,"AdwActionRow","icon-name","package-x-generic-symbolic",None,None,None,None,None,None,None,None,None),
-	(11,30,"AdwPreferencesRow","title","Supported Extension Version:",None,None,None,None,None,None,None,None,None),
+	(11,30,"AdwPreferencesRow","title","Supported Extension Version",None,None,None,None,None,None,None,None,None),
 	(11,31,"AdwActionRow","icon-name","computer-symbolic",None,None,None,None,None,None,None,None,None),
 	(11,31,"AdwPreferencesRow","title","Supported GNOME Versions",None,None,None,None,None,None,None,None,None),
 	(11,32,"AdwActionRow","icon-name","user-home-symbolic",None,None,None,None,None,None,None,None,None),
@@ -326,7 +328,9 @@
 	(12,3,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(12,5,"GtkDropDown","model",None,None,None,None,None,7,None,None,None,None),
 	(12,7,"GtkStringList","strings","Relevance\nDownloads\nRecent\nName",None,None,None,None,None,None,None,None,None),
-	(12,8,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None)
+	(12,8,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(12,12,"GtkListView","factory",None,None,None,None,None,13,None,None,None,None),
+	(12,13,"GtkBuilderListItemFactory","bytes","&lt;?xml version='1.0' encoding='UTF-8'?&gt;\n&lt;!-- This ui file was created by hand, not with Cambalache.                  --&gt;\n&lt;!-- It may need to be pasted into a Cambalache template to be properly used --&gt;\n&lt;interface&gt;\n  &lt;template class=\"GtkListItem\"&gt;\n    &lt;property name=\"child\"&gt;\n      &lt;object class=\"GtkBox\"&gt;\n        &lt;property name=\"valign\"&gt;start&lt;/property&gt;\n        &lt;property name=\"vexpand\"&gt;false&lt;/property&gt;\n        &lt;property name=\"halign\"&gt;fill&lt;/property&gt;\n        &lt;property name=\"hexpand\"&gt;true&lt;/property&gt;\n        &lt;property name=\"width-request\"&gt;275&lt;/property&gt;\n        &lt;property name=\"height-request\"&gt;-1&lt;/property&gt;\n        &lt;property name=\"orientation\"&gt;horizontal&lt;/property&gt;\n        &lt;property name=\"spacing\"&gt;15&lt;/property&gt;\n        &lt;property name=\"hexpand\"&gt;false&lt;/property&gt;\n        &lt;property name=\"halign\"&gt;fill&lt;/property&gt;\n        &lt;property name=\"vexpand\"&gt;false&lt;/property&gt;\n        &lt;property name=\"valign\"&gt;start&lt;/property&gt;\n        &lt;style&gt;\n          &lt;class name=\"card\"/&gt;\n        &lt;/style&gt;\n        &lt;child&gt;\n          &lt;object class=\"GtkBox\"&gt;\n            &lt;property name=\"orientation\"&gt;vertical&lt;/property&gt;\n            &lt;property name=\"valign\"&gt;start&lt;/property&gt;\n            &lt;property name=\"vexpand\"&gt;True&lt;/property&gt;\n            &lt;property name=\"halign\"&gt;fill&lt;/property&gt;\n            &lt;property name=\"hexpand\"&gt;true&lt;/property&gt;\n            &lt;property name=\"margin-top\"&gt;10&lt;/property&gt;\n            &lt;property name=\"margin-bottom\"&gt;10&lt;/property&gt;\n            &lt;property name=\"margin-start\"&gt;10&lt;/property&gt;\n            &lt;property name=\"margin-end\"&gt;10&lt;/property&gt;\n            &lt;child&gt;\n              &lt;object class=\"GtkLabel\" id=\"name\"&gt;\n                &lt;property name=\"halign\"&gt;fill&lt;/property&gt;\n                &lt;property name=\"hexpand\"&gt;true&lt;/property&gt;\n                &lt;property name=\"ellipsize\"&gt;end&lt;/property&gt;\n                &lt;property name=\"wrap\"&gt;True&lt;/property&gt;\n                &lt;property name=\"lines\"&gt;2&lt;/property&gt;\n                &lt;property name=\"xalign\"&gt;0&lt;/property&gt;\n                &lt;binding name=\"label\"&gt;\n                  &lt;lookup name=\"name\" type=\"RemoteExtensionItem\"&gt;\n                    &lt;lookup name=\"item\" type=\"GtkListItem\"&gt;\n                      &lt;constant&gt;GtkListItem&lt;/constant&gt;\n                    &lt;/lookup&gt;\n                  &lt;/lookup&gt;\n                &lt;/binding&gt;\n                &lt;style&gt;\n                  &lt;class name=\"title-4\"/&gt;\n                &lt;/style&gt;\n              &lt;/object&gt;\n            &lt;/child&gt;\n            &lt;child&gt;\n              &lt;object class=\"GtkLabel\" id=\"author\"&gt;\n                &lt;property name=\"halign\"&gt;fill&lt;/property&gt;\n                &lt;property name=\"hexpand\"&gt;true&lt;/property&gt;\n                &lt;property name=\"ellipsize\"&gt;end&lt;/property&gt;\n                &lt;property name=\"xalign\"&gt;0&lt;/property&gt;\n                &lt;property name=\"wrap\"&gt;False&lt;/property&gt;\n                &lt;property name=\"lines\"&gt;1&lt;/property&gt;\n                &lt;binding name=\"label\"&gt;\n                  &lt;lookup name=\"author\" type=\"RemoteExtensionItem\"&gt;\n                    &lt;lookup name=\"item\" type=\"GtkListItem\"&gt;\n                      &lt;constant&gt;GtkListItem&lt;/constant&gt;\n                    &lt;/lookup&gt;\n                  &lt;/lookup&gt;\n                &lt;/binding&gt;\n                &lt;style&gt;\n                  &lt;class name=\"dim-label\"/&gt;\n                &lt;/style&gt;\n              &lt;/object&gt;\n            &lt;/child&gt;\n          &lt;/object&gt;\n        &lt;/child&gt;\n        &lt;child&gt;\n          &lt;object class=\"GtkImage\"&gt;\n            &lt;property name=\"icon-name\"&gt;go-next-symbolic&lt;/property&gt;\n            &lt;property name=\"halign\"&gt;end&lt;/property&gt;\n            &lt;property name=\"margin-end\"&gt;10&lt;/property&gt;\n          &lt;/object&gt;\n        &lt;/child&gt;\n      &lt;/object&gt;\n    &lt;/property&gt;\n  &lt;/template&gt;\n&lt;/interface&gt;",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_data>
 	(11,20,"GtkWidget",1,1,None,None,None,None,None,None),
@@ -343,7 +347,11 @@
 	(11,26,"GtkWidget",2,2,None,1,None,None,None,None),
 	(11,26,"GtkWidget",2,3,None,1,None,None,None,None),
 	(12,2,"GtkWidget",1,1,None,None,None,None,None,None),
-	(12,2,"GtkWidget",2,2,None,1,None,None,None,None)
+	(12,2,"GtkWidget",2,2,None,1,None,None,None,None),
+	(12,12,"GtkWidget",1,1,None,None,None,None,None,None),
+	(12,12,"GtkWidget",2,2,None,1,None,None,None,None),
+	(12,11,"GtkWidget",1,1,None,None,None,None,None,None),
+	(12,11,"GtkWidget",2,2,None,1,None,None,None,None)
   </object_data>
   <object_data_arg>
 	(11,20,"GtkWidget",2,2,"name","title-3"),
@@ -353,6 +361,8 @@
 	(11,24,"GtkWidget",2,2,"name","card"),
 	(11,26,"GtkWidget",2,2,"name","heading"),
 	(11,26,"GtkWidget",2,3,"name","h4"),
-	(12,2,"GtkWidget",2,2,"name","title-2")
+	(12,2,"GtkWidget",2,2,"name","title-2"),
+	(12,12,"GtkWidget",2,2,"name","card"),
+	(12,11,"GtkWidget",2,2,"name","card")
   </object_data_arg>
 </cambalache-project>

@@ -24,6 +24,7 @@ _user_rows = []
 _builder = None
 
 
+
 @Gtk.Template(filename=os.path.join(constants.UI_DIR, "ExtensionRow.ui"))
 class ExtensionRow(Adw.ExpanderRow):
     __gtype_name__ = "ExtensionRow"
@@ -173,16 +174,21 @@ def add_extensions_to_groups():
     system_group = _builder.get_object("system_extensions_group")
 
     # Clear groups
-    for row in _user_rows:
-        user_group.remove(row)
-    for row in _system_rows:
-        system_group.remove(row)
+    for item in _user_rows:
+        user_group.remove(item)
+        _user_rows.remove(item)
 
     for extension in extensions:
         print(extensions[extension])
+        row = ExtensionRow(extensions[extension])
         if _proxy.is_system_extension_from_data(extensions[extension]):
-            system_group.add(ExtensionRow(extensions[extension]))
-            _system_rows.append(ExtensionRow(extensions[extension]))
+            system_group.add(row)
+            _system_rows.append(row)
         else:
-            user_group.add(ExtensionRow(extensions[extension]))
-            _user_rows.append(ExtensionRow(extensions[extension]))
+            user_group.add(row)
+            _user_rows.append(row)
+
+    for item in _user_rows:
+        user_group.remove(item)
+        _user_rows.remove(item)
+

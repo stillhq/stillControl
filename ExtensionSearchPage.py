@@ -10,11 +10,12 @@ from RemoteExtensionPage import RemoteExtensionPage
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Gtk, Adw
+from gi.repository import Gtk, Adw, GObject, Gio
 
 import constants
 
 _QUERY_URL = "https://extensions.gnome.org/extension-query/"
+
 
 def query_gnome_extensions(query, sort, page=1):
     params = {
@@ -32,6 +33,45 @@ def query_gnome_extensions(query, sort, page=1):
         print(f"Request failed with status code {response.status_code}")
         return None
 
+
+class RemoteExtensionItem(GObject.GObject):
+    __gtype_name__ = "RemoteExtensionItem"
+
+    _name: str = ""
+    _author: str = ""
+    _uuid: str = ""
+
+    @GObject.Property(type=str)
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @GObject.Property(type=str)
+    def author(self):
+        return self._author
+
+    @author.setter
+    def author(self, value):
+        self._author = value
+
+    @GObject.Property(type=str)
+    def uuid(self):
+        return self._uuid
+
+    @uuid.setter
+    def uuid(self, value):
+        self._uuid = value
+
+    @classmethod
+    def new_from_extension_info(cls, extension_info):
+        item = cls()
+        item.name = extension_info["name"]
+        item.author = extension_info["creator"]
+        item.uuid = extension_info["uuid"]
+        return item
 
 class SearchExtensionRow(Adw.ActionRow):
     __gtype_name__ = "SearchExtensionRow"
@@ -54,45 +94,32 @@ class SearchExtensionRow(Adw.ActionRow):
         RemoteExtensionPage(self.extension_info).add_to_window(self.builder)
 
 
-
 @Gtk.Template(filename=os.path.join(constants.UI_DIR, "ExtensionSearchPage.ui"))
 class ExtensionSearchPage(Gtk.Box):
     __gtype_name__ = "ExtensionSearchPage"
     rows = []
     search_entry = Gtk.Template.Child()
     sort_dropdown = Gtk.Template.Child()
-    extensions_group = Gtk.Template.Child()
+    extension_view = Gtk.Template.Child()
     page = 1
+    page_amount = 0
 
     def __init__(self, builder, proxy):
         super().__init__()
         self.proxy = proxy
         self.builder = builder
 
+        self.store = Gio.ListStore.new(RemoteExtensionItem)
+        self.extension_view.set_model(Gtk.NoSelection.new(self.store))
         self.search_entry.connect("search-changed", self.search_changed)
 
-    def add_row(self, row):
-        self.rows.append(row)
-        self.extensions_group.add(row)
-
-    def clear_rows(self):
-        for child in self.rows:
-            child.destroy()
-
     def search_changed(self, search_entry):
-        self.clear_rows()
-
         self.page = 1
+        self.store.remove_all()
         query = self.search_entry.get_text()
         sort = self.sort_dropdown.get_selected_item().get_string().lower()
+        results = query_gnome_extensions(query, sort, self.page)
 
-        result = query_gnome_extensions(query, sort, self.page)
-        self.query_to_rows(result)
-
-
-    def query_to_rows(self, result):
-        print(result)
-        if result is not None:
-            for extension in result["extensions"]:
-                self.add_row(SearchExtensionRow(self.builder, Utils.RemoteExtensionInfo.from_json(self.proxy, extension)))
-
+        for extension in results["extensions"]:
+            self.store.append(RemoteExtensionItem.new_from_extension_info(extension))
+        self.page_amount = results["numpages"]

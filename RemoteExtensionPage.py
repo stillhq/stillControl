@@ -6,7 +6,8 @@ import Utils
 import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Soup", "3.0")
-from gi.repository import Gtk, Adw, Soup, Gdk, GLib
+gi.require_version("Adw", "1")
+from gi.repository import Gtk, Adw, Soup, Gdk, GLib, GObject
 
 import constants
 
@@ -99,11 +100,14 @@ class RemoteExtensionPage(Gtk.Box):
         )
 
     def set_url_image(self, url, bytes_received):
-        session = Soup.Session()
-        message = Soup.Message(
-            method="GET",
-            uri=GLib.Uri.parse(url, GLib.UriFlags.NONE),
-        )
-        session.send_and_read_async(
-            message, GLib.PRIORITY_DEFAULT, None, bytes_received, message
-        )
+        try:
+            session = Soup.Session()
+            message = Soup.Message(
+                method="GET",
+                uri=GLib.Uri.parse(url, GLib.UriFlags.NONE),
+            )
+            session.send_and_read_async(
+                message, GLib.PRIORITY_DEFAULT, None, bytes_received, message
+            )
+        except GLib.Error:
+            pass

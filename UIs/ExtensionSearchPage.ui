@@ -41,7 +41,108 @@ Name</property>
       </object>
     </child>
     <child>
-      <object class="AdwPreferencesGroup" id="extensions_group"/>
+      <object class="AdwBin">
+        <child>
+          <object class="GtkListView" id="extension_view">
+            <property name="factory">
+              <object class="GtkBuilderListItemFactory">
+                <property name="bytes">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;!-- This ui file was created by hand, not with Cambalache.                  --&gt;
+&lt;!-- It may need to be pasted into a Cambalache template to be properly used --&gt;
+&lt;interface&gt;
+  &lt;template class="GtkListItem"&gt;
+    &lt;property name="child"&gt;
+      &lt;object class="GtkBox"&gt;
+        &lt;property name="valign"&gt;start&lt;/property&gt;
+        &lt;property name="vexpand"&gt;false&lt;/property&gt;
+        &lt;property name="halign"&gt;fill&lt;/property&gt;
+        &lt;property name="hexpand"&gt;true&lt;/property&gt;
+        &lt;property name="width-request"&gt;275&lt;/property&gt;
+        &lt;property name="height-request"&gt;-1&lt;/property&gt;
+        &lt;property name="orientation"&gt;horizontal&lt;/property&gt;
+        &lt;property name="spacing"&gt;15&lt;/property&gt;
+        &lt;property name="hexpand"&gt;false&lt;/property&gt;
+        &lt;property name="halign"&gt;fill&lt;/property&gt;
+        &lt;property name="vexpand"&gt;false&lt;/property&gt;
+        &lt;property name="valign"&gt;start&lt;/property&gt;
+        &lt;style&gt;
+          &lt;class name="card"/&gt;
+        &lt;/style&gt;
+        &lt;child&gt;
+          &lt;object class="GtkBox"&gt;
+            &lt;property name="orientation"&gt;vertical&lt;/property&gt;
+            &lt;property name="valign"&gt;start&lt;/property&gt;
+            &lt;property name="vexpand"&gt;True&lt;/property&gt;
+            &lt;property name="halign"&gt;fill&lt;/property&gt;
+            &lt;property name="hexpand"&gt;true&lt;/property&gt;
+            &lt;property name="margin-top"&gt;10&lt;/property&gt;
+            &lt;property name="margin-bottom"&gt;10&lt;/property&gt;
+            &lt;property name="margin-start"&gt;10&lt;/property&gt;
+            &lt;property name="margin-end"&gt;10&lt;/property&gt;
+            &lt;child&gt;
+              &lt;object class="GtkLabel" id="name"&gt;
+                &lt;property name="halign"&gt;fill&lt;/property&gt;
+                &lt;property name="hexpand"&gt;true&lt;/property&gt;
+                &lt;property name="ellipsize"&gt;end&lt;/property&gt;
+                &lt;property name="wrap"&gt;True&lt;/property&gt;
+                &lt;property name="lines"&gt;2&lt;/property&gt;
+                &lt;property name="xalign"&gt;0&lt;/property&gt;
+                &lt;binding name="label"&gt;
+                  &lt;lookup name="name" type="RemoteExtensionItem"&gt;
+                    &lt;lookup name="item" type="GtkListItem"&gt;
+                      &lt;constant&gt;GtkListItem&lt;/constant&gt;
+                    &lt;/lookup&gt;
+                  &lt;/lookup&gt;
+                &lt;/binding&gt;
+                &lt;style&gt;
+                  &lt;class name="title-4"/&gt;
+                &lt;/style&gt;
+              &lt;/object&gt;
+            &lt;/child&gt;
+            &lt;child&gt;
+              &lt;object class="GtkLabel" id="author"&gt;
+                &lt;property name="halign"&gt;fill&lt;/property&gt;
+                &lt;property name="hexpand"&gt;true&lt;/property&gt;
+                &lt;property name="ellipsize"&gt;end&lt;/property&gt;
+                &lt;property name="xalign"&gt;0&lt;/property&gt;
+                &lt;property name="wrap"&gt;False&lt;/property&gt;
+                &lt;property name="lines"&gt;1&lt;/property&gt;
+                &lt;binding name="label"&gt;
+                  &lt;lookup name="author" type="RemoteExtensionItem"&gt;
+                    &lt;lookup name="item" type="GtkListItem"&gt;
+                      &lt;constant&gt;GtkListItem&lt;/constant&gt;
+                    &lt;/lookup&gt;
+                  &lt;/lookup&gt;
+                &lt;/binding&gt;
+                &lt;style&gt;
+                  &lt;class name="dim-label"/&gt;
+                &lt;/style&gt;
+              &lt;/object&gt;
+            &lt;/child&gt;
+          &lt;/object&gt;
+        &lt;/child&gt;
+        &lt;child&gt;
+          &lt;object class="GtkImage"&gt;
+            &lt;property name="icon-name"&gt;go-next-symbolic&lt;/property&gt;
+            &lt;property name="halign"&gt;end&lt;/property&gt;
+            &lt;property name="margin-end"&gt;10&lt;/property&gt;
+          &lt;/object&gt;
+        &lt;/child&gt;
+      &lt;/object&gt;
+    &lt;/property&gt;
+  &lt;/template&gt;
+&lt;/interface&gt;</property>
+              </object>
+            </property>
+            <style>
+              <class name="card"/>
+            </style>
+          </object>
+        </child>
+        <style>
+          <class name="card"/>
+        </style>
+      </object>
     </child>
   </template>
 </interface>

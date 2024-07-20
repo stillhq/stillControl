@@ -115,7 +115,7 @@
                 </child>
                 <child>
                   <object class="AdwPreferencesGroup">
-                    <property name="margin-end">15</property>
+                    <property name="margin-end">9</property>
                     <property name="margin-top">10</property>
                     <property name="title">Extension Info</property>
                     <child>
@@ -127,7 +127,7 @@
                     <child>
                       <object class="AdwActionRow" id="extension_version">
                         <property name="icon-name">package-x-generic-symbolic</property>
-                        <property name="title">Supported Extension Version:</property>
+                        <property name="title">Supported Extension Version</property>
                       </object>
                     </child>
                     <child>

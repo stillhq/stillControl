@@ -31,10 +31,6 @@ class StillControl(Adw.Application):
             ExtensionSearchPage(self.builder, ManageExtensionsPage._proxy)
         )
 
-
-
-
-
     def do_activate(self):
         self.main_window.set_application(self)
         self.main_window.present()
