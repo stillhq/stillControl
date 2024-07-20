@@ -11,8 +11,7 @@ import Utils
 from RemoteExtensionPage import RemoteExtensionPage
 
 gi.require_version("Gtk", "4.0")
-gi.require_version("Adw", "1")
-from gi.repository import Gtk, Adw, GObject, Gio, GLib
+from gi.repository import Gtk, GObject, Gio, GLib
 
 import constants
 
@@ -78,6 +77,7 @@ class ExtensionSearchPage(Gtk.Box):
     def __init__(self, builder, proxy):
         super().__init__()
         self.proxy = proxy
+        self.shell_version = self.proxy.get_shell_version()
         self.builder = builder
 
         self.store = Gio.ListStore.new(RemoteExtensionItem)
@@ -122,7 +122,7 @@ class ExtensionSearchPage(Gtk.Box):
             "sort": self.sort,
             "page": self.page,
             "search": self.query,
-            "shell_version": "46"  # replace with your GNOME shell version
+            "shell_version": self.shell_version
         }
         response = requests.get(_QUERY_URL, params=params)
         if response.status_code == 200:
