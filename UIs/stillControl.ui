@@ -291,6 +291,8 @@
                                                     <child>
                                                       <object class="AdwPreferencesGroup" id="user_extensions_group">
                                                         <property name="hexpand">True</property>
+                                                        <property name="margin-end">20</property>
+                                                        <property name="margin-start">20</property>
                                                         <property name="margin-top">20</property>
                                                         <property name="title">User Extensions</property>
                                                       </object>
@@ -299,18 +301,59 @@
                                                       <object class="AdwPreferencesGroup" id="system_extensions_group">
                                                         <property name="description">These extensions are used by stillOS to improve the user experience. Modify at your own risk.</property>
                                                         <property name="hexpand">True</property>
+                                                        <property name="margin-end">20</property>
+                                                        <property name="margin-start">20</property>
                                                         <property name="margin-top">20</property>
                                                         <property name="title">System Extensions (Advanced)</property>
                                                       </object>
                                                     </child>
                                                   </object>
                                                 </property>
+                                                <property name="maximum-size">700</property>
+                                                <property name="tightening-threshold">300</property>
+                                                <property name="unit">pt</property>
                                               </object>
                                             </property>
                                           </object>
                                         </property>
                                         <property name="name">manage</property>
                                         <property name="title">Manage</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="child">
+                                          <object class="GtkScrolledWindow">
+                                            <property name="child">
+                                              <object class="AdwClamp">
+                                                <property name="child">
+                                                  <object class="GtkBox">
+                                                    <property name="hexpand">True</property>
+                                                    <property name="margin-bottom">20</property>
+                                                    <property name="margin-top">20</property>
+                                                    <property name="orientation">vertical</property>
+                                                    <child>
+                                                      <object class="GtkLabel">
+                                                        <property name="label">Search from extensions.gnome.org</property>
+                                                        <style>
+                                                          <class name="title-2"/>
+                                                        </style>
+                                                      </object>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkBox"/>
+                                                    </child>
+                                                  </object>
+                                                </property>
+                                                <property name="maximum-size">700</property>
+                                                <property name="tightening-threshold">300</property>
+                                                <property name="unit">pt</property>
+                                              </object>
+                                            </property>
+                                          </object>
+                                        </property>
+                                        <property name="name">install</property>
+                                        <property name="title">Install</property>
                                       </object>
                                     </child>
                                   </object>

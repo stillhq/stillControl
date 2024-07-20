@@ -16,9 +16,11 @@
     <child>
       <object class="GtkScrolledWindow">
         <property name="hexpand">True</property>
+        <property name="hscrollbar-policy">never</property>
         <property name="vexpand">True</property>
         <child>
           <object class="AdwClamp">
+            <property name="maximum-size">750</property>
             <child>
               <object class="GtkBox">
                 <property name="hexpand">True</property>
@@ -78,7 +80,10 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkPicture" id="extension_screenshot"/>
+                  <object class="GtkPicture" id="extension_screenshot">
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                  </object>
                 </child>
                 <child>
                   <object class="GtkLabel">
@@ -99,6 +104,7 @@
                         <property name="margin-end">10</property>
                         <property name="margin-start">10</property>
                         <property name="margin-top">10</property>
+                        <property name="wrap">True</property>
                         <property name="xalign">0.0</property>
                       </object>
                     </child>
@@ -120,13 +126,25 @@
                     <child>
                       <object class="AdwActionRow" id="extension_version">
                         <property name="icon-name">package-x-generic-symbolic</property>
-                        <property name="title">Version</property>
+                        <property name="title">Supported Extension Version:</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwActionRow" id="extension_shell_versions">
                         <property name="icon-name">computer-symbolic</property>
                         <property name="title">Supported GNOME Versions</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow" id="extension_homepage">
+                        <property name="icon-name">user-home-symbolic</property>
+                        <property name="title">Extension Home Page</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow" id="extension_link">
+                        <property name="icon-name">web-browser-symbolic</property>
+                        <property name="title">View on Extensions Web</property>
                       </object>
                     </child>
                   </object>

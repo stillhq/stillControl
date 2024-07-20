@@ -72,6 +72,15 @@ class ExtensionProxy:
         return extension["path"].startswith("/usr/share/gnome-shell/extensions/")
 
 
+def shell_version_supported(shell_version, supported_versions):
+    for version in supported_versions:
+        if shell_version.startswith(version + "."):
+            return True
+        elif version == shell_version:
+            return True
+    return False
+
+
 class RemoteExtensionInfo:
     uuid: str = ""
     name: str = ""
@@ -83,8 +92,9 @@ class RemoteExtensionInfo:
     screenshot: str = ""
     version: str = ""
     shell_versions: list = []
+    is_supported = False
     downloads: int = 0
-    url: str = ""
+    homepage: str = ""
     donate: str = None
 
     @classmethod
@@ -110,15 +120,17 @@ class RemoteExtensionInfo:
         if data["screenshot"]:
             remote_extension.screenshot = "https://extensions.gnome.org" + data["screenshot"]
         remote_extension.downloads = data["downloads"]
+
+        remote_extension.is_supported = shell_version_supported(proxy.get_shell_version(), data["shell_version_map"].keys())
         try:
-            remote_extension.supported_version = data["shell_version_map"][proxy.get_shell_version()]["version"]
+            remote_extension.supported_version = data["shell_version_map"][str(float(proxy.get_shell_version()))]["version"]
         except KeyError:
             try:
-                remote_extension.supported_version = data["shell_version_map"][math.floor(float(proxy.get_shell_version()))]["version"]
+                remote_extension.supported_version = data["shell_version_map"][str(math.floor(float(proxy.get_shell_version())))]["version"]
             except KeyError:
                 remote_extension.supported_version = None
         remote_extension.shell_versions = data["shell_version_map"].keys()
-        remote_extension.url = data["url"]
+        remote_extension.homepage = data["url"]
         if "donate" in data:
             remote_extension.donate = data["donate"][0]
 

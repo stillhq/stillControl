@@ -1,7 +1,11 @@
 import os
+import subprocess
 
 import Utils
 
+import gi
+gi.require_version("Gtk", "4.0")
+gi.require_version("Soup", "3.0")
 from gi.repository import Gtk, Adw, Soup, Gdk, GLib
 
 import constants
@@ -19,6 +23,8 @@ class RemoteExtensionPage(Gtk.Box):
     extension_downloads = Gtk.Template.Child()
     extension_version = Gtk.Template.Child()
     extension_shell_versions = Gtk.Template.Child()
+    extension_homepage = Gtk.Template.Child()
+    extension_link = Gtk.Template.Child()
 
     def __init__(self, remote_extension: Utils.RemoteExtensionInfo):
         super().__init__()
@@ -38,19 +44,35 @@ class RemoteExtensionPage(Gtk.Box):
             self.extension_screenshot.set_visible(True)
             self.set_url_image(remote_extension.screenshot, self.screenshot_on_receive_bytes)
 
-        self.extension_description.set_label(remote_extension.description.replace("&", "&amp;"))
+        self.extension_description.set_label(remote_extension.description)
 
         self.set_row(self.extension_downloads, str(remote_extension.downloads))
-        self.set_row(self.extension_version, str(remote_extension.version))
+        self.set_row(self.extension_version, str(remote_extension.supported_version))
         self.set_row(self.extension_shell_versions, ", ".join(remote_extension.shell_versions))
+        self.set_row(self.extension_homepage, remote_extension.homepage)
+        self.set_row(self.extension_link, remote_extension.link)
+
+        # Unsupported Version
+        if not remote_extension.is_supported:
+            self.extension_version.set_subtitle("This extension is not supported on your version of GNOME Shell")
+            self.extension_shell_versions.set_icon_name("computer-fail-symbolic")  # EASTER EGG :D
+            self.extension_version.set_visible(True)
+
+        self.extension_homepage.set_activatable(True)
+        self.extension_link.set_activatable(True)
+        self.extension_homepage.connect("activate", self.url_row_clicked, remote_extension.homepage)
+        self.extension_link.connect("activate", self.url_row_clicked, remote_extension.link)
 
     @staticmethod
     def set_row(row, value):
-        if value is not None and value is not "":
+        if value is not None and value != "":
             row.set_subtitle(value)
             row.set_visible(True)
         else:
             row.set_visible(False)
+
+    def url_row_clicked(self, widget, url):
+        subprocess.run(["xdg-open", url])
 
     def add_to_window(self, builder):
         page = Adw.NavigationPage(title=self.extension_name.get_label())
@@ -70,13 +92,17 @@ class RemoteExtensionPage(Gtk.Box):
             raise Exception(f"Got {message.get_status()}, {message.get_reason_phrase()}")
         texture = Gdk.Texture.new_from_bytes(bytes)
         self.extension_screenshot.set_paintable(texture)
+        self.extension_screenshot.set_size_request(
+            -1, self.extension_screenshot.get_allocated_width() / texture.get_intrinsic_aspect_ratio()
+        )
 
-    def set_url_image(self, url, bytes_recieved):
+
+    def set_url_image(self, url, bytes_received):
         session = Soup.Session()
         message = Soup.Message(
             method="GET",
             uri=GLib.Uri.parse(url, GLib.UriFlags.NONE),
         )
         session.send_and_read_async(
-            message, GLib.PRIORITY_DEFAULT, None, bytes_recieved, message
+            message, GLib.PRIORITY_DEFAULT, None, bytes_received, message
         )
