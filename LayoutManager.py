@@ -1,10 +1,16 @@
 import json
+import os
+
 from gi.repository import Gio
+
+import constants
 
 _shell_settings = Gio.Settings.new("org.gnome.shell")
 _panel_settings = Gio.Settings.new("org.gnome.shell.extensions.dash-to-panel")
 _dock_settings = Gio.Settings.new("org.gnome.shell.extensions.dash-to-dock")
 _arc_settings = Gio.Settings.new("org.gnome.shell.extensions.arcmenu")
+
+_LAYOUTS_UI = os.path.join(os.path.dirname(__file__), "layouts")
 
 _monitor_specific_panel_settings = [
     "panel-anchors", "panel-element-positions",
@@ -94,7 +100,7 @@ def set_monitor_specific_panel_setting(key, value):
     _panel_settings.set_value(key, settings)
 
 
-def set_layout(layout):
+def set_layout_from_dict(layout: dict):
     enabled_exts = []
     disabled_exts = []
 
@@ -121,3 +127,14 @@ def set_layout(layout):
 
     if "gsettings" in layout:
         set_gsettings(layout["gsettings"])
+
+
+def set_layout(layout: str):
+    json_file = f"{_LAYOUTS_UI}/{layout}.json"
+
+    if os.path.exists(json_file):
+        with open(json_file, "r") as file:
+            layout = json.load(file)
+            set_layout_from_dict(layout)
+    else:
+        raise FileNotFoundError(f"Layout file {json_file} not found in {_LAYOUTS_UI} directory")

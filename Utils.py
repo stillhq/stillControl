@@ -139,10 +139,10 @@ class RemoteExtensionInfo:
 
         remote_extension.is_supported = shell_version_supported(proxy.get_shell_version(), json["shell_version_map"].keys())
         try:
-            remote_extension.supported_version = json["shell_version_map"][str(float(proxy.get_shell_version()))]["version"]
+            remote_extension.supported_version = json["shell_version_map"][str(proxy.get_shell_version())]["version"]
         except KeyError:
             try:
-                remote_extension.supported_version = json["shell_version_map"][str(math.floor(float(proxy.get_shell_version())))]["version"]
+                remote_extension.supported_version = json["shell_version_map"][str(proxy.get_shell_version()).split(".")[0]]["version"]
             except KeyError:
                 remote_extension.supported_version = None
         remote_extension.shell_versions = json["shell_version_map"].keys()
