@@ -94,10 +94,10 @@ def check_monitor_specific_panel_setting(key, value):
 
 
 def set_monitor_specific_panel_setting(key, value):
-    settings = _panel_settings.get_value(key)
+    settings = json.loads(_panel_settings.get_string(key))
     for monitor in settings:
         settings[monitor] = value
-    _panel_settings.set_value(key, settings)
+    _panel_settings.set_string(key, json.dumps(settings))
 
 
 def set_layout_from_dict(layout: dict):
