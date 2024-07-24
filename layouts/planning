@@ -1,0 +1,4 @@
+Make it check for "panel" and "dock" to figure how what extensions to enable for layout
+Than run through "enabled_extensions" and enable them. Only system extensions can be enabled or disabled
+Then run through "disabled_extensions" and disable them. Only system extensions can be enabled or disabled
+Than run through other gsettings
