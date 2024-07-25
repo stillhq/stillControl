@@ -220,7 +220,7 @@ def get_current_layout():
     return "custom"
 
 
-def get_available_layouts() -> list(str):
+def get_available_layouts():
     layouts = []
     for layout in os.listdir(_LAYOUTS_UI):
         if layout.endswith(".json"):

@@ -13,7 +13,7 @@ preview_dir = os.path.join(constants.MAIN_DIR, "data", "layout_previews")
 
 @Gtk.Template(filename=os.path.join(constants.UI_DIR, "LayoutButton.ui"))
 class LayoutButton(Gtk.Box):
-    __gtype__ = "LayoutButton"
+    __gtype_name__ = "LayoutButton"
     preview = Gtk.Template.Child()
     label = Gtk.Template.Child()
     check = Gtk.Template.Child()
@@ -26,7 +26,7 @@ class LayoutButton(Gtk.Box):
         if os.path.exists(os.path.join(preview_dir, f"{layout_id}.svg")):
             self.preview.set_from_file(os.path.join(preview_dir, f"{layout_id}.svg"))
         else:
-            self.preview.set_from_icon("dialog-question-symbolic")
+            self.preview.set_from_icon_name("dialog-question-symbolic")
 
         self.label.set_label(layout_name)
         if last_button:
