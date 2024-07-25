@@ -29,6 +29,10 @@
                 </child>
                 <child>
                   <object class="AdwViewStack" id="main_stack">
+                    <property name="visible-child-name">layout</property>
+                    <child>
+                      <object class="GtkFlowBox"/>
+                    </child>
                     <child>
                       <object class="AdwViewStackPage">
                         <property name="child">
@@ -42,35 +46,20 @@
                                       <object class="GtkStackPage">
                                         <property name="child">
                                           <object class="GtkScrolledWindow">
-                                            <property name="hscrollbar-policy">never</property>
-                                            <property name="vexpand">True</property>
                                             <child>
                                               <object class="AdwClamp">
                                                 <property name="maximum-size">700</property>
                                                 <property name="tightening-threshold">300</property>
                                                 <property name="unit">pt</property>
                                                 <child>
-                                                  <object class="GtkBox">
-                                                    <property name="hexpand">True</property>
-                                                    <property name="margin-bottom">20</property>
-                                                    <property name="orientation">vertical</property>
-                                                    <property name="vexpand">True</property>
-                                                    <child>
-                                                      <object class="GSettingsGroup" id="theming_group">
-                                                        <property name="hexpand">True</property>
-                                                        <property name="title">Theming</property>
-                                                        <property name="valign">start</property>
-                                                        <property name="vexpand">True</property>
-                                                      </object>
-                                                    </child>
-                                                  </object>
+                                                  <object class="GtkBox"/>
                                                 </child>
                                               </object>
                                             </child>
                                           </object>
                                         </property>
-                                        <property name="name">theming</property>
-                                        <property name="title">Theming</property>
+                                        <property name="name">layout</property>
+                                        <property name="title">Layout</property>
                                       </object>
                                     </child>
                                     <child>
@@ -81,60 +70,12 @@
                                             <property name="vexpand">True</property>
                                             <child>
                                               <object class="AdwClamp">
+                                                <property name="child">
+                                                  <object class="GtkFlowBox"/>
+                                                </property>
                                                 <property name="maximum-size">700</property>
                                                 <property name="tightening-threshold">300</property>
                                                 <property name="unit">pt</property>
-                                                <child>
-                                                  <object class="GtkBox">
-                                                    <property name="hexpand">True</property>
-                                                    <property name="margin-bottom">20</property>
-                                                    <property name="orientation">vertical</property>
-                                                    <property name="vexpand">True</property>
-                                                    <child>
-                                                      <object class="GSettingsGroup" id="font_group">
-                                                        <property name="hexpand">True</property>
-                                                        <property name="title">Fonts</property>
-                                                        <property name="valign">start</property>
-                                                        <property name="vexpand">True</property>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </property>
-                                        <property name="name">fonts</property>
-                                        <property name="title">Fonts</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkStackPage">
-                                        <property name="child">
-                                          <object class="GtkScrolledWindow">
-                                            <property name="hscrollbar-policy">never</property>
-                                            <property name="vexpand">True</property>
-                                            <child>
-                                              <object class="AdwClamp">
-                                                <property name="maximum-size">700</property>
-                                                <property name="tightening-threshold">300</property>
-                                                <property name="unit">pt</property>
-                                                <child>
-                                                  <object class="GtkBox">
-                                                    <property name="hexpand">True</property>
-                                                    <property name="margin-bottom">20</property>
-                                                    <property name="orientation">vertical</property>
-                                                    <property name="vexpand">True</property>
-                                                    <child>
-                                                      <object class="GSettingsGroup" id="panel_group">
-                                                        <property name="hexpand">True</property>
-                                                        <property name="title">Panel</property>
-                                                        <property name="valign">start</property>
-                                                        <property name="vexpand">True</property>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
                                               </object>
                                             </child>
                                           </object>
@@ -258,9 +199,112 @@
                             <property name="vexpand">True</property>
                           </object>
                         </property>
+                        <property name="icon-name">object-packing-symbolic</property>
+                        <property name="name">layout</property>
+                        <property name="title">Layout</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwViewStackPage">
+                        <property name="child">
+                          <object class="AdwNavigationSplitView">
+                            <property name="content">
+                              <object class="AdwNavigationPage">
+                                <property name="child">
+                                  <object class="GtkStack" id="appearance_stack">
+                                    <property name="vexpand">True</property>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="child">
+                                          <object class="GtkScrolledWindow">
+                                            <property name="hscrollbar-policy">never</property>
+                                            <property name="vexpand">True</property>
+                                            <child>
+                                              <object class="AdwClamp">
+                                                <property name="maximum-size">700</property>
+                                                <property name="tightening-threshold">300</property>
+                                                <property name="unit">pt</property>
+                                                <child>
+                                                  <object class="GtkBox">
+                                                    <property name="hexpand">True</property>
+                                                    <property name="margin-bottom">20</property>
+                                                    <property name="orientation">vertical</property>
+                                                    <property name="vexpand">True</property>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="theming_group">
+                                                        <property name="hexpand">True</property>
+                                                        <property name="title">Theming</property>
+                                                        <property name="valign">start</property>
+                                                        <property name="vexpand">True</property>
+                                                      </object>
+                                                    </child>
+                                                  </object>
+                                                </child>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </property>
+                                        <property name="name">theming</property>
+                                        <property name="title">Theming</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="child">
+                                          <object class="GtkScrolledWindow">
+                                            <property name="hscrollbar-policy">never</property>
+                                            <property name="vexpand">True</property>
+                                            <child>
+                                              <object class="AdwClamp">
+                                                <property name="maximum-size">700</property>
+                                                <property name="tightening-threshold">300</property>
+                                                <property name="unit">pt</property>
+                                                <child>
+                                                  <object class="GtkBox">
+                                                    <property name="hexpand">True</property>
+                                                    <property name="margin-bottom">20</property>
+                                                    <property name="orientation">vertical</property>
+                                                    <property name="vexpand">True</property>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="font_group">
+                                                        <property name="hexpand">True</property>
+                                                        <property name="title">Fonts</property>
+                                                        <property name="valign">start</property>
+                                                        <property name="vexpand">True</property>
+                                                      </object>
+                                                    </child>
+                                                  </object>
+                                                </child>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </property>
+                                        <property name="name">fonts</property>
+                                        <property name="title">Fonts</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                                <property name="title">Desktop</property>
+                              </object>
+                            </property>
+                            <property name="sidebar">
+                              <object class="AdwNavigationPage">
+                                <property name="title">Sidebar</property>
+                                <child>
+                                  <object class="GtkStackSidebar">
+                                    <property name="stack">appearance_stack</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                            <property name="sidebar-width-fraction">0.2</property>
+                            <property name="vexpand">True</property>
+                          </object>
+                        </property>
                         <property name="icon-name">preferences-desktop-appearance-symbolic</property>
-                        <property name="name">desktop</property>
-                        <property name="title">Desktop</property>
+                        <property name="name">appearance</property>
+                        <property name="title">Appearance</property>
                       </object>
                     </child>
                     <child>

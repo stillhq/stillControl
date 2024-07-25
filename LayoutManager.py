@@ -226,3 +226,5 @@ def get_available_layouts() -> list(str):
         if layout.endswith(".json"):
             layouts.append(layout.replace(".json", ""))
     return layouts
+
+
