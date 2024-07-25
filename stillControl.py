@@ -9,6 +9,8 @@ gi.require_version("Adw", "1")
 from gi.repository import Gtk, Adw
 
 import ManageExtensionsPage
+import LayoutManager
+import LayoutButton
 
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
@@ -21,6 +23,7 @@ class StillControl(Adw.Application):
         self.builder.add_from_file(os.path.join(constants.UI_DIR, "stillControl.ui"))
 
         self.main_window = self.builder.get_object("main_window")
+        self.setup_layout_page()
         self.setup_extension_page()
         # self.connect("activate", self.do_activate)
 
@@ -30,6 +33,14 @@ class StillControl(Adw.Application):
         self.builder.get_object("install_extensions_clamp").set_child(
             ExtensionSearchPage(self.builder, ManageExtensionsPage._proxy)
         )
+
+    def setup_layout_page(self):
+        layout_box = self.builder.get_object("layout_box")
+        last_button = None
+        for layout in LayoutManager.get_layouts():
+            layout_button = LayoutButton(layout["id"], layout["id"], last_button)
+            layout_box.append(layout_button)
+            last_button = layout_button
 
     def do_activate(self):
         self.main_window.set_application(self)
