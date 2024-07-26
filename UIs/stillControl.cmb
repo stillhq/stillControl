@@ -7,7 +7,7 @@
 	(4,1,"ExtensionRow.ui","ExtensionRow.ui",None,None,None,None,None,None,None),
 	(5,1,"GSettingsGroup.ui","GSettingsGroup.ui",None,None,None,None,None,None,None),
 	(6,None,"stillcontrol.ui","stillControl.ui",None,None,None,None,None,None,None),
-	(7,None,None,"LayoutButton.ui",None,None,None,None,None,None,None)
+	(7,1,None,"LayoutButton.ui",None,None,None,None,None,None,None)
   </ui>
   <ui_library>
 	(2,"gtk","4.12",None),
@@ -127,7 +127,7 @@
 	(6,122,"GtkFlowBox","layout_box",118,None,None,None,-1,None,None),
 	(6,123,"GtkBox",None,65,None,None,None,-1,None,None),
 	(6,124,"GSettingsGroup","panel_group",123,None,None,None,-1,None,None),
-	(7,1,"GtkBox",None,None,None,None,None,-1,None,None),
+	(7,1,"GtkBox","LayoutButton",None,None,None,None,-1,None,None),
 	(7,2,"GtkBox",None,1,None,None,None,1,None,None),
 	(7,3,"GtkLabel","label",2,None,None,None,None,None,None),
 	(7,4,"GtkCheckButton","check",2,None,None,None,1,None,None),

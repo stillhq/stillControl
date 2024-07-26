@@ -2,7 +2,7 @@
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkBox">
+  <template class="LayoutButton" parent="GtkBox">
     <property name="orientation">vertical</property>
     <child>
       <object class="GtkImage" id="preview"/>
@@ -19,5 +19,5 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>
