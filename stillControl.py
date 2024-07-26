@@ -38,7 +38,8 @@ class StillControl(Adw.Application):
         layout_box = self.builder.get_object("layout_box")
         last_button = None
         for layout in LayoutManager.get_available_layouts():
-            layout_button = LayoutButton(layout["id"], layout["id"], last_button)
+            print(layout)
+            layout_button = LayoutButton.LayoutButton(layout, layout, last_button)
             layout_box.append(layout_button)
             last_button = layout_button
 

@@ -59,6 +59,8 @@ def parse_json(builder):
 
     for group_name in data:
         group = builder.get_object(group_name)
+        if group is None:
+            raise ValueError(f"Group {group_name} not found in the builder")
         for setting in data[group_name]:
             setting_type = setting["type"]
             gsetting = GSetting.from_dict(setting["gsetting"])
