@@ -3,9 +3,9 @@
 <interface>
   <requires lib="gtk" version="4.6"/>
   <requires lib="libadwaita" version="1.0"/>
-  <object class="AdwBin" id="LayoutButton">
+  <template class="LayoutButton" parent="AdwBin">
     <child>
-      <object class="GtkBox" id="LayoutButton_2">
+      <object class="GtkBox">
         <property name="height-request">0</property>
         <property name="margin-bottom">5</property>
         <property name="margin-end">5</property>
@@ -42,5 +42,5 @@
     <style>
       <class name="card"/>
     </style>
-  </object>
+  </template>
 </interface>
