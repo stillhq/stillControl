@@ -36,10 +36,13 @@ class StillControl(Adw.Application):
 
     def setup_layout_page(self):
         layout_box = self.builder.get_object("layout_box")
-        last_button = None
+        last_button = LayoutButton.LayoutButton("custom", None)
+        layout_box.append(last_button)
+        current_layout = LayoutManager.get_current_layout()
         for layout in LayoutManager.get_available_layouts():
-            print(layout)
-            layout_button = LayoutButton.LayoutButton(layout, layout, last_button)
+            layout_button = LayoutButton.LayoutButton(layout, last_button)
+            if layout == current_layout:
+                layout_button.check.set_active(True)
             layout_box.append(layout_button)
             last_button = layout_button
 

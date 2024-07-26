@@ -6,7 +6,7 @@
   <requires lib="libadwaita" version="1.4"/>
   <object class="AdwApplicationWindow" id="main_window">
     <property name="default-height">600</property>
-    <property name="default-width">1200</property>
+    <property name="default-width">800</property>
     <property name="title">stillControl</property>
     <child>
       <object class="AdwNavigationView" id="main_navigation">
@@ -51,12 +51,17 @@
                                                   <object class="GtkFlowBox" id="layout_box">
                                                     <property name="column-spacing">5</property>
                                                     <property name="hexpand">True</property>
-                                                    <property name="homogeneous">True</property>
                                                     <property name="max-children-per-line">3</property>
                                                     <property name="min-children-per-line">1</property>
                                                     <property name="selection-mode">none</property>
                                                     <property name="valign">start</property>
                                                     <property name="width-request">250</property>
+                                                    <child>
+                                                      <object class="LayoutButton"/>
+                                                    </child>
+                                                    <child>
+                                                      <object class="LayoutButton"/>
+                                                    </child>
                                                   </object>
                                                 </child>
                                               </object>

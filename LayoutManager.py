@@ -211,12 +211,20 @@ def check_layout_dict(layout: dict):
     return True
 
 
+def get_layout_name_from_id(layout_id):
+    if layout_id == "custom":
+        return "Custom"
+
+    with open(f"{_LAYOUTS_UI}/{layout_id}.json", "r") as file:
+        layout_dict = layout_as_dict(file.read())
+        return layout_dict.get("name")
+
+
 def get_current_layout():
-    for layout in os.listdir(_LAYOUTS_UI):
-        if layout.endswith(".json"):
-            with open(f"{_LAYOUTS_UI}/{layout}", "r") as file:
-                if check_layout_dict(layout_as_dict(file.read())):
-                    return layout.replace(".json", "")
+    for layout in get_available_layouts():
+        with open(f"{_LAYOUTS_UI}/{layout}.json", "r") as file:
+            if check_layout_dict(layout_as_dict(file.read())):
+                return layout.replace(".json", "")
     return "custom"
 
 
@@ -226,5 +234,3 @@ def get_available_layouts():
         if layout.endswith(".json"):
             layouts.append(layout.replace(".json", ""))
     return layouts
-
-

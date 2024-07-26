@@ -127,12 +127,14 @@
 	(6,122,"GtkFlowBox","layout_box",118,None,None,None,-1,None,None),
 	(6,123,"GtkBox",None,65,None,None,None,-1,None,None),
 	(6,124,"GSettingsGroup","panel_group",123,None,None,None,-1,None,None),
+	(6,125,"LayoutButton",None,122,None,None,None,-1,None,None),
+	(6,126,"LayoutButton",None,122,None,None,None,1,None,None),
 	(7,1,"AdwBin","LayoutButton",None,None,None,None,-1,None,None),
 	(7,2,"GtkBox",None,1,None,None,None,None,None,None),
-	(7,7,"GtkPicture","preview",2,None,None,None,2,None,None),
 	(7,8,"GtkBox",None,2,None,None,None,2,None,None),
 	(7,9,"GtkLabel","label",8,None,None,None,None,None,None),
-	(7,10,"GtkCheckButton","check",8,None,None,None,1,None,None)
+	(7,10,"GtkCheckButton","check",8,None,None,None,1,None,None),
+	(7,11,"GtkImage","preview",2,None,None,None,None,None,None)
   </object>
   <object_property>
 	(2,1,"GtkBox","spacing","10",None,None,None,None,None,None,None,None,None),
@@ -215,7 +217,7 @@
 	(5,1,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
 	(5,1,"GtkWidget","width-request","300",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWindow","default-height","600",None,None,None,None,None,None,None,None,None),
-	(6,1,"GtkWindow","default-width","1200",None,None,None,None,None,None,None,None,None),
+	(6,1,"GtkWindow","default-width","800",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWindow","title","stillControl",None,None,None,None,None,None,None,None,None),
 	(6,3,"AdwNavigationPage","can-pop","False",None,None,None,None,None,None,None,None,None),
 	(6,3,"AdwNavigationPage","title","Main View",None,None,None,None,None,None,None,None,None),
@@ -382,7 +384,6 @@
 	(6,118,"AdwClamp","tightening-threshold","300",None,None,None,None,None,None,None,None,None),
 	(6,118,"AdwClamp","unit","px",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","column-spacing","5",None,None,None,None,None,None,None,None,None),
-	(6,122,"GtkFlowBox","homogeneous","True",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","max-children-per-line","3",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","min-children-per-line","1",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","selection-mode","none",None,None,None,None,None,None,None,None,None),
@@ -397,12 +398,13 @@
 	(7,2,"GtkWidget","margin-start","5",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","margin-top","5",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","width-request","0",None,None,None,None,None,None,None,None,None),
-	(7,7,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
-	(7,7,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None),
 	(7,8,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(7,8,"GtkWidget","width-request","100",None,None,None,None,None,None,None,None,None),
 	(7,9,"GtkLabel","label","Layout",None,None,None,None,None,None,None,None,None),
-	(7,9,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None)
+	(7,9,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(7,11,"GtkImage","file","/home/cameron/Documents/stillControl/layouts/previews/still.svg",None,None,None,None,None,None,None,None,None),
+	(7,11,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
+	(7,11,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_data>
 	(2,2,"GtkWidget",1,1,None,None,None,None,None,None),
@@ -426,7 +428,8 @@
 	(2,21,"GtkWidget",2,2,None,1,None,None,None,None),
 	(7,2,"GtkWidget",1,1,None,None,None,None,None,None),
 	(7,1,"GtkWidget",1,1,None,None,None,None,None,None),
-	(7,1,"GtkWidget",2,2,None,1,None,None,None,None)
+	(7,1,"GtkWidget",2,2,None,1,None,None,None,None),
+	(7,9,"GtkWidget",1,1,None,None,None,None,None,None)
   </object_data>
   <object_data_arg>
 	(2,2,"GtkWidget",2,2,"name","title-2"),

@@ -14,7 +14,7 @@
         <property name="orientation">vertical</property>
         <property name="width-request">0</property>
         <child>
-          <object class="GtkPicture" id="preview">
+          <object class="GtkImage" id="preview">
             <property name="height-request">189</property>
             <property name="width-request">252</property>
           </object>
@@ -27,6 +27,7 @@
               <object class="GtkLabel" id="label">
                 <property name="hexpand">True</property>
                 <property name="label">Layout</property>
+                <style/>
               </object>
             </child>
             <child>
