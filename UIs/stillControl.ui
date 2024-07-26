@@ -29,12 +29,9 @@
                 </child>
                 <child>
                   <object class="AdwViewStack" id="main_stack">
-                    <property name="visible-child-name">layout</property>
+                    <property name="visible-child-name">layout_page</property>
                     <child>
-                      <object class="GtkFlowBox"/>
-                    </child>
-                    <child>
-                      <object class="AdwViewStackPage">
+                      <object class="AdwViewStackPage" id="layout_page">
                         <property name="child">
                           <object class="AdwNavigationSplitView">
                             <property name="content">
