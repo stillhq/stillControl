@@ -1,17 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
-  <requires lib="gtk" version="4.0"/>
+  <requires lib="gtk" version="4.6"/>
   <template class="LayoutButton" parent="GtkBox">
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkImage" id="preview"/>
+      <object class="GtkImage" id="preview">
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
+      </object>
     </child>
     <child>
       <object class="GtkBox">
         <child>
           <object class="GtkLabel" id="label">
             <property name="hexpand">True</property>
+            <property name="xalign">0.0</property>
           </object>
         </child>
         <child>
