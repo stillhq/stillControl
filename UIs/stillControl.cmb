@@ -129,10 +129,10 @@
 	(6,124,"GSettingsGroup","panel_group",123,None,None,None,-1,None,None),
 	(7,1,"AdwBin","LayoutButton",None,None,None,None,-1,None,None),
 	(7,2,"GtkBox",None,1,None,None,None,None,None,None),
-	(7,3,"GtkImage","preview",2,None,None,None,None,None,None),
-	(7,4,"GtkBox",None,2,None,None,None,1,None,None),
-	(7,5,"GtkLabel","label",4,None,None,None,None,None,None),
-	(7,6,"GtkCheckButton","check",4,None,None,None,1,None,None)
+	(7,7,"GtkPicture","preview",2,None,None,None,2,None,None),
+	(7,8,"GtkBox",None,2,None,None,None,2,None,None),
+	(7,9,"GtkLabel","label",8,None,None,None,None,None,None),
+	(7,10,"GtkCheckButton","check",8,None,None,None,1,None,None)
   </object>
   <object_property>
 	(2,1,"GtkBox","spacing","10",None,None,None,None,None,None,None,None,None),
@@ -396,15 +396,13 @@
 	(7,2,"GtkWidget","margin-end","5",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","margin-start","5",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","margin-top","5",None,None,None,None,None,None,None,None,None),
-	(7,2,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None),
-	(7,3,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
-	(7,3,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(7,3,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
-	(7,3,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None),
-	(7,4,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(7,4,"GtkWidget","width-request","100",None,None,None,None,None,None,None,None,None),
-	(7,5,"GtkLabel","label","Layout",None,None,None,None,None,None,None,None,None),
-	(7,5,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None)
+	(7,2,"GtkWidget","width-request","0",None,None,None,None,None,None,None,None,None),
+	(7,7,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
+	(7,7,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None),
+	(7,8,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(7,8,"GtkWidget","width-request","100",None,None,None,None,None,None,None,None,None),
+	(7,9,"GtkLabel","label","Layout",None,None,None,None,None,None,None,None,None),
+	(7,9,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_data>
 	(2,2,"GtkWidget",1,1,None,None,None,None,None,None),
