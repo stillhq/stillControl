@@ -1,30 +1,46 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
-  <requires lib="gtk" version="4.0"/>
-  <template class="LayoutButton" parent="GtkBox">
-    <property name="height-request">0</property>
-    <property name="orientation">vertical</property>
-    <property name="width-request">252</property>
+  <requires lib="gtk" version="4.6"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <object class="AdwBin" id="LayoutButton">
     <child>
-      <object class="GtkImage" id="preview">
-        <property name="height-request">189</property>
+      <object class="GtkBox" id="LayoutButton_2">
+        <property name="height-request">0</property>
+        <property name="margin-bottom">5</property>
+        <property name="margin-end">5</property>
+        <property name="margin-start">5</property>
+        <property name="margin-top">5</property>
+        <property name="orientation">vertical</property>
         <property name="width-request">252</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox">
-        <property name="hexpand">True</property>
-        <property name="width-request">100</property>
         <child>
-          <object class="GtkLabel" id="label">
+          <object class="GtkImage" id="preview">
+            <property name="height-request">189</property>
             <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <property name="width-request">252</property>
           </object>
         </child>
         <child>
-          <object class="GtkCheckButton" id="check"/>
+          <object class="GtkBox">
+            <property name="hexpand">True</property>
+            <property name="width-request">100</property>
+            <child>
+              <object class="GtkLabel" id="label">
+                <property name="hexpand">True</property>
+                <property name="label">Layout</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="check"/>
+            </child>
+          </object>
         </child>
+        <style/>
       </object>
     </child>
-  </template>
+    <style>
+      <class name="card"/>
+    </style>
+  </object>
 </interface>

@@ -7,7 +7,7 @@
 	(4,1,"ExtensionRow.ui","ExtensionRow.ui",None,None,None,None,None,None,None),
 	(5,1,"GSettingsGroup.ui","GSettingsGroup.ui",None,None,None,None,None,None,None),
 	(6,None,"stillcontrol.ui","stillControl.ui",None,None,None,None,None,None,None),
-	(7,1,None,"LayoutButton.ui",None,None,None,None,None,None,None)
+	(7,None,None,"LayoutButton.ui",None,None,None,None,None,None,None)
   </ui>
   <ui_library>
 	(2,"gtk","4.12",None),
@@ -127,11 +127,12 @@
 	(6,122,"GtkFlowBox","layout_box",118,None,None,None,-1,None,None),
 	(6,123,"GtkBox",None,65,None,None,None,-1,None,None),
 	(6,124,"GSettingsGroup","panel_group",123,None,None,None,-1,None,None),
-	(7,1,"GtkBox","LayoutButton",None,None,None,None,-1,None,None),
-	(7,2,"GtkBox",None,1,None,None,None,1,None,None),
-	(7,3,"GtkLabel","label",2,None,None,None,None,None,None),
-	(7,4,"GtkCheckButton","check",2,None,None,None,1,None,None),
-	(7,5,"GtkImage","preview",1,None,None,None,None,None,None)
+	(7,1,"AdwBin","LayoutButton",None,None,None,None,-1,None,None),
+	(7,2,"GtkBox","LayoutButton_2",1,None,None,None,None,None,None),
+	(7,3,"GtkImage","preview",2,None,None,None,None,None,None),
+	(7,4,"GtkBox",None,2,None,None,None,1,None,None),
+	(7,5,"GtkLabel","label",4,None,None,None,None,None,None),
+	(7,6,"GtkCheckButton","check",4,None,None,None,1,None,None)
   </object>
   <object_property>
 	(2,1,"GtkBox","spacing","10",None,None,None,None,None,None,None,None,None),
@@ -389,14 +390,21 @@
 	(6,122,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkWidget","width-request","250",None,None,None,None,None,None,None,None,None),
 	(6,124,"AdwPreferencesGroup","title","Panel",None,None,None,None,None,None,None,None,None),
-	(7,1,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
-	(7,1,"GtkWidget","height-request","0",None,None,None,None,None,None,None,None,None),
-	(7,1,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None),
-	(7,2,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(7,2,"GtkWidget","width-request","100",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkWidget","height-request","0",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkWidget","margin-bottom","5",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkWidget","margin-end","5",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkWidget","margin-start","5",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkWidget","margin-top","5",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None),
+	(7,3,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
 	(7,3,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(7,5,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
-	(7,5,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None)
+	(7,3,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
+	(7,3,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None),
+	(7,4,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(7,4,"GtkWidget","width-request","100",None,None,None,None,None,None,None,None,None),
+	(7,5,"GtkLabel","label","Layout",None,None,None,None,None,None,None,None,None),
+	(7,5,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_data>
 	(2,2,"GtkWidget",1,1,None,None,None,None,None,None),
@@ -417,7 +425,10 @@
 	(2,17,"GtkWidget",1,1,None,None,None,None,None,None),
 	(2,17,"GtkWidget",2,2,None,1,None,None,None,None),
 	(2,21,"GtkWidget",1,1,None,None,None,None,None,None),
-	(2,21,"GtkWidget",2,2,None,1,None,None,None,None)
+	(2,21,"GtkWidget",2,2,None,1,None,None,None,None),
+	(7,2,"GtkWidget",1,1,None,None,None,None,None,None),
+	(7,1,"GtkWidget",1,1,None,None,None,None,None,None),
+	(7,1,"GtkWidget",2,2,None,1,None,None,None,None)
   </object_data>
   <object_data_arg>
 	(2,2,"GtkWidget",2,2,"name","title-2"),
@@ -429,6 +440,7 @@
 	(3,14,"GtkWidget",2,3,"name","h4"),
 	(3,15,"GtkWidget",2,2,"name","card"),
 	(2,17,"GtkWidget",2,2,"name","card"),
-	(2,21,"GtkWidget",2,2,"name","card")
+	(2,21,"GtkWidget",2,2,"name","card"),
+	(7,1,"GtkWidget",2,2,"name","card")
   </object_data_arg>
 </cambalache-project>
