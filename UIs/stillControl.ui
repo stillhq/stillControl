@@ -29,9 +29,8 @@
                 </child>
                 <child>
                   <object class="AdwViewStack" id="main_stack">
-                    <property name="visible-child-name">layout_page</property>
                     <child>
-                      <object class="AdwViewStackPage" id="layout_page">
+                      <object class="AdwViewStackPage">
                         <property name="child">
                           <object class="AdwNavigationSplitView">
                             <property name="content">
@@ -49,7 +48,10 @@
                                                 <property name="tightening-threshold">300</property>
                                                 <property name="unit">pt</property>
                                                 <child>
-                                                  <object class="GtkFlowBox" id="layout_box"/>
+                                                  <object class="GtkFlowBox" id="layout_box">
+                                                    <property name="hexpand">True</property>
+                                                    <property name="vexpand">True</property>
+                                                  </object>
                                                 </child>
                                               </object>
                                             </child>
