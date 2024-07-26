@@ -390,11 +390,10 @@
 	(6,122,"GtkWidget","width-request","250",None,None,None,None,None,None,None,None,None),
 	(6,124,"AdwPreferencesGroup","title","Panel",None,None,None,None,None,None,None,None,None),
 	(7,1,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
-	(7,1,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
+	(7,1,"GtkWidget","height-request","0",None,None,None,None,None,None,None,None,None),
 	(7,1,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","width-request","100",None,None,None,None,None,None,None,None,None),
-	(7,3,"GtkLabel","xalign","0.0",None,None,None,None,None,None,None,None,None),
 	(7,3,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(7,5,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
 	(7,5,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None)
