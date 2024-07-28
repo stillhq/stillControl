@@ -23,6 +23,8 @@ class StillControl(Adw.Application):
         self.builder.add_from_file(os.path.join(constants.UI_DIR, "stillControl.ui"))
 
         self.main_window = self.builder.get_object("main_window")
+        self.main_stack = self.builder.get_object("main_stack")
+        self.layout_stack = self.builder.get_object("layout_stack")
         self.setup_layout_page()
         self.setup_extension_page()
         # self.connect("activate", self.do_activate)
@@ -33,6 +35,11 @@ class StillControl(Adw.Application):
         self.builder.get_object("install_extensions_clamp").set_child(
             ExtensionSearchPage(self.builder, ManageExtensionsPage._proxy)
         )
+
+    def layout_page_visible(self, _stack, _prop):
+        if self.main_stack.get_visible_child_name() == "layout" and self.layout_stack.get_visible_child_name() == "layout":
+            print("layout time")
+            LayoutButton.refresh_buttons(LayoutManager.get_current_layout())
 
     def setup_layout_page(self):
         layout_box = self.builder.get_object("layout_box")
@@ -45,6 +52,10 @@ class StillControl(Adw.Application):
                 layout_button.check.set_active(True)
             layout_box.append(layout_button)
             last_button = layout_button
+        LayoutButton.refresh_buttons(current_layout)
+
+        self.main_stack.connect("notify::visible-child-name", self.layout_page_visible)
+        self.layout_stack.connect("notify::visible-child-name", self.layout_page_visible)
 
     def do_activate(self):
         self.main_window.set_application(self)

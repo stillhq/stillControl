@@ -36,7 +36,7 @@
                             <property name="content">
                               <object class="AdwNavigationPage">
                                 <property name="child">
-                                  <object class="GtkStack" id="desktop_stack">
+                                  <object class="GtkStack" id="layout_stack">
                                     <property name="vexpand">True</property>
                                     <child>
                                       <object class="GtkStackPage">
@@ -56,12 +56,6 @@
                                                     <property name="selection-mode">none</property>
                                                     <property name="valign">start</property>
                                                     <property name="width-request">250</property>
-                                                    <child>
-                                                      <object class="LayoutButton"/>
-                                                    </child>
-                                                    <child>
-                                                      <object class="LayoutButton"/>
-                                                    </child>
                                                   </object>
                                                 </child>
                                               </object>
@@ -206,7 +200,7 @@
                                 <property name="title">Sidebar</property>
                                 <child>
                                   <object class="GtkStackSidebar">
-                                    <property name="stack">desktop_stack</property>
+                                    <property name="stack">layout_stack</property>
                                   </object>
                                 </child>
                               </object>

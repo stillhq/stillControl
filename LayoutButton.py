@@ -13,8 +13,18 @@ import constants
 layout_dir = os.path.join(constants.MAIN_DIR, "layouts")
 preview_dir = os.path.join(layout_dir, "previews")
 
+buttons = []
+
+def refresh_buttons(layout_id):
+    for button in buttons:
+        print(button)
+        button.layout_setting_changed(layout_id)
+        button.change_layout = True
+
+
 @Gtk.Template(filename=os.path.join(constants.UI_DIR, "LayoutButton.ui"))
 class LayoutButton(Adw.Bin):
+    change_layout = False
     __gtype_name__ = "LayoutButton"
     preview: Gtk.Image = Gtk.Template.Child()
     label: Gtk.Label = Gtk.Template.Child()
@@ -22,6 +32,7 @@ class LayoutButton(Adw.Bin):
 
     def __init__(self, layout_id, last_button: None):
         super().__init__()
+        buttons.append(self)
         self.layout_name = LayoutManager.get_layout_name_from_id(layout_id)
         self.layout_id = layout_id
         self.svg_path = os.path.join(preview_dir, f"{layout_id}.svg")
@@ -45,6 +56,17 @@ class LayoutButton(Adw.Bin):
             print(self.svg_path)
             self.preview.set_from_icon_name("dialog-question-symbolic")
             self.preview.set_pixel_size(72)
+
+        self.check.connect("toggled", self.toggled)
+
+    def toggled(self, _check_button):
+        if self.change_layout:
+            LayoutManager.set_layout(self.layout_id)
+
+    def layout_setting_changed(self, layout_id):
+        self.change_layout = False
+        if layout_id == self.layout_id:
+            self.check.set_active(True)
 
 
 def invert_pixbuf(pixbuf):
