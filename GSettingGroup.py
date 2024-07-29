@@ -12,7 +12,7 @@ from gi.repository import Adw, Gtk, Pango
 
 from GSettingDetailedComboRow import GSettingDetailedComboRow
 from GSettingComboRow import GSettingComboRow
-
+import Utils
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
 
@@ -52,7 +52,7 @@ class GSettingsGroup(Adw.PreferencesGroup):
             row.set_icon_name(gsetting.icon_name)
         row.set_active()
         row.connect("notify::active", extension_switch_row_changed, gsetting)
-        gsetting.settings.connect("changed", extension_changed, row, gsetting)
+        gsetting.settings.connect("changed", extension__changed, row, gsetting)
         self.add(row)
         return row
 
@@ -108,6 +108,14 @@ class GSettingsGroup(Adw.PreferencesGroup):
         row = GSettingDetailedComboRow(gsetting, values, display, display_subtitles)
         self.add(row)
         return row
+
+    def add_extension_setting_button(self, title, subtitle, icon, extension_uuid: str):
+        row = Adw.ActionRow(title=title, subtitle=subtitle)
+        row.set_icon_name(icon)
+        row.connect("activate", lambda _: self.open_extension_settings(extension_uuid))
+        self.add(row)
+        return row
+
 
 
 def switch_row_changed(switch_row, _active, gsetting):
@@ -207,3 +215,8 @@ def font_setting_changed(settings, key, button, gsetting):
         font_desc = button.get_font_desc()
         if settings.get_string(key) != font_desc.to_string():
             set_font_button(button, settings.get_string(key))
+
+
+def open_extension_settings(_row, extension_uuid):
+    _proxy = Utils.ExtensionProxy()
+    _proxy.open_extension_prefs(extension_uuid)

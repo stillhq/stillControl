@@ -69,31 +69,46 @@ def parse_json(builder):
             raise ValueError(f"Group {group_name} not found in the builder")
         for setting in data[group_name]:
             setting_type = setting["type"]
-            gsetting = GSetting.from_dict(setting["gsetting"])
             setting_widget = None
             match setting_type:
                 case "switch":
+                    gsetting = GSetting.from_dict(setting["gsetting"])
                     setting_widget = group.add_switch(gsetting)
                 case "switch-inverse":
+                    gsetting = GSetting.from_dict(setting["gsetting"])
                     setting_widget = group.add_switch_inverse(gsetting)
+                case "switch-extension":
+                    subtitle = setting.get("subtitle")
+                    icon = setting.get("icon_name")
+                    setting_widget = group.add_switch_extension(setting["title"], subtitle, icon, setting["extension"])
                 case "spin":
+                    gsetting = GSetting.from_dict(setting["gsetting"])
                     setting_widget = group.add_spin(
                         gsetting, setting["spin_type"], setting["percent"],
                         parse_adjustment(setting["adjustment"])
                     )
                 case "font":
+                    gsetting = GSetting.from_dict(setting["gsetting"])
                     setting_widget = group.add_font(gsetting)
                 case "combo":
+                    gsetting = GSetting.from_dict(setting["gsetting"])
                     if setting.get("python_options"):
                         displays, values, _display_subtitles = function_ids[setting["python_options"]]()
                     else:
                         displays, values, _display_subtitles = parse_options(setting["options"])
                     gsetting_widget = group.add_combo(gsetting, values, displays)
                 case "detailed_combo":
+                    gsetting = GSetting.from_dict(setting["gsetting"])
                     if setting.get("python_options"):
                         displays, values, display_subtitles = function_ids[setting["python_options"]]()
                     else:
                         displays, values, display_subtitles = parse_options(setting["options"])
                     gsetting_widget = group.add_detailed_combo(gsetting, values, displays, display_subtitles)
+                case "extension_setting_button":
+                    subtitle = setting.get("subtitle")
+                    icon = setting.get("icon_name")
+                    group.add_extension_setting_button(
+                        setting["title"], subtitle, icon, setting["extension_uuid"]
+                    )
             if setting.get("extension_required"):
                 extension_specific_setting(setting["extension_required"], gsetting_widget, setting["extension_uuid"])
