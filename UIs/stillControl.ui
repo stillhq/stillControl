@@ -39,7 +39,7 @@
                                   <object class="GtkStack" id="layout_stack">
                                     <property name="vexpand">True</property>
                                     <child>
-                                      <object class="GtkStackPage">
+                                      <object class="GtkStackPage" id="layout_page">
                                         <property name="child">
                                           <object class="GtkScrolledWindow">
                                             <child>
@@ -54,6 +54,7 @@
                                                     <property name="homogeneous">True</property>
                                                     <property name="max-children-per-line">3</property>
                                                     <property name="min-children-per-line">1</property>
+                                                    <property name="row-spacing">5</property>
                                                     <property name="selection-mode">none</property>
                                                     <property name="valign">start</property>
                                                     <property name="width-request">250</property>

@@ -52,7 +52,7 @@ class GSettingsGroup(Adw.PreferencesGroup):
             row.set_icon_name(gsetting.icon_name)
         row.set_active()
         row.connect("notify::active", extension_switch_row_changed, gsetting)
-        gsetting.settings.connect("changed", extension_switch_setting_changed, row, gsetting)
+        gsetting.settings.connect("changed", extension_changed, row, gsetting)
         self.add(row)
         return row
 

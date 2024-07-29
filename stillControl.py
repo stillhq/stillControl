@@ -42,25 +42,29 @@ class StillControl(Adw.Application):
 
     def layout_page_visible(self, _stack, _prop):
         if self.main_stack.get_visible_child_name() == "layout" and self.layout_stack.get_visible_child_name() == "layout":
-            print("layout time")
             LayoutButton.refresh_buttons(LayoutManager.get_current_layout())
 
     def setup_layout_page(self):
-        layout_box = self.builder.get_object("layout_box")
-        last_button = LayoutButton.LayoutButton("custom", None)
-        layout_box.append(last_button)
-        current_layout = LayoutManager.get_current_layout()
-        for layout in LayoutManager.get_available_layouts():
-            layout_button = LayoutButton.LayoutButton(layout, last_button)
-            if layout == current_layout:
-                layout_button.check.set_active(True)
-            layout_box.append(layout_button)
-            last_button = layout_button
-        LayoutButton.refresh_buttons(current_layout)
+        available_layouts = LayoutManager.get_available_layouts()
+        if len(available_layouts) <= 2:
+            layout_box = self.builder.get_object("layout_box")
+            last_button = LayoutButton.LayoutButton("custom", None)
+            layout_box.append(last_button)
+            current_layout = LayoutManager.get_current_layout()
+            for layout in LayoutManager.get_available_layouts():
+                layout_button = LayoutButton.LayoutButton(layout, last_button)
+                if layout == current_layout:
+                    layout_button.check.set_active(True)
+                layout_box.append(layout_button)
+                last_button = layout_button
+            LayoutButton.refresh_buttons(current_layout)
 
-        layout_box.connect("child-activated", self.layout_page_child_clicked)
-        self.main_stack.connect("notify::visible-child-name", self.layout_page_visible)
-        self.layout_stack.connect("notify::visible-child-name", self.layout_page_visible)
+            layout_box.connect("child-activated", self.layout_page_child_clicked)
+            self.main_stack.connect("notify::visible-child-name", self.layout_page_visible)
+            self.layout_stack.connect("notify::visible-child-name", self.layout_page_visible)
+        else:
+            self.layout_stack.remove(self.builder.get_object("layout_page").get_child())
+            self.layout_stack.set_visible_child(self.layout_stack.get_first_child())
 
     def do_activate(self):
         self.main_window.set_application(self)

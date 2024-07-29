@@ -5,17 +5,23 @@ from gi.repository import Gio
 
 import constants
 
-_shell_settings = Gio.Settings.new("org.gnome.shell")
-_panel_settings = Gio.Settings.new("org.gnome.shell.extensions.dash-to-panel")
-_dock_settings = Gio.Settings.new("org.gnome.shell.extensions.dash-to-dock")
-_arc_settings = Gio.Settings.new("org.gnome.shell.extensions.arcmenu")
-
 _LAYOUTS_UI = os.path.join(os.path.dirname(__file__), "layouts")
 
 _monitor_specific_panel_settings = [
     "panel-anchors", "panel-element-positions",
     "panel-lengths", "panel-positions", "panel-sizes"
 ]
+
+def import_settings(schema):
+    try:
+        return Gio.Settings.new(schema)
+    except Gio.Error:
+        return None
+
+_shell_settings = import_settings("org.gnome.shell")
+_panel_settings = import_settings("org.gnome.shell.extensions.dash-to-panel")
+_dock_settings = import_settings("org.gnome.shell.extensions.dash-to-dock")
+_arc_settings = import_settings("org.gnome.shell.extensions.arcmenu")
 
 
 def set_extensions(to_enable, to_disable):
@@ -37,6 +43,8 @@ def set_extensions(to_enable, to_disable):
 
 
 def check_extensions(enabled, disabled):
+    if not _shell_settings:
+        return False
     enabled_extensions = _shell_settings.get_strv("enabled-extensions")
     disabled_extensions = _shell_settings.get_strv("disabled-extensions")
     for extension in enabled:
@@ -73,6 +81,8 @@ def set_dock_settings(settings):
 
 
 def check_dock_settings(settings):
+    if not _dock_settings:
+        return False
     for key in settings:
         if _dock_settings.get_value(key) != settings[key]:
             return False
@@ -85,6 +95,8 @@ def set_arc_settings(settings):
 
 
 def check_arc_settings(settings):
+    if not _arc_settings:
+        return False
     for key in settings:
         if _arc_settings.get_value(key) != settings[key]:
             return False
@@ -124,6 +136,8 @@ def check_gsettings(json):
 
 
 def check_monitor_specific_panel_setting(key, value):
+    if not _panel_settings:
+        return False
     settings = json.loads(_panel_settings.get_string(key))
     for monitor in settings:
         if settings[monitor] != value:
@@ -167,22 +181,29 @@ def set_layout(layout: str):
 
 def layout_as_dict(json_str: str):
     layout = json.loads(json_str)
+    layout["compatible"] = _shell_settings is not None
 
     for d in ["enabled_extension", "disabled_extension"]:
         if d not in layout:
             layout[d] = []
 
     if "panel" in layout:
+        if not _panel_settings:
+            layout["compatible"] = False
         layout["enabled_extension"].append("dash-to-panel@jderose9.github.com")
     else:
         layout["disabled_extension"].append("dash-to-panel@jderose9.github.com")
 
     if "dock" in layout:
+        if not _dock_settings:
+            layout["compatible"] = False
         layout["enabled_extension"].append("dash-to-dock@micxgx.gmail.com")
     else:
         layout["disabled_extension"].append("dash-to-dock@micxgx.gmail.com")
 
     if "arc" in layout:
+        if not _arc_settings:
+            layout["compatible"] = False
         layout["enabled_extension"].append("arcmenu@arcmenu.com")
     else:
         layout["disabled_extension"].append("arcmenu@arcmenu.com")
@@ -233,5 +254,7 @@ def get_available_layouts():
     layouts = []
     for layout in os.listdir(_LAYOUTS_UI):
         if layout.endswith(".json"):
-            layouts.append(layout.replace(".json", ""))
+            with open(f"{_LAYOUTS_UI}/{layout}", "r") as file:
+                if layout_as_dict(file.read()).get("compatible"):
+                    layouts.append(layout.replace(".json", ""))
     return layouts
