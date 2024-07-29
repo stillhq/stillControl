@@ -36,6 +36,10 @@ class StillControl(Adw.Application):
             ExtensionSearchPage(self.builder, ManageExtensionsPage._proxy)
         )
 
+    def layout_page_child_clicked(self, flowbox, child):
+        if child.get_child().get_sensitive():
+            child.get_child().check.set_active(True)
+
     def layout_page_visible(self, _stack, _prop):
         if self.main_stack.get_visible_child_name() == "layout" and self.layout_stack.get_visible_child_name() == "layout":
             print("layout time")
@@ -54,6 +58,7 @@ class StillControl(Adw.Application):
             last_button = layout_button
         LayoutButton.refresh_buttons(current_layout)
 
+        layout_box.connect("child-activated", self.layout_page_child_clicked)
         self.main_stack.connect("notify::visible-child-name", self.layout_page_visible)
         self.layout_stack.connect("notify::visible-child-name", self.layout_page_visible)
 

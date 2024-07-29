@@ -46,6 +46,16 @@ class GSettingsGroup(Adw.PreferencesGroup):
         self.add(row)
         return row
 
+    def add_extension_switch(self, gsetting: GSetting, uuid: str):
+        row = Adw.SwitchRow(title=gsetting.title, subtitle=gsetting.subtitle)
+        if gsetting.icon_name:
+            row.set_icon_name(gsetting.icon_name)
+        row.set_active()
+        row.connect("notify::active", extension_switch_row_changed, gsetting)
+        gsetting.settings.connect("changed", extension_switch_setting_changed, row, gsetting)
+        self.add(row)
+        return row
+
     def add_spin(self, gsetting: GSetting, spin_type, percent, adjustment):
         row = Adw.SpinRow(title=gsetting.title, subtitle=gsetting.subtitle)
         if gsetting.icon_name:
@@ -118,6 +128,33 @@ def switch_inverse_setting_changed(settings, key, switch_row, gsetting):
     if key == gsetting.key:
         if switch_row.get_active() == settings.get_boolean(key):
             switch_row.set_active(not settings.get_boolean(key))
+
+
+def extension_switch_row_changed(switch_row, _active, gsetting):
+    if switch_row.get_active():
+        if gsetting.key not in gsetting.settings.get_strv("enabled-extensions"):
+            gsetting.settings.set_strv(
+                "enabled-extensions", gsetting.settings.get_strv("enabled-extensions") + [gsetting.key]
+            )
+        if gsetting.key in gsetting.settings.get_strv("disabled_extensions"):
+            gsetting.settings.set_strv(
+                "disabled_extensions", [ext for ext in gsetting.settings.get_strv("disabled_extensions") if ext != gsetting.key]
+            )
+    else:
+        if gsetting.key in gsetting.settings.get_strv("enabled-extensions"):
+            gsetting.settings.set_strv(
+                "enabled-extensions", [ext for ext in gsetting.settings.get_strv("enabled-extensions") if ext != gsetting.key]
+            )
+
+
+def extension_changed(settings, key, switch_row, extension_uuid):
+    toggle = False
+    if key == "enabled-extensions" or "disabled_extensions":
+        enabled = extension_uuid in settings.get_strv("enabled-extensions")
+        not_disabled = extension_uuid not in settings.get_strv("disabled-extensions")
+        toggle = enabled and not_disabled
+    if switch_row.get_active() != toggle:
+        switch_row.set_active(toggle)
 
 
 def spin_row_changed(spin_row, _value, gsetting, spin_type, percent):

@@ -383,6 +383,7 @@
 	(6,118,"AdwClamp","tightening-threshold","300",None,None,None,None,None,None,None,None,None),
 	(6,118,"AdwClamp","unit","px",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","column-spacing","5",None,None,None,None,None,None,None,None,None),
+	(6,122,"GtkFlowBox","homogeneous","True",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","max-children-per-line","3",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","min-children-per-line","1",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","selection-mode","none",None,None,None,None,None,None,None,None,None),

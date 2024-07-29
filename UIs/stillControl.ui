@@ -51,6 +51,7 @@
                                                   <object class="GtkFlowBox" id="layout_box">
                                                     <property name="column-spacing">5</property>
                                                     <property name="hexpand">True</property>
+                                                    <property name="homogeneous">True</property>
                                                     <property name="max-children-per-line">3</property>
                                                     <property name="min-children-per-line">1</property>
                                                     <property name="selection-mode">none</property>

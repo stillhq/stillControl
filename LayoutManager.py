@@ -22,24 +22,25 @@ def set_extensions(to_enable, to_disable):
     enabled_extensions = _shell_settings.get_strv("enabled-extensions")
     disabled_extensions = _shell_settings.get_strv("disabled-extensions")
     for extension in to_disable:
-        if extension in enabled_extensions:
+        while extension in enabled_extensions:
             enabled_extensions.remove(extension)
         if extension not in disabled_extensions:
             disabled_extensions.append(extension)
     for extension in to_enable:
         if extension not in enabled_extensions:
             enabled_extensions.append(extension)
-        if extension in disabled_extensions:
+        while extension in disabled_extensions:
             disabled_extensions.remove(extension)
 
     _shell_settings.set_strv("enabled-extensions", enabled_extensions)
+    _shell_settings.set_strv("disabled-extensions", disabled_extensions)
 
 
 def check_extensions(enabled, disabled):
     enabled_extensions = _shell_settings.get_strv("enabled-extensions")
     disabled_extensions = _shell_settings.get_strv("disabled-extensions")
     for extension in enabled:
-        if extension not in enabled_extensions:
+        if extension not in enabled_extensions or extension in disabled_extensions:
             return False
     for extension in disabled:
         if extension in enabled_extensions and extension not in disabled_extensions:

@@ -17,15 +17,14 @@ buttons = []
 
 def refresh_buttons(layout_id):
     for button in buttons:
-        print(button)
         button.layout_setting_changed(layout_id)
         button.change_layout = True
 
 
 @Gtk.Template(filename=os.path.join(constants.UI_DIR, "LayoutButton.ui"))
 class LayoutButton(Adw.Bin):
-    change_layout = False
     __gtype_name__ = "LayoutButton"
+    change_layout = False
     preview: Gtk.Image = Gtk.Template.Child()
     label: Gtk.Label = Gtk.Template.Child()
     check: Gtk.CheckButton = Gtk.Template.Child()
@@ -39,6 +38,10 @@ class LayoutButton(Adw.Bin):
         self.style_manager = Adw.StyleManager.get_default()
 
         self.style_manager.connect("notify::dark", lambda _style,_dark: self.set_image())
+
+        if layout_id == "custom":
+            self.set_sensitive(False)
+            self.check.set_sensitive(False)
 
         self.set_image()
         self.label.set_label(self.layout_name)
@@ -60,7 +63,7 @@ class LayoutButton(Adw.Bin):
         self.check.connect("toggled", self.toggled)
 
     def toggled(self, _check_button):
-        if self.change_layout:
+        if self.change_layout and self.check.get_active() and self.layout_id != "custom":
             LayoutManager.set_layout(self.layout_id)
 
     def layout_setting_changed(self, layout_id):

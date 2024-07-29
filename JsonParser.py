@@ -6,9 +6,10 @@ from __init__ import GSetting  # FIXME: Change this to absolute import
 
 import gi
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Gio
 
 _SETTINGS_JSON = os.path.join(UI_DIR, "settings.json")
+_shell_settings = Gio.Settings.new("org.gnome.shell")
 
 
 def legacy_themes_placeholder():
@@ -41,6 +42,11 @@ def parse_options(data):
     return displays, values, display_subtitles
 
 
+def extension_specific_setting(key, setting, extension_uuid):
+    if key == "enabled-extensions":
+        setting.set_visible(extension_uuid in _shell_settings.get_strv("enabled-extensions"))
+
+
 def parse_adjustment(data):
     adjustment = Gtk.Adjustment()
     if data.get("lower"):
@@ -64,27 +70,30 @@ def parse_json(builder):
         for setting in data[group_name]:
             setting_type = setting["type"]
             gsetting = GSetting.from_dict(setting["gsetting"])
+            setting_widget = None
             match setting_type:
                 case "switch":
-                    group.add_switch(gsetting)
+                    setting_widget = group.add_switch(gsetting)
                 case "switch-inverse":
-                    group.add_switch_inverse(gsetting)
+                    setting_widget = group.add_switch_inverse(gsetting)
                 case "spin":
-                    group.add_spin(
+                    setting_widget = group.add_spin(
                         gsetting, setting["spin_type"], setting["percent"],
                         parse_adjustment(setting["adjustment"])
                     )
                 case "font":
-                    group.add_font(gsetting)
+                    setting_widget = group.add_font(gsetting)
                 case "combo":
                     if setting.get("python_options"):
                         displays, values, _display_subtitles = function_ids[setting["python_options"]]()
                     else:
                         displays, values, _display_subtitles = parse_options(setting["options"])
-                    group.add_combo(gsetting, values, displays)
+                    gsetting_widget = group.add_combo(gsetting, values, displays)
                 case "detailed_combo":
                     if setting.get("python_options"):
                         displays, values, display_subtitles = function_ids[setting["python_options"]]()
                     else:
                         displays, values, display_subtitles = parse_options(setting["options"])
-                    group.add_detailed_combo(gsetting, values, displays, display_subtitles)
+                    gsetting_widget = group.add_detailed_combo(gsetting, values, displays, display_subtitles)
+            if setting.get("extension_required"):
+                extension_specific_setting(setting["extension_required"], gsetting_widget, setting["extension_uuid"])
