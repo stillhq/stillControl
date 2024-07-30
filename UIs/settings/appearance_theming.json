@@ -1,0 +1,50 @@
+{
+  "theming_group": {
+    "items": [
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Theme Styling",
+          "subtitle": "This is the same as the light and dark theme options in GNOME Control Center,\nexcept with the \"Light\" option which is an experimental desktop light theme.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "color-scheme"
+        },
+        "options": [
+          ["Mixed (Default)", "default"],
+          ["Dark", "prefer-dark"],
+          ["Light", "prefer-light"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Legacy GTK3/GTK4 Theme",
+          "subtitle": "This is the theme used by legacy applications that don't use Libadwaita.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "gtk-theme"
+        },
+        "python_options": "legacy_themes"
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Icon Theme",
+          "subtitle": "This is the icon theme used by your system.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "icon-theme"
+        },
+        "python_options": "icon_themes"
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Cursor Theme",
+          "subtitle": "This is the theme used for your mouse pointer.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "cursor-theme"
+        },
+        "python_options": "cursor_themes"
+      }
+    ]
+  }
+}

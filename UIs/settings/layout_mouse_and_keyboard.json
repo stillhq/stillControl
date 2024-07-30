@@ -1,0 +1,75 @@
+{
+  "mouse_group": {
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Middle Click Paste",
+          "subtitle": "Whether or not to paste when you middle click.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "gtk-enable-primary-paste"
+        }
+      }
+    ]
+  },
+  "touchpad_group": {
+    "items": [
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Touchpad Acceleration",
+          "subtitle": "Turning acceleration off can allow faster and more precise movements,\nbut can also make the touchpad more difficult to use.",
+          "schema": "org.gnome.desktop.peripherals.touchpad",
+          "key": "accel-profile"
+        },
+        "options": [
+          ["Enabled", "default"],
+          ["Disabled", "flat"]
+        ]
+      }
+    ]
+  },
+  "pointing_stick_group": {
+    "items": [
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Pointing Stick Acceleration",
+          "subtitle": "Turning acceleration off can allow faster and more precise movements,\nbut can also make the pointing stick more difficult to use.",
+          "schema": "org.gnome.desktop.peripherals.pointingstick",
+          "key": "accel-profile"
+        },
+        "options": [
+          ["Enabled", "default"],
+          ["Disabled", "flat"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Pointing Stick Scrolling Method",
+          "schema": "org.gnome.desktop.peripherals.pointingstick",
+          "key": "scroll-method"
+        },
+        "options": [
+          ["Default", "default"],
+          ["On Button Down", "on-button-down"],
+          ["None", "none"]
+        ]
+      }
+    ]
+  },
+  "keyboard_group": {
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show Extended Sources in Settings",
+          "subtitle": "Show extended input sources in GNOME Control Center's Keyboard settings.",
+          "schema": "org.gnome.desktop.input-sources",
+          "key": "show-all-sources"
+        }
+      }
+    ]
+  }
+}

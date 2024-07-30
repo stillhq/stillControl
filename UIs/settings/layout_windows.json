@@ -1,0 +1,141 @@
+{
+  "window_group": {
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Attach Modal Dialogs",
+          "subtitle": "Attaches a window's modal dialogs to itself. Disabling this allows you to move some dialogs separately from the parent window.",
+          "schema": "org.gnome.mutter",
+          "key": "attach-modal-dialogs"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Center New Windows",
+          "subtitle": "Whether or not to start new windows in the center of the screen.",
+          "schema": "org.gnome.mutter",
+          "key": "center-new-windows"
+        }
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Window Action Key",
+          "subtitle": "Holding this essentially key treats the whole window like the titlebar.",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "mouse-button-modifier"
+        },
+        "options": [
+          ["Alt", "<Alt>"],
+          ["Super (Default)", "<Super>"]
+        ]
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Resize with Secondary",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "resize-with-right-button"
+        }
+      },
+      {
+        "type": "detailed-combo",
+        "gsetting": {
+          "title": "Window Focus Mode",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "focus-mode"
+        },
+        "options": [
+          ["Click", "click", "Windows are focused when they are clicked."],
+          [
+            "Sloppy",
+            "sloppy",
+            "Window is focused when hovered with the pointer. Windows remain focused when the desktop is hovered."
+          ],
+          [
+            "Mouse",
+            "mouse",
+            "Window is focused when hovered with the pointer. Hovering the desktop removes focus from the previous window."
+          ]
+        ]
+      }
+    ]
+  },
+  "titlebar_group": {
+    "items": [
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Titlebar Button Layout",
+          "subtitle": "This is the layout of the titlebar buttons.",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "button-layout"
+        },
+        "options": [
+          ["risiOS Left", "minimize,close:appmenu"],
+          ["risiOS Right", "appmenu:minimize,close"],
+          ["elementary", "close,appmenu:maximize"],
+          ["elementary inverted", "maximize,appmenu:close"],
+          ["minimentary", "close,appmenu:minimize"],
+          ["minimentary inverted", "minimize,appmenu:close"],
+          ["GNOME Left", "close:appmenu"],
+          ["GNOME Right", "appmenu:close"],
+          ["San Francisco Left", "close,minimize,maximize:appmenu"],
+          ["San Francisco Right", "appmenu:maximize,minimize,close"],
+          ["Seattle Left", "close,maximize,minimize:appmenu"],
+          ["Seattle Right (Default)", "appmenu:minimize,maximize,close"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Double Click Action",
+          "subtitle": null,
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "action-double-click-titlebar"
+        },
+        "options": [
+          ["Lower Window", "lower"],
+          ["Open Menu", "menu"],
+          ["Toggle Maximize", "toggle-maximize"],
+          ["Minimize", "minimize"],
+          ["Nothing", "none"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Middle Click Action",
+          "subtitle": null,
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "action-middle-click-titlebar"
+        },
+        "options": [
+          ["Lower Window", "lower"],
+          ["Open Menu", "menu"],
+          ["Toggle Maximize", "toggle-maximize"],
+          ["Minimize", "minimize"],
+          ["Nothing", "none"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Right Click Action",
+          "subtitle": null,
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "action-right-click-titlebar"
+        },
+        "options": [
+          ["Lower Window", "lower"],
+          ["Open Menu", "menu"],
+          ["Toggle Maximize", "toggle-maximize"],
+          ["Minimize", "minimize"],
+          ["Nothing", "none"]
+        ]
+      }
+    ]
+  },
+}

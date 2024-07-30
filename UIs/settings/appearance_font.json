@@ -1,0 +1,87 @@
+{
+	"font_group": {
+        "items": [
+      {
+        "type": "font",
+        "gsetting": {
+          "title": "Interface Font",
+          "subtitle": "This is the primary font used by your system.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "font-name"
+        }
+      },
+      {
+        "type": "font",
+        "gsetting": {
+          "title": "Document Font",
+          "subtitle": "Font used for viewing documents.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "document-font-name"
+        }
+      },
+      {
+        "type": "font",
+        "gsetting": {
+          "title": "Monospace Font",
+          "subtitle": "Font used when all the letters need to be the same size. For example, terminals and text editors.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "monospace-font-name"
+        }
+      },
+      {
+        "type": "font",
+        "gsetting": {
+          "title": "Legacy Titlebar Font",
+          "subtitle": "Font used in the titlebar for apps that don't use header bars (old Gtk apps, non-Gtk apps).",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "titlebar-font"
+        }
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Font Hinting",
+          "subtitle": "Adjusts font so that it lines up with a rasterized grid.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "font-hinting"
+        },
+        "options": [
+          ["None", "none"],
+          ["Slight", "slight"],
+          ["Medium", "medium"],
+          ["Full", "full"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Font Antialiasing",
+          "subtitle": "The method of antialiasing used.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "font-antialiasing"
+        },
+        "options": [
+          ["None", "none"],
+          ["Subpixel (for LCD Screens)", "rgba"],
+          ["Standard (Grayscale)", "grayscale"]
+        ]
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Font Scaling Factor (Percent)",
+          "subtitle": "The scaling factor for font sizes.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "text-scaling-factor"
+        },
+        "spin_type": "double",
+        "percent": true,
+        "adjustment": {
+          "lower": 50,
+          "upper": 300,
+          "step_increment": 25
+        }
+      }
+    ]
+	}
+}

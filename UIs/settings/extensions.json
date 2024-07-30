@@ -1,0 +1,26 @@
+{
+  "extension_group": {
+    "items": [
+      {
+        "type": "switch-inverse",
+        "gsetting": {
+          "title": "Enable Third Party Extensions",
+          "subtitle": "Third party extensions are not supported by stillOS and may cause unforeseen issues. stillOS modifies GNOME Shell, so not every extension will work properly. Some third-party extensions may also randomly break after stillOS updates.",
+          "schema": "org.gnome.shell",
+          "key": "disable-user-extensions",
+          "icon_name": "dialog-warning-symbolic"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show System Extensions (Advanced)",
+          "subtitle": "ONLY DO THIS IF YOU KNOW WHAT YOU ARE DOING!!\n\nThese extensions are used by stillOS's UI. Disabling them or changing settings may cause problems.",
+          "schema": "io.stillhq.control",
+          "key": "show-system-extensions",
+          "icon_name": "dialog-warning-symbolic"
+        }
+      }
+    ]
+  }
+}
