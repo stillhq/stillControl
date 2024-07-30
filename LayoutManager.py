@@ -12,11 +12,17 @@ _monitor_specific_panel_settings = [
     "panel-lengths", "panel-positions", "panel-sizes"
 ]
 
+
 def import_settings(schema):
-    try:
-        return Gio.Settings.new(schema)
-    except Gio.Error:
+    schema_source = Gio.SettingsSchemaSource.get_default()
+    if schema_source.lookup(schema, True):
+        try:
+            return Gio.Settings.new(schema)
+        except Gio.Error:
+            return None
+    else:
         return None
+
 
 _shell_settings = import_settings("org.gnome.shell")
 _panel_settings = import_settings("org.gnome.shell.extensions.dash-to-panel")

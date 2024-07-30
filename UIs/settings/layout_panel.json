@@ -17,19 +17,42 @@
         }
       },
       {
-        "type": "switch",
-        "gsetting": {
-          "title": "Show Battery Percentage",
-          "subtitle": "This shows the battery percentage in the top bar. This is only useful if you have a laptop.",
-          "schema": "org.gnome.desktop.interface",
-          "key": "show-battery-percentage"
-        }
-      },
-      {
         "type": "extension-setting-button",
         "title": "Advanced Panel Settings",
         "subtitle": "Powered by Dash to Panel",
         "extension": "dash-to-panel@jderose9.github.com"
+      }
+    ]
+  },
+  "panel_behavior_group": {
+    "requires_extension": "dash-to-panel@jderose9.github.com",
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show Favorites Applications",
+          "subtitle": "Pins your favorite apps to the panel.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "show-favorites"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show Favorites Applications on Extra Monitors",
+          "subtitle": "Show favorite apps on the non-primary display.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "show-favorites-all-monitors"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show Running Applications",
+          "subtitle": "Shows running applications on the panel.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "show-running-apps"
+        }
       }
     ]
   }
