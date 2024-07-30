@@ -8,13 +8,14 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gtk, Pango
+from gi.repository import Adw, Gtk, Gio, Pango
 
 from GSettingDetailedComboRow import GSettingDetailedComboRow
 from GSettingComboRow import GSettingComboRow
 import Utils
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
+shell_settings = Gio.Settings.new("org.gnome.shell")
 
 class SpinType(enum.Enum):
     INT = 0
@@ -46,13 +47,13 @@ class GSettingsGroup(Adw.PreferencesGroup):
         self.add(row)
         return row
 
-    def add_extension_switch(self, gsetting: GSetting, uuid: str):
-        row = Adw.SwitchRow(title=gsetting.title, subtitle=gsetting.subtitle)
-        if gsetting.icon_name:
-            row.set_icon_name(gsetting.icon_name)
-        row.set_active()
-        row.connect("notify::active", extension_switch_row_changed, gsetting)
-        gsetting.settings.connect("changed", extension__changed, row, gsetting)
+    def add_extension_switch(self, title: str, subtitle, icon, uuid: str):
+        row = Adw.SwitchRow(title=title, subtitle=subtitle)
+        if icon:
+            row.set_icon_name(icon)
+        extension_changed(None, "enabled-extensions", row, uuid)
+        row.connect("notify::active", extension_switch_row_changed, uuid)
+        shell_settings.connect("changed", extension_changed, row, uuid)
         self.add(row)
         return row
 
@@ -111,8 +112,15 @@ class GSettingsGroup(Adw.PreferencesGroup):
 
     def add_extension_setting_button(self, title, subtitle, icon, extension_uuid: str):
         row = Adw.ActionRow(title=title, subtitle=subtitle)
+        row.set_activatable(True)
         row.set_icon_name(icon)
-        row.connect("activate", lambda _: self.open_extension_settings(extension_uuid))
+
+        button = Gtk.Button(
+            label="Open", valign=Gtk.Align.CENTER, halign=Gtk.Align.END
+        )
+        row.add_suffix(button)
+        row.set_activatable_widget(button)
+        button.connect("clicked", lambda _: open_extension_settings(extension_uuid))
         self.add(row)
         return row
 
@@ -138,28 +146,28 @@ def switch_inverse_setting_changed(settings, key, switch_row, gsetting):
             switch_row.set_active(not settings.get_boolean(key))
 
 
-def extension_switch_row_changed(switch_row, _active, gsetting):
+def extension_switch_row_changed(switch_row, _active: None, uuid):
     if switch_row.get_active():
-        if gsetting.key not in gsetting.settings.get_strv("enabled-extensions"):
-            gsetting.settings.set_strv(
-                "enabled-extensions", gsetting.settings.get_strv("enabled-extensions") + [gsetting.key]
+        if uuid not in shell_settings.get_strv("enabled-extensions"):
+            shell_settings.set_strv(
+                "enabled-extensions", shell_settings.get_strv("enabled-extensions") + [uuid]
             )
-        if gsetting.key in gsetting.settings.get_strv("disabled_extensions"):
-            gsetting.settings.set_strv(
-                "disabled_extensions", [ext for ext in gsetting.settings.get_strv("disabled_extensions") if ext != gsetting.key]
+        if uuid in shell_settings.get_strv("disabled-extensions"):
+            shell_settings.set_strv(
+                "disabled-extensions", [ext for ext in shell_settings.get_strv("disabled-extensions") if ext != uuid]
             )
     else:
-        if gsetting.key in gsetting.settings.get_strv("enabled-extensions"):
-            gsetting.settings.set_strv(
-                "enabled-extensions", [ext for ext in gsetting.settings.get_strv("enabled-extensions") if ext != gsetting.key]
+        if uuid in shell_settings.get_strv("enabled-extensions"):
+            shell_settings.set_strv(
+                "enabled-extensions", [ext for ext in shell_settings.get_strv("enabled-extensions") if ext != uuid]
             )
 
 
 def extension_changed(settings, key, switch_row, extension_uuid):
     toggle = False
-    if key == "enabled-extensions" or "disabled_extensions":
-        enabled = extension_uuid in settings.get_strv("enabled-extensions")
-        not_disabled = extension_uuid not in settings.get_strv("disabled-extensions")
+    if key == "enabled-extensions" or "disabled-extensions":
+        enabled = extension_uuid in shell_settings.get_strv("enabled-extensions")
+        not_disabled = extension_uuid not in shell_settings.get_strv("disabled-extensions")
         toggle = enabled and not_disabled
     if switch_row.get_active() != toggle:
         switch_row.set_active(toggle)
@@ -217,6 +225,6 @@ def font_setting_changed(settings, key, button, gsetting):
             set_font_button(button, settings.get_string(key))
 
 
-def open_extension_settings(_row, extension_uuid):
+def open_extension_settings(extension_uuid):
     _proxy = Utils.ExtensionProxy()
     _proxy.open_extension_prefs(extension_uuid)

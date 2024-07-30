@@ -25,7 +25,7 @@ def refresh_buttons(layout_id):
 class LayoutButton(Adw.Bin):
     __gtype_name__ = "LayoutButton"
     change_layout = False
-    preview: Gtk.Image = Gtk.Template.Child()
+    preview: Gtk.Picture = Gtk.Template.Child()
     label: Gtk.Label = Gtk.Template.Child()
     check: Gtk.CheckButton = Gtk.Template.Child()
 
@@ -54,11 +54,11 @@ class LayoutButton(Adw.Bin):
             # Invert colors for dark mode, otherwise keep it for light
             if self.style_manager.get_dark():
                 pixbuf = invert_pixbuf(pixbuf)
-            self.preview.set_from_paintable(Gdk.Texture.new_for_pixbuf(pixbuf))
+            self.preview.set_paintable(Gdk.Texture.new_for_pixbuf(pixbuf))
         else:
             print(self.svg_path)
-            self.preview.set_from_icon_name("dialog-question-symbolic")
-            self.preview.set_pixel_size(72)
+            #self.preview.set_from_icon_name("dialog-question-symbolic")
+            #self.preview.set_pixel_size(72)
 
         self.check.connect("toggled", self.toggled)
 

@@ -42,9 +42,9 @@ def parse_options(data):
     return displays, values, display_subtitles
 
 
-def extension_specific_setting(key, setting, extension_uuid):
+def extension_specific_setting(setting, key, row, extension_uuid):
     if key == "enabled-extensions":
-        setting.set_visible(extension_uuid in _shell_settings.get_strv("enabled-extensions"))
+        row.set_visible(extension_uuid in _shell_settings.get_strv("enabled-extensions"))
 
 
 def parse_adjustment(data):
@@ -70,7 +70,7 @@ def parse_json(builder):
         for setting in data[group_name]:
             setting_type = setting["type"]
             setting_widget = None
-            match setting_type:
+            match setting_type.replace("_", "-"):  # Makes both hyphens and underscore work as replacement for spaces
                 case "switch":
                     gsetting = GSetting.from_dict(setting["gsetting"])
                     setting_widget = group.add_switch(gsetting)
@@ -80,7 +80,7 @@ def parse_json(builder):
                 case "switch-extension":
                     subtitle = setting.get("subtitle")
                     icon = setting.get("icon_name")
-                    setting_widget = group.add_switch_extension(setting["title"], subtitle, icon, setting["extension"])
+                    setting_widget = group.add_extension_switch(setting["title"], subtitle, icon, setting["extension"])
                 case "spin":
                     gsetting = GSetting.from_dict(setting["gsetting"])
                     setting_widget = group.add_spin(
@@ -97,18 +97,25 @@ def parse_json(builder):
                     else:
                         displays, values, _display_subtitles = parse_options(setting["options"])
                     gsetting_widget = group.add_combo(gsetting, values, displays)
-                case "detailed_combo":
+                case "detailed-combo":
                     gsetting = GSetting.from_dict(setting["gsetting"])
                     if setting.get("python_options"):
                         displays, values, display_subtitles = function_ids[setting["python_options"]]()
                     else:
                         displays, values, display_subtitles = parse_options(setting["options"])
                     gsetting_widget = group.add_detailed_combo(gsetting, values, displays, display_subtitles)
-                case "extension_setting_button":
+                case "extension-setting-button":
                     subtitle = setting.get("subtitle")
                     icon = setting.get("icon_name")
-                    group.add_extension_setting_button(
-                        setting["title"], subtitle, icon, setting["extension_uuid"]
+                    gsetting_widget = group.add_extension_setting_button(
+                        setting["title"], subtitle, icon, setting["extension"]
+                    )
+                    _shell_settings.connect(
+                        "changed", extension_specific_setting,
+                        gsetting_widget, setting["extension"]
                     )
             if setting.get("extension_required"):
-                extension_specific_setting(setting["extension_required"], gsetting_widget, setting["extension_uuid"])
+                _shell_settings.connect(
+                    "changed", extension_specific_setting,
+                    gsetting_widget, setting["extension"]
+                )

@@ -133,7 +133,7 @@
 	(7,8,"GtkBox",None,2,None,None,None,1,None,None),
 	(7,9,"GtkLabel","label",8,None,None,None,None,None,None),
 	(7,10,"GtkCheckButton","check",8,None,None,None,1,None,None),
-	(7,11,"GtkImage","preview",2,None,None,None,None,None,None)
+	(7,12,"GtkPicture","preview",2,None,None,None,None,None,None)
   </object>
   <object_property>
 	(2,1,"GtkBox","spacing","10",None,None,None,None,None,None,None,None,None),
@@ -383,28 +383,35 @@
 	(6,118,"AdwClamp","tightening-threshold","300",None,None,None,None,None,None,None,None,None),
 	(6,118,"AdwClamp","unit","px",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","column-spacing","5",None,None,None,None,None,None,None,None,None),
-	(6,122,"GtkFlowBox","homogeneous","True",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","max-children-per-line","3",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","min-children-per-line","1",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","row-spacing","5",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkFlowBox","selection-mode","none",None,None,None,None,None,None,None,None,None),
-	(6,122,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(6,122,"GtkWidget","halign","center",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
 	(6,122,"GtkWidget","width-request","250",None,None,None,None,None,None,None,None,None),
 	(6,124,"AdwPreferencesGroup","title","Panel",None,None,None,None,None,None,None,None,None),
+	(7,1,"GtkWidget","halign","start",None,None,None,None,None,None,None,None,None),
+	(7,1,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkWidget","halign","start",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","height-request","0",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","margin-bottom","5",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","margin-end","5",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","margin-start","5",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","margin-top","5",None,None,None,None,None,None,None,None,None),
+	(7,2,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
 	(7,2,"GtkWidget","width-request","0",None,None,None,None,None,None,None,None,None),
 	(7,8,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(7,8,"GtkWidget","valign","end",None,None,None,None,None,None,None,None,None),
 	(7,8,"GtkWidget","width-request","100",None,None,None,None,None,None,None,None,None),
 	(7,9,"GtkLabel","label","Layout",None,None,None,None,None,None,None,None,None),
 	(7,9,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(7,11,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
-	(7,11,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None)
+	(7,12,"GtkPicture","content-fit","scale-down",None,None,None,None,None,None,None,None,None),
+	(7,12,"GtkWidget","halign","start",None,None,None,None,None,None,None,None,None),
+	(7,12,"GtkWidget","height-request","189",None,None,None,None,None,None,None,None,None),
+	(7,12,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
+	(7,12,"GtkWidget","width-request","252",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_data>
 	(2,2,"GtkWidget",1,1,None,None,None,None,None,None),

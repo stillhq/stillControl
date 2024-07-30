@@ -130,7 +130,7 @@
   ],
   "panel_group": [
     {
-      "type": "switch_extension",
+      "type": "switch-extension",
       "title": "Enable Full Panel",
       "subtitle": "This enables a full panel which is customizable but heavier on resources.",
       "extension": "dash-to-panel@jderose9.github.com"
@@ -152,6 +152,12 @@
         "schema": "org.gnome.desktop.interface",
         "key": "show-battery-percentage"
       }
+    },
+    {
+      "type": "extension-setting-button",
+      "title": "Advanced Panel Settings",
+      "subtitle": "Powered by Dash to Panel",
+      "extension": "dash-to-panel@jderose9.github.com"
     }
   ],
   "window_group": [
@@ -195,7 +201,7 @@
       }
     },
     {
-      "type": "detailed_combo",
+      "type": "detailed-combo",
       "gsetting": {
         "title": "Window Focus Mode",
         "schema": "org.gnome.desktop.wm.preferences",

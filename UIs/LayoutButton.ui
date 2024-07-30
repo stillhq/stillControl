@@ -4,24 +4,32 @@
   <requires lib="gtk" version="4.8"/>
   <requires lib="libadwaita" version="1.0"/>
   <template class="LayoutButton" parent="AdwBin">
+    <property name="halign">start</property>
+    <property name="valign">start</property>
     <child>
       <object class="GtkBox">
+        <property name="halign">start</property>
         <property name="height-request">0</property>
         <property name="margin-bottom">5</property>
         <property name="margin-end">5</property>
         <property name="margin-start">5</property>
         <property name="margin-top">5</property>
         <property name="orientation">vertical</property>
+        <property name="valign">start</property>
         <property name="width-request">0</property>
         <child>
-          <object class="GtkImage" id="preview">
+          <object class="GtkPicture" id="preview">
+            <property name="content-fit">scale-down</property>
+            <property name="halign">start</property>
             <property name="height-request">189</property>
+            <property name="valign">start</property>
             <property name="width-request">252</property>
           </object>
         </child>
         <child>
           <object class="GtkBox">
             <property name="hexpand">True</property>
+            <property name="valign">end</property>
             <property name="width-request">100</property>
             <child>
               <object class="GtkLabel" id="label">
