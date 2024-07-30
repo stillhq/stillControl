@@ -8,7 +8,7 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk, Gio
 
-_SETTINGS_JSON = os.path.join(UI_DIR, "settings.json")
+_SETTING_JSON_DIR = os.path.join(UI_DIR, "settings")
 _shell_settings = Gio.Settings.new("org.gnome.shell")
 
 
@@ -60,64 +60,68 @@ def parse_adjustment(data):
 
 
 def parse_json(builder):
-    with open(_SETTINGS_JSON, "r") as file:
-        data = json.load(file)
-
-    for group_name in data:
-        group = builder.get_object(group_name)
-        if group is None:
-            raise ValueError(f"Group {group_name} not found in the builder")
-        if data[group_name].get("requires_extension"):
-            _shell_settings.connect("changed", extension_specific_setting, group, data[group_name]["requires_extension"])
-        for setting in data[group_name]["items"]:
-            setting_type = setting["type"]
-            setting_widget = None
-            match setting_type.replace("_", "-"):  # Makes both hyphens and underscore work as replacement for spaces
-                case "switch":
-                    gsetting = GSetting.from_dict(setting["gsetting"])
-                    setting_widget = group.add_switch(gsetting)
-                case "switch-inverse":
-                    gsetting = GSetting.from_dict(setting["gsetting"])
-                    setting_widget = group.add_switch_inverse(gsetting)
-                case "switch-extension":
-                    subtitle = setting.get("subtitle")
-                    icon = setting.get("icon_name")
-                    setting_widget = group.add_extension_switch(setting["title"], subtitle, icon, setting["extension"])
-                case "spin":
-                    gsetting = GSetting.from_dict(setting["gsetting"])
-                    setting_widget = group.add_spin(
-                        gsetting, setting["spin_type"], setting["percent"],
-                        parse_adjustment(setting["adjustment"])
+    for filename in os.listdir(_SETTING_JSON_DIR):
+        if filename.endswith('.json'):
+            file_path = os.path.join(_SETTING_JSON_DIR, filename)
+            with open(file_path, "r") as file:
+                data = json.load(file)
+            for group_name in data:
+                group = builder.get_object(group_name)
+                if group is None:
+                    raise ValueError(f"Group {group_name} not found in the builder")
+                if data[group_name].get("requires_extension"):
+                    Gio.Settings.new("org.gnome.shell").connect(
+                        "changed", extension_specific_setting, group, data[group_name]["requires_extension"]
                     )
-                case "font":
-                    gsetting = GSetting.from_dict(setting["gsetting"])
-                    setting_widget = group.add_font(gsetting)
-                case "combo":
-                    gsetting = GSetting.from_dict(setting["gsetting"])
-                    if setting.get("python_options"):
-                        displays, values, _display_subtitles = function_ids[setting["python_options"]]()
-                    else:
-                        displays, values, _display_subtitles = parse_options(setting["options"])
-                    gsetting_widget = group.add_combo(gsetting, values, displays)
-                case "detailed-combo":
-                    gsetting = GSetting.from_dict(setting["gsetting"])
-                    if setting.get("python_options"):
-                        displays, values, display_subtitles = function_ids[setting["python_options"]]()
-                    else:
-                        displays, values, display_subtitles = parse_options(setting["options"])
-                    gsetting_widget = group.add_detailed_combo(gsetting, values, displays, display_subtitles)
-                case "extension-setting-button":
-                    subtitle = setting.get("subtitle")
-                    icon = setting.get("icon_name")
-                    gsetting_widget = group.add_extension_setting_button(
-                        setting["title"], subtitle, icon, setting["extension"]
-                    )
-                    _shell_settings.connect(
-                        "changed", extension_specific_setting,
-                        gsetting_widget, setting["extension"]
-                    )
-            if setting.get("extension_required"):
-                _shell_settings.connect(
-                    "changed", extension_specific_setting,
-                    gsetting_widget, setting["extension"]
-                )
+                for setting in data[group_name]["items"]:
+                    setting_type = setting["type"]
+                    setting_widget = None
+                    match setting_type.replace("_", "-"):
+                        case "switch":
+                            gsetting = GSetting.from_dict(setting["gsetting"])
+                            setting_widget = group.add_switch(gsetting)
+                        case "switch-inverse":
+                            gsetting = GSetting.from_dict(setting["gsetting"])
+                            setting_widget = group.add_switch_inverse(gsetting)
+                        case "switch-extension":
+                            subtitle = setting.get("subtitle")
+                            icon = setting.get("icon_name")
+                            setting_widget = group.add_extension_switch(setting["title"], subtitle, icon, setting["extension"])
+                        case "spin":
+                            gsetting = GSetting.from_dict(setting["gsetting"])
+                            setting_widget = group.add_spin(
+                                gsetting, setting["spin_type"], setting["percent"],
+                                parse_adjustment(setting["adjustment"])
+                            )
+                        case "font":
+                            gsetting = GSetting.from_dict(setting["gsetting"])
+                            setting_widget = group.add_font(gsetting)
+                        case "combo":
+                            gsetting = GSetting.from_dict(setting["gsetting"])
+                            if setting.get("python_options"):
+                                displays, values, *display_subtitles = function_ids[setting["python_options"]]()
+                            else:
+                                displays, values, *display_subtitles = parse_options(setting["options"])
+                            setting_widget = group.add_combo(gsetting, values, displays)
+                        case "detailed-combo":
+                            gsetting = GSetting.from_dict(setting["gsetting"])
+                            if setting.get("python_options"):
+                                displays, values, display_subtitles = function_ids[setting["python_options"]]()
+                            else:
+                                displays, values, display_subtitles = parse_options(setting["options"])
+                            setting_widget = group.add_detailed_combo(gsetting, values, displays, display_subtitles)
+                        case "extension-setting-button":
+                            subtitle = setting.get("subtitle")
+                            icon = setting.get("icon_name")
+                            setting_widget = group.add_extension_setting_button(
+                                setting["title"], subtitle, icon, setting["extension"]
+                            )
+                            Gio.Settings.new("org.gnome.shell").connect(
+                                "changed", extension_specific_setting,
+                                setting_widget, setting["extension"]
+                            )
+                    if setting.get("extension_required"):
+                        Gio.Settings.new("org.gnome.shell").connect(
+                            "changed", extension_specific_setting,
+                            setting_widget, setting["extension"]
+                        )
