@@ -4,12 +4,13 @@
   <requires lib="gtk" version="4.8"/>
   <requires lib="libadwaita" version="1.0"/>
   <template class="LayoutButton" parent="AdwBin">
-    <property name="halign">start</property>
+    <property name="halign">center</property>
     <property name="valign">start</property>
+    <property name="width-request">255</property>
     <child>
       <object class="GtkBox">
-        <property name="halign">start</property>
         <property name="height-request">0</property>
+        <property name="hexpand">True</property>
         <property name="margin-bottom">5</property>
         <property name="margin-end">5</property>
         <property name="margin-start">5</property>
@@ -18,12 +19,19 @@
         <property name="valign">start</property>
         <property name="width-request">0</property>
         <child>
-          <object class="GtkPicture" id="preview">
-            <property name="content-fit">scale-down</property>
-            <property name="halign">start</property>
+          <object class="GtkScrolledWindow">
+            <property name="child">preview</property>
             <property name="height-request">189</property>
-            <property name="valign">start</property>
             <property name="width-request">252</property>
+            <child>
+              <object class="GtkPicture" id="preview">
+                <property name="content-fit">scale-down</property>
+                <property name="halign">start</property>
+                <property name="height-request">189</property>
+                <property name="valign">start</property>
+                <property name="width-request">252</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
@@ -39,7 +47,9 @@
               </object>
             </child>
             <child>
-              <object class="GtkCheckButton" id="check"/>
+              <object class="GtkCheckButton" id="check">
+                <property name="halign">end</property>
+              </object>
             </child>
           </object>
         </child>

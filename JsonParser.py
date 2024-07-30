@@ -67,7 +67,9 @@ def parse_json(builder):
         group = builder.get_object(group_name)
         if group is None:
             raise ValueError(f"Group {group_name} not found in the builder")
-        for setting in data[group_name]:
+        if data[group_name].get("requires_extension"):
+            _shell_settings.connect("changed", extension_specific_setting, group, data[group_name]["requires_extension"])
+        for setting in data[group_name]["items"]:
             setting_type = setting["type"]
             setting_widget = None
             match setting_type.replace("_", "-"):  # Makes both hyphens and underscore work as replacement for spaces

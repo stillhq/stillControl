@@ -1,385 +1,405 @@
 {
-  "theming_group": [
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Theme Styling",
-        "subtitle": "This is the same as the light and dark theme options in GNOME Control Center,\nexcept with the \"Light\" option which is an experimental desktop light theme.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "color-scheme"
-      },
-      "options": [
-        ["Mixed (Default)", "default"],
-        ["Dark", "prefer-dark"],
-        ["Light", "prefer-light"]
-      ]
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Legacy GTK3/GTK4 Theme",
-        "subtitle": "This is the theme used by legacy applications that don't use Libadwaita.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "gtk-theme"
-      },
-      "python_options": "legacy_themes"
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Icon Theme",
-        "subtitle": "This is the icon theme used by your system.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "icon-theme"
-      },
-      "python_options": "icon_themes"
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Cursor Theme",
-        "subtitle": "This is the theme used for your mouse pointer.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "cursor-theme"
-      },
-      "python_options": "cursor_themes"
-    }
-  ],
-  "font_group": [
-    {
-      "type": "font",
-      "gsetting": {
-        "title": "Interface Font",
-        "subtitle": "This is the primary font used by your system.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "font-name"
-      }
-    },
-    {
-      "type": "font",
-      "gsetting": {
-        "title": "Document Font",
-        "subtitle": "Font used for viewing documents.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "document-font-name"
-      }
-    },
-    {
-      "type": "font",
-      "gsetting": {
-        "title": "Monospace Font",
-        "subtitle": "Font used when all the letters need to be the same size. For example, terminals and text editors.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "monospace-font-name"
-      }
-    },
-    {
-      "type": "font",
-      "gsetting": {
-        "title": "Legacy Titlebar Font",
-        "subtitle": "Font used in the titlebar for apps that don't use header bars (old Gtk apps, non-Gtk apps).",
-        "schema": "org.gnome.desktop.wm.preferences",
-        "key": "titlebar-font"
-      }
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Font Hinting",
-        "subtitle": "Adjusts font so that it lines up with a rasterized grid.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "font-hinting"
-      },
-      "options": [
-        ["None", "none"],
-        ["Slight", "slight"],
-        ["Medium", "medium"],
-        ["Full", "full"]
-      ]
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Font Antialiasing",
-        "subtitle": "The method of antialiasing used.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "font-antialiasing"
-      },
-      "options": [
-        ["None", "none"],
-        ["Subpixel (for LCD Screens)", "rgba"],
-        ["Standard (Grayscale)", "grayscale"]
-      ]
-    },
-    {
-      "type": "spin",
-      "gsetting": {
-        "title": "Font Scaling Factor (Percent)",
-        "subtitle": "The scaling factor for font sizes.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "text-scaling-factor"
-      },
-      "spin_type": "double",
-      "percent": true,
-      "adjustment": {
-        "lower": 50,
-        "upper": 300,
-        "step_increment": 25
-      }
-    }
-  ],
-  "panel_group": [
-    {
-      "type": "switch-extension",
-      "title": "Enable Full Panel",
-      "subtitle": "This enables a full panel which is customizable but heavier on resources.",
-      "extension": "dash-to-panel@jderose9.github.com"
-    },
-    {
-      "type": "switch",
-      "gsetting": {
-        "title": "Allow Audio Volume Above 100%",
-        "subtitle": "This allows you to go above 100% volume in the top bar.\nWARNING: this may have an impact on audio quality, and potentially could damage your audio hardware.",
-        "schema": "org.gnome.desktop.sound",
-        "key": "allow-volume-above-100-percent"
-      }
-    },
-    {
-      "type": "switch",
-      "gsetting": {
-        "title": "Show Battery Percentage",
-        "subtitle": "This shows the battery percentage in the top bar. This is only useful if you have a laptop.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "show-battery-percentage"
-      }
-    },
-    {
-      "type": "extension-setting-button",
-      "title": "Advanced Panel Settings",
-      "subtitle": "Powered by Dash to Panel",
-      "extension": "dash-to-panel@jderose9.github.com"
-    }
-  ],
-  "window_group": [
-    {
-      "type": "switch",
-      "gsetting": {
-        "title": "Attach Modal Dialogs",
-        "subtitle": "Attaches a window's modal dialogs to itself. Disabling this allows you to move some dialogs separately from the parent window.",
-        "schema": "org.gnome.mutter",
-        "key": "attach-modal-dialogs"
-      }
-    },
-    {
-      "type": "switch",
-      "gsetting": {
-        "title": "Center New Windows",
-        "subtitle": "Whether or not to start new windows in the center of the screen.",
-        "schema": "org.gnome.mutter",
-        "key": "center-new-windows"
-      }
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Window Action Key",
-        "subtitle": "Holding this essentially key treats the whole window like the titlebar.",
-        "schema": "org.gnome.desktop.wm.preferences",
-        "key": "mouse-button-modifier"
-      },
-      "options": [
-        ["Alt", "<Alt>"],
-        ["Super (Default)", "<Super>"]
-      ]
-    },
-    {
-      "type": "switch",
-      "gsetting": {
-        "title": "Resize with Secondary",
-        "schema": "org.gnome.desktop.wm.preferences",
-        "key": "resize-with-right-button"
-      }
-    },
-    {
-      "type": "detailed-combo",
-      "gsetting": {
-        "title": "Window Focus Mode",
-        "schema": "org.gnome.desktop.wm.preferences",
-        "key": "focus-mode"
-      },
-      "options": [
-        ["Click", "click", "Windows are focused when they are clicked."],
-        [
-          "Sloppy",
-          "sloppy",
-          "Window is focused when hovered with the pointer. Windows remain focused when the desktop is hovered."
-        ],
-        [
-          "Mouse",
-          "mouse",
-          "Window is focused when hovered with the pointer. Hovering the desktop removes focus from the previous window."
+  "theming_group": {
+    "items": [
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Theme Styling",
+          "subtitle": "This is the same as the light and dark theme options in GNOME Control Center,\nexcept with the \"Light\" option which is an experimental desktop light theme.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "color-scheme"
+        },
+        "options": [
+          ["Mixed (Default)", "default"],
+          ["Dark", "prefer-dark"],
+          ["Light", "prefer-light"]
         ]
-      ]
-    }
-  ],
-  "titlebar_group": [
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Titlebar Button Layout",
-        "subtitle": "This is the layout of the titlebar buttons.",
-        "schema": "org.gnome.desktop.wm.preferences",
-        "key": "button-layout"
       },
-      "options": [
-        ["risiOS Left", "minimize,close:appmenu"],
-        ["risiOS Right", "appmenu:minimize,close"],
-        ["elementary", "close,appmenu:maximize"],
-        ["elementary inverted", "maximize,appmenu:close"],
-        ["minimentary", "close,appmenu:minimize"],
-        ["minimentary inverted", "minimize,appmenu:close"],
-        ["GNOME Left", "close:appmenu"],
-        ["GNOME Right", "appmenu:close"],
-        ["San Francisco Left", "close,minimize,maximize:appmenu"],
-        ["San Francisco Right", "appmenu:maximize,minimize,close"],
-        ["Seattle Left", "close,maximize,minimize:appmenu"],
-        ["Seattle Right (Default)", "appmenu:minimize,maximize,close"]
-      ]
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Double Click Action",
-        "subtitle": null,
-        "schema": "org.gnome.desktop.wm.preferences",
-        "key": "action-double-click-titlebar"
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Legacy GTK3/GTK4 Theme",
+          "subtitle": "This is the theme used by legacy applications that don't use Libadwaita.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "gtk-theme"
+        },
+        "python_options": "legacy_themes"
       },
-      "options": [
-        ["Lower Window", "lower"],
-        ["Open Menu", "menu"],
-        ["Toggle Maximize", "toggle-maximize"],
-        ["Minimize", "minimize"],
-        ["Nothing", "none"]
-      ]
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Middle Click Action",
-        "subtitle": null,
-        "schema": "org.gnome.desktop.wm.preferences",
-        "key": "action-middle-click-titlebar"
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Icon Theme",
+          "subtitle": "This is the icon theme used by your system.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "icon-theme"
+        },
+        "python_options": "icon_themes"
       },
-      "options": [
-        ["Lower Window", "lower"],
-        ["Open Menu", "menu"],
-        ["Toggle Maximize", "toggle-maximize"],
-        ["Minimize", "minimize"],
-        ["Nothing", "none"]
-      ]
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Right Click Action",
-        "subtitle": null,
-        "schema": "org.gnome.desktop.wm.preferences",
-        "key": "action-right-click-titlebar"
-      },
-      "options": [
-        ["Lower Window", "lower"],
-        ["Open Menu", "menu"],
-        ["Toggle Maximize", "toggle-maximize"],
-        ["Minimize", "minimize"],
-        ["Nothing", "none"]
-      ]
-    }
-  ],
-  "mouse_group": [
-    {
-      "type": "switch",
-      "gsetting": {
-        "title": "Middle Click Paste",
-        "subtitle": "Whether or not to paste when you middle click.",
-        "schema": "org.gnome.desktop.interface",
-        "key": "gtk-enable-primary-paste"
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Cursor Theme",
+          "subtitle": "This is the theme used for your mouse pointer.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "cursor-theme"
+        },
+        "python_options": "cursor_themes"
       }
-    }
-  ],
-  "touchpad_group": [
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Touchpad Acceleration",
-        "subtitle": "Turning acceleration off can allow faster and more precise movements,\nbut can also make the touchpad more difficult to use.",
-        "schema": "org.gnome.desktop.peripherals.touchpad",
-        "key": "accel-profile"
+    ]
+  },
+  "font_group": {
+    "items": [
+      {
+        "type": "font",
+        "gsetting": {
+          "title": "Interface Font",
+          "subtitle": "This is the primary font used by your system.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "font-name"
+        }
       },
-      "options": [
-        ["Enabled", "default"],
-        ["Disabled", "flat"]
-      ]
-    }
-  ],
-  "pointing_stick_group": [
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Pointing Stick Acceleration",
-        "subtitle": "Turning acceleration off can allow faster and more precise movements,\nbut can also make the pointing stick more difficult to use.",
-        "schema": "org.gnome.desktop.peripherals.pointingstick",
-        "key": "accel-profile"
+      {
+        "type": "font",
+        "gsetting": {
+          "title": "Document Font",
+          "subtitle": "Font used for viewing documents.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "document-font-name"
+        }
       },
-      "options": [
-        ["Enabled", "default"],
-        ["Disabled", "flat"]
-      ]
-    },
-    {
-      "type": "combo",
-      "gsetting": {
-        "title": "Pointing Stick Scrolling Method",
-        "schema": "org.gnome.desktop.peripherals.pointingstick",
-        "key": "scroll-method"
+      {
+        "type": "font",
+        "gsetting": {
+          "title": "Monospace Font",
+          "subtitle": "Font used when all the letters need to be the same size. For example, terminals and text editors.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "monospace-font-name"
+        }
       },
-      "options": [
-        ["Default", "default"],
-        ["On Button Down", "on-button-down"],
-        ["None", "none"]
-      ]
-    }
-  ],
-  "keyboard_group": [
-    {
-      "type": "switch",
-      "gsetting": {
-        "title": "Show Extended Sources in Settings",
-        "subtitle": "Show extended input sources in GNOME Control Center's Keyboard settings.",
-        "schema": "org.gnome.desktop.input-sources",
-        "key": "show-all-sources"
+      {
+        "type": "font",
+        "gsetting": {
+          "title": "Legacy Titlebar Font",
+          "subtitle": "Font used in the titlebar for apps that don't use header bars (old Gtk apps, non-Gtk apps).",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "titlebar-font"
+        }
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Font Hinting",
+          "subtitle": "Adjusts font so that it lines up with a rasterized grid.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "font-hinting"
+        },
+        "options": [
+          ["None", "none"],
+          ["Slight", "slight"],
+          ["Medium", "medium"],
+          ["Full", "full"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Font Antialiasing",
+          "subtitle": "The method of antialiasing used.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "font-antialiasing"
+        },
+        "options": [
+          ["None", "none"],
+          ["Subpixel (for LCD Screens)", "rgba"],
+          ["Standard (Grayscale)", "grayscale"]
+        ]
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Font Scaling Factor (Percent)",
+          "subtitle": "The scaling factor for font sizes.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "text-scaling-factor"
+        },
+        "spin_type": "double",
+        "percent": true,
+        "adjustment": {
+          "lower": 50,
+          "upper": 300,
+          "step_increment": 25
+        }
       }
-    }
-  ],
-  "extension_group": [
-    {
-      "type": "switch-inverse",
-      "gsetting": {
-        "title": "Enable Third Party Extensions",
-        "subtitle": "Third party extensions are not supported by stillOS and may cause unforeseen issues. stillOS modifies GNOME Shell, so not every extension will work properly. Some third-party extensions may also randomly break after stillOS updates.",
-        "schema": "org.gnome.shell",
-        "key": "disable-user-extensions",
-        "icon_name": "dialog-warning-symbolic"
+    ]
+  },
+  "panel_group": {
+    "items": [
+      {
+        "type": "switch-extension",
+        "title": "Enable Full Panel",
+        "subtitle": "This enables a full panel which is customizable but heavier on resources.",
+        "extension": "dash-to-panel@jderose9.github.com"
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Allow Audio Volume Above 100%",
+          "subtitle": "This allows you to go above 100% volume in the top bar.\nWARNING: this may have an impact on audio quality, and potentially could damage your audio hardware.",
+          "schema": "org.gnome.desktop.sound",
+          "key": "allow-volume-above-100-percent"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show Battery Percentage",
+          "subtitle": "This shows the battery percentage in the top bar. This is only useful if you have a laptop.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "show-battery-percentage"
+        }
+      },
+      {
+        "type": "extension-setting-button",
+        "title": "Advanced Panel Settings",
+        "subtitle": "Powered by Dash to Panel",
+        "extension": "dash-to-panel@jderose9.github.com"
       }
-    },
-    {
-      "type": "switch",
-      "gsetting": {
-        "title": "Show System Extensions (Advanced)",
-        "subtitle": "ONLY DO THIS IF YOU KNOW WHAT YOU ARE DOING!!\n\nThese extensions are used by stillOS's UI. Disabling them or changing settings may cause problems.",
-        "schema": "io.stillhq.control",
-        "key": "show-system-extensions",
-        "icon_name": "dialog-warning-symbolic"
+    ]
+  },
+  "window_group": {
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Attach Modal Dialogs",
+          "subtitle": "Attaches a window's modal dialogs to itself. Disabling this allows you to move some dialogs separately from the parent window.",
+          "schema": "org.gnome.mutter",
+          "key": "attach-modal-dialogs"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Center New Windows",
+          "subtitle": "Whether or not to start new windows in the center of the screen.",
+          "schema": "org.gnome.mutter",
+          "key": "center-new-windows"
+        }
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Window Action Key",
+          "subtitle": "Holding this essentially key treats the whole window like the titlebar.",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "mouse-button-modifier"
+        },
+        "options": [
+          ["Alt", "<Alt>"],
+          ["Super (Default)", "<Super>"]
+        ]
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Resize with Secondary",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "resize-with-right-button"
+        }
+      },
+      {
+        "type": "detailed-combo",
+        "gsetting": {
+          "title": "Window Focus Mode",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "focus-mode"
+        },
+        "options": [
+          ["Click", "click", "Windows are focused when they are clicked."],
+          [
+            "Sloppy",
+            "sloppy",
+            "Window is focused when hovered with the pointer. Windows remain focused when the desktop is hovered."
+          ],
+          [
+            "Mouse",
+            "mouse",
+            "Window is focused when hovered with the pointer. Hovering the desktop removes focus from the previous window."
+          ]
+        ]
       }
-    }
-  ]
+    ]
+  },
+  "titlebar_group": {
+    "items": [
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Titlebar Button Layout",
+          "subtitle": "This is the layout of the titlebar buttons.",
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "button-layout"
+        },
+        "options": [
+          ["risiOS Left", "minimize,close:appmenu"],
+          ["risiOS Right", "appmenu:minimize,close"],
+          ["elementary", "close,appmenu:maximize"],
+          ["elementary inverted", "maximize,appmenu:close"],
+          ["minimentary", "close,appmenu:minimize"],
+          ["minimentary inverted", "minimize,appmenu:close"],
+          ["GNOME Left", "close:appmenu"],
+          ["GNOME Right", "appmenu:close"],
+          ["San Francisco Left", "close,minimize,maximize:appmenu"],
+          ["San Francisco Right", "appmenu:maximize,minimize,close"],
+          ["Seattle Left", "close,maximize,minimize:appmenu"],
+          ["Seattle Right (Default)", "appmenu:minimize,maximize,close"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Double Click Action",
+          "subtitle": null,
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "action-double-click-titlebar"
+        },
+        "options": [
+          ["Lower Window", "lower"],
+          ["Open Menu", "menu"],
+          ["Toggle Maximize", "toggle-maximize"],
+          ["Minimize", "minimize"],
+          ["Nothing", "none"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Middle Click Action",
+          "subtitle": null,
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "action-middle-click-titlebar"
+        },
+        "options": [
+          ["Lower Window", "lower"],
+          ["Open Menu", "menu"],
+          ["Toggle Maximize", "toggle-maximize"],
+          ["Minimize", "minimize"],
+          ["Nothing", "none"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Right Click Action",
+          "subtitle": null,
+          "schema": "org.gnome.desktop.wm.preferences",
+          "key": "action-right-click-titlebar"
+        },
+        "options": [
+          ["Lower Window", "lower"],
+          ["Open Menu", "menu"],
+          ["Toggle Maximize", "toggle-maximize"],
+          ["Minimize", "minimize"],
+          ["Nothing", "none"]
+        ]
+      }
+    ]
+  },
+  "mouse_group": {
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Middle Click Paste",
+          "subtitle": "Whether or not to paste when you middle click.",
+          "schema": "org.gnome.desktop.interface",
+          "key": "gtk-enable-primary-paste"
+        }
+      }
+    ]
+  },
+  "touchpad_group": {
+    "items": [
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Touchpad Acceleration",
+          "subtitle": "Turning acceleration off can allow faster and more precise movements,\nbut can also make the touchpad more difficult to use.",
+          "schema": "org.gnome.desktop.peripherals.touchpad",
+          "key": "accel-profile"
+        },
+        "options": [
+          ["Enabled", "default"],
+          ["Disabled", "flat"]
+        ]
+      }
+    ]
+  },
+  "pointing_stick_group": {
+    "items": [
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Pointing Stick Acceleration",
+          "subtitle": "Turning acceleration off can allow faster and more precise movements,\nbut can also make the pointing stick more difficult to use.",
+          "schema": "org.gnome.desktop.peripherals.pointingstick",
+          "key": "accel-profile"
+        },
+        "options": [
+          ["Enabled", "default"],
+          ["Disabled", "flat"]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Pointing Stick Scrolling Method",
+          "schema": "org.gnome.desktop.peripherals.pointingstick",
+          "key": "scroll-method"
+        },
+        "options": [
+          ["Default", "default"],
+          ["On Button Down", "on-button-down"],
+          ["None", "none"]
+        ]
+      }
+    ]
+  },
+  "keyboard_group": {
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show Extended Sources in Settings",
+          "subtitle": "Show extended input sources in GNOME Control Center's Keyboard settings.",
+          "schema": "org.gnome.desktop.input-sources",
+          "key": "show-all-sources"
+        }
+      }
+    ]
+  },
+  "extension_group": {
+    "items": [
+      {
+        "type": "switch-inverse",
+        "gsetting": {
+          "title": "Enable Third Party Extensions",
+          "subtitle": "Third party extensions are not supported by stillOS and may cause unforeseen issues. stillOS modifies GNOME Shell, so not every extension will work properly. Some third-party extensions may also randomly break after stillOS updates.",
+          "schema": "org.gnome.shell",
+          "key": "disable-user-extensions",
+          "icon_name": "dialog-warning-symbolic"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show System Extensions (Advanced)",
+          "subtitle": "ONLY DO THIS IF YOU KNOW WHAT YOU ARE DOING!!\n\nThese extensions are used by stillOS's UI. Disabling them or changing settings may cause problems.",
+          "schema": "io.stillhq.control",
+          "key": "show-system-extensions",
+          "icon_name": "dialog-warning-symbolic"
+        }
+      }
+    ]
+  }
 }
