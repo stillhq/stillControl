@@ -1,3 +1,5 @@
+import timeit
+
 from constants import UI_DIR
 import json
 import os
@@ -8,7 +10,7 @@ from __init__ import GSetting  # FIXME: Change this to absolute import
 
 import gi
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gio, GLib
 
 _SETTING_JSON_DIR = os.path.join(UI_DIR, "settings")
 _shell_settings = Gio.Settings.new("org.gnome.shell")
@@ -46,7 +48,7 @@ def parse_options(data):
     return displays, values, display_subtitles
 
 
-def set_extension_widget_visibility():
+def set_extension_widget_visibility_all():
     extensions_to_check = list(requires_extension.keys())
     extensions = _extension_proxy.get_extensions()
     for extension_uuid in extensions.keys():
@@ -60,9 +62,14 @@ def set_extension_widget_visibility():
             widget.set_visible(False)
 
 
-def extensions_changed(setting, key):
-    if key == "enabled-extensions" or key == "disabled-extensions":
-        set_extension_widget_visibility()
+def extensions_changed(dbus_proxy, sender, signal, params):
+    uuid = params[0]
+    state = params[1]["enabled"]
+    if uuid in requires_extension:
+        for widget in requires_extension[uuid]:
+            widget.set_visible(state)
+
+_extension_proxy.proxy.connect("g-signal::ExtensionStateChanged", extensions_changed)
 
 
 def parse_adjustment(data):
@@ -141,7 +148,4 @@ def parse_json(builder):
                         if setting["extension_required"] not in requires_extension:
                             requires_extension[setting["extension_required"]] = []
                         requires_extension[setting["extension_required"]].append(setting_widget)
-    set_extension_widget_visibility()
-
-
-_shell_settings.connect("changed", extensions_changed)
+    set_extension_widget_visibility_all()

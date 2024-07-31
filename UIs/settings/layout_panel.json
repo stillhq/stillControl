@@ -4,8 +4,14 @@
       {
         "type": "switch-extension",
         "title": "Enable Full Panel",
-        "subtitle": "This enables a full panel which is customizable but heavier on resources.",
+        "subtitle": "This enables a full panel which is more customizable but heavier on resources.",
         "extension": "dash-to-panel@jderose9.github.com"
+      },
+      {
+        "type": "switch-extension",
+        "title": "Enable Tray Icons",
+        "subtitle": "Enables indicator icons often used by apps such as Discord, Steam, Slack, etc.",
+        "extension": "appindicatorsupport@rgcjonas.gmail.com"
       },
       {
         "type": "switch",
@@ -16,12 +22,6 @@
           "key": "allow-volume-above-100-percent"
         },
         "require_extension": "dash-to-panel@jderose9.github.com"
-      },
-      {
-        "type": "extension-setting-button",
-        "title": "Advanced Panel Settings",
-        "subtitle": "Powered by Dash to Panel",
-        "extension": "dash-to-panel@jderose9.github.com"
       }
     ]
   },
@@ -54,6 +54,53 @@
           "schema": "org.gnome.shell.extensions.dash-to-panel",
           "key": "show-running-apps"
         }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Group Applications",
+          "subtitle": "Groups open applications together, disabling will show the window title of each open applications.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "group-apps"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show Window Previews on Hover",
+          "subtitle": "Will show a preview of the window when hovering over open windows in the panel.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "group-apps"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Isolate Workspaces",
+          "subtitle": "Only show open windows from the current workspace.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "isolate-workspaces"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Isolate Monitors",
+          "subtitle": "Only show open windows from the current monitor.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "isolate-monitors"
+        }
+      }
+    ]
+  },
+  "panel_advanced_settings": {
+    "requires_extension": "dash-to-panel@jderose9.github.com",
+    "items": [
+      {
+        "type": "extension-setting-button",
+        "title": "Advanced Panel Settings",
+        "subtitle": "Powered by Dash to Panel",
+        "extension": "dash-to-panel@jderose9.github.com"
       }
     ]
   }

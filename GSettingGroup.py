@@ -1,5 +1,6 @@
 import enum
 import os
+import threading
 from typing import List
 
 import constants
@@ -16,7 +17,6 @@ import Utils
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
 shell_settings = Gio.Settings.new("org.gnome.shell")
-extension_proxy = Utils.ExtensionProxy()
 
 
 class SpinType(enum.Enum):
@@ -125,7 +125,6 @@ class GSettingsGroup(Adw.PreferencesGroup):
         button.connect("clicked", lambda _: open_extension_settings(extension_uuid))
         self.add(row)
         return row
-
 
 
 def switch_row_changed(switch_row, _active, gsetting):
