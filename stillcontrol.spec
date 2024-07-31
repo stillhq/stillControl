@@ -32,8 +32,7 @@ install -d -m 0755 . %{buildroot}%{python3_sitelib}/stillControl
 install -m 0755 __main__.py %{buildroot}%{_bindir}/still-control
 
 %files
-%doc README.md
-%{buildroot}%{_bindir}/still-control
+%{_bindir}/still-control
 %{python3_sitelib}/stillControl
 
 %changelog
