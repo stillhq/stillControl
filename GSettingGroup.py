@@ -13,6 +13,7 @@ from gi.repository import Adw, Gtk, Gio, Pango
 
 from GSettingDetailedComboRow import GSettingDetailedComboRow
 from GSettingComboRow import GSettingComboRow
+import GSettingSpecificGroupRows
 import Utils
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
@@ -68,7 +69,7 @@ class GSettingsGroup(Adw.PreferencesGroup):
             spin_type = SpinType[spin_type.upper()]
 
         row.set_adjustment(adjustment)
-        if not percent:
+        if not percent and not spin_type == SpinType.INT:
             row.set_digits(2)
 
         spin_setting_changed(
@@ -126,6 +127,31 @@ class GSettingsGroup(Adw.PreferencesGroup):
         self.add(row)
         return row
 
+    def add_dash_to_panel_monitor_dropdown(self, gsetting: GSetting, values: List, display: List):
+        row = GSettingSpecificGroupRows.DashToPanelMonitorComboRow(gsetting, values, display)
+        self.add(row)
+        return row
+
+    def add_dash_to_panel_monitor_spin(self, gsetting: GSetting, adjustment):
+        row = Adw.SpinRow(title=gsetting.title, subtitle=gsetting.subtitle)
+        if gsetting.icon_name:
+            row.set_icon_name(gsetting.icon_name)
+
+        row.set_adjustment(adjustment)
+
+        GSettingSpecificGroupRows.dtp_monitor_spin_setting_changed(
+            gsetting.settings, gsetting.key, row, gsetting
+        )
+
+        row.connect(
+            "notify::value", GSettingSpecificGroupRows.dtp_monitor_spin_row_changed, gsetting
+        )
+        gsetting.settings.connect(
+            "changed", GSettingSpecificGroupRows.dtp_monitor_spin_setting_changed, row, gsetting
+        )
+        self.add(row)
+        return row
+
 
 def switch_row_changed(switch_row, _active, gsetting):
     gsetting.settings.set_boolean(gsetting.key, switch_row.get_active())
@@ -150,8 +176,15 @@ def switch_inverse_setting_changed(settings, key, switch_row, gsetting):
 def extension_switch_row_changed(switch_row, _active: None, uuid):
     if switch_row.get_active():
         if uuid not in shell_settings.get_strv("enabled-extensions"):
+            enabled_extensions = shell_settings.get_strv("enabled-extensions") + [uuid]
+            # Disables Dash to Dock if Dash to Panel is enabled or vise-versa
+            if uuid == "dash-to-panel@jderose9.github.com" and "dash-to-dock@micxgx.gmail.com" in enabled_extensions:
+                enabled_extensions.remove("dash-to-dock@micxgx.gmail.com")
+            elif uuid == "dash-to-dock@micxgx.gmail.com" and "dash-to-panel@jderose9.github.com" in enabled_extensions:
+                enabled_extensions.remove("dash-to-panel@jderose9.github.com")
+
             shell_settings.set_strv(
-                "enabled-extensions", shell_settings.get_strv("enabled-extensions") + [uuid]
+                "enabled-extensions", enabled_extensions
             )
         if uuid in shell_settings.get_strv("disabled-extensions"):
             shell_settings.set_strv(

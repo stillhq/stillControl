@@ -144,6 +144,21 @@ def parse_json(builder):
                             if setting["extension"] not in requires_extension:
                                 requires_extension[setting["extension"]] = []
                             requires_extension[setting["extension"]].append(setting_widget)
+                        case "dash-to-panel-monitor-dropdown":
+                            gsetting = GSetting.from_dict(setting["gsetting"])
+                            if setting.get("python_options"):
+                                displays, values, *display_subtitles = function_ids[setting["python_options"]]()
+                            else:
+                                displays, values, *display_subtitles = parse_options(setting["options"])
+                            setting_widget = group.add_dash_to_panel_monitor_dropdown(gsetting, values, displays)
+                        case "dash-to-panel-monitor-spin":
+                            gsetting = GSetting.from_dict(setting["gsetting"])
+                            setting_widget = group.add_dash_to_panel_monitor_spin(
+                                gsetting, parse_adjustment(setting["adjustment"])
+                            )
+                        case _:
+                            raise ValueError(f"Unknown setting type {setting_type}")
+
                     if setting.get("extension_required"):
                         if setting["extension_required"] not in requires_extension:
                             requires_extension[setting["extension_required"]] = []

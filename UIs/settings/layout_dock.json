@@ -1,0 +1,65 @@
+{
+    "enable_dock_group": {
+        "items": [
+            {
+                "type": "switch-extension",
+                "title": "Enable Floating Dock",
+                "subtitle": "Can not be enabled the same time as the full panel.",
+                "extension": "dash-to-dock@micxgx.gmail.com"
+            }
+        ]
+    },
+    "dock_position_group": {
+        "requires_extension": "dash-to-dock@micxgx.gmail.com",
+        "items": [
+            {
+                "type": "switch",
+                "gsetting": {
+                    "title": "Display Dock on All Monitors",
+                    "subtitle": "If disabled the dock is only displayed on the primary monitor, or the monitor set in advanced dock settings.",
+                    "schema": "org.gnome.shell.extensions.dash-to-dock",
+                    "key": "multi-monitor"
+                }
+            },
+            {
+                "type": "switch",
+                "gsetting": {
+                    "title": "Dock Intellihide",
+                    "subtitle": "Autohides the dock. Can be customized in advanced dock settings.",
+                    "schema": "org.gnome.shell.extensions.dash-to-dock",
+                    "key": "intellihide"
+                }
+            },
+            {
+                "type": "combo",
+				"gsetting": {
+					"title": "Dock Position",
+					"subtitle": "Position of the dock on the screen.",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "dock-position"
+				},
+				"options": [
+					["Bottom", "BOTTOM"],
+					["Left", "LEFT"],
+					["Right", "RIGHT"]
+				]
+            },
+			{
+				"type": "spin",
+				"gsetting": {
+					"title": "Max Icon Size",
+					"subtitle": "Max size of the icons on the dock. Icons will shrink if the dock is full.",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "dash-max-icon-size"
+				},
+				"spin_type": "int",
+				"percent": false,
+				"adjustment": {
+				  "lower": 8,
+				  "upper": 128,
+				  "step_increment": 4
+				}
+			}
+        ]
+    }
+}

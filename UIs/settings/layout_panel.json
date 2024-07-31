@@ -4,7 +4,7 @@
       {
         "type": "switch-extension",
         "title": "Enable Full Panel",
-        "subtitle": "This enables a full panel which is more customizable but heavier on resources.",
+        "subtitle": "This enables a full panel which is more customizable but heavier on resources.\nCan not be enabled at the same time as the Floating Dock.",
         "extension": "dash-to-panel@jderose9.github.com"
       },
       {
@@ -17,11 +17,61 @@
         "type": "switch",
         "gsetting": {
           "title": "Allow Audio Volume Above 100%",
-          "subtitle": "This allows you to go above 100% volume in the top bar.\nWARNING: this may have an impact on audio quality, and potentially could damage your audio hardware.",
+          "subtitle": "WARNING: this may have an impact on audio quality, and potentially could damage your audio hardware.",
           "schema": "org.gnome.desktop.sound",
           "key": "allow-volume-above-100-percent"
+        }
+      }
+    ]
+  },
+  "panel_position_group": {
+    "requires_extension": "dash-to-panel@jderose9.github.com",
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Display Panel on All Monitors",
+          "subtitle": "If disabled the panel is only displayed on the primary monitor, or the monitor set in advanced panel settings.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "multi-monitors"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Panel Intellihide",
+          "subtitle": "Autohides the panel. Can be customized in advanced panel settings.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "intellihide"
+        }
+      },
+      {
+        "type": "dash-to-panel-monitor-dropdown",
+        "gsetting": {
+          "title": "Panel Screen Position",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "panel-positions"
         },
-        "require_extension": "dash-to-panel@jderose9.github.com"
+        "options": [
+          ["Top", "TOP"],
+          ["Bottom", "BOTTOM"],
+          ["Left", "LEFT"],
+          ["Right", "RIGHT"]
+        ]
+      },
+      {
+        "type": "dash-to-panel-monitor-spin",
+        "gsetting": {
+          "title": "Panel Size",
+          "subtitle": "The size of the panel in pixels.",
+          "schema": "org.gnome.shell.extensions.dash-to-panel",
+          "key": "panel-sizes"
+        },
+        "adjustment": {
+          "lower": 24,
+          "upper": 96,
+          "step_increment": 1
+        }
       }
     ]
   },
