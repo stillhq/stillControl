@@ -89,6 +89,9 @@
                                                         <property name="title">Behavior</property>
                                                       </object>
                                                     </child>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="panel_advanced_settings"/>
+                                                    </child>
                                                   </object>
                                                 </property>
                                                 <property name="maximum-size">700</property>
