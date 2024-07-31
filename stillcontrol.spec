@@ -1,4 +1,4 @@
-Name:           stillcontrol
+Name:           still-control
 Version:        0.1
 Release:        1%{?dist}
 Summary:        Used for customing stillOS. Replaces GNOME Tweaks, Extension Manager, and more.
@@ -28,8 +28,8 @@ mkdir -p %{buildroot}%{python3_sitelib}/stillControl/data
 mkdir -p %{buildroot}%{python3_sitelib}/stillControl/layouts
 mkdir -p %{buildroot}%{python3_sitelib}/stillControl/UIs
 mkdir -p %{buildroot}%{_bindir}
-install -d -m 0755 src/__main__.py %{buildroot}%{_bindir}/stillcontrol
-install -m 0755 src %{buildroot}%{python3_sitelib}/stillControl
+install -m 0755 src/__main__.py %{buildroot}%{_bindir}/still-control
+install -d -m 0755 src %{buildroot}%{python3_sitelib}/stillControl
 
 %files
 %doc README.md
