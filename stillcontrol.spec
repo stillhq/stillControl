@@ -28,11 +28,12 @@ mkdir -p %{buildroot}%{python3_sitelib}/stillControl/data
 mkdir -p %{buildroot}%{python3_sitelib}/stillControl/layouts
 mkdir -p %{buildroot}%{python3_sitelib}/stillControl/UIs
 mkdir -p %{buildroot}%{_bindir}
-install -m 0755 src/__main__.py %{buildroot}%{_bindir}/still-control
-install -d -m 0755 src %{buildroot}%{python3_sitelib}/stillControl
+install -d -m 0755 . %{buildroot}%{python3_sitelib}/stillControl
+install -m 0755 __main__.py %{buildroot}%{_bindir}/still-control
 
 %files
 %doc README.md
+%{buildroot}%{_bindir}/still-control
 %{python3_sitelib}/stillControl
 
 %changelog
