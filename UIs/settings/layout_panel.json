@@ -14,7 +14,8 @@
           "subtitle": "This allows you to go above 100% volume in the top bar.\nWARNING: this may have an impact on audio quality, and potentially could damage your audio hardware.",
           "schema": "org.gnome.desktop.sound",
           "key": "allow-volume-above-100-percent"
-        }
+        },
+        "require_extension": "dash-to-panel@jderose9.github.com"
       },
       {
         "type": "extension-setting-button",

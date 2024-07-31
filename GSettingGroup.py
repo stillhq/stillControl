@@ -16,6 +16,8 @@ import Utils
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
 shell_settings = Gio.Settings.new("org.gnome.shell")
+extension_proxy = Utils.ExtensionProxy()
+
 
 class SpinType(enum.Enum):
     INT = 0

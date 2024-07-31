@@ -1,7 +1,9 @@
 from constants import UI_DIR
 import json
 import os
+import threading
 
+import Utils
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
 import gi
@@ -10,6 +12,8 @@ from gi.repository import Gtk, Gio
 
 _SETTING_JSON_DIR = os.path.join(UI_DIR, "settings")
 _shell_settings = Gio.Settings.new("org.gnome.shell")
+_extension_proxy = Utils.ExtensionProxy()
+requires_extension = {}
 
 
 def legacy_themes_placeholder():
@@ -42,9 +46,23 @@ def parse_options(data):
     return displays, values, display_subtitles
 
 
-def extension_specific_setting(setting, key, row, extension_uuid):
-    if key == "enabled-extensions":
-        row.set_visible(extension_uuid in _shell_settings.get_strv("enabled-extensions"))
+def set_extension_widget_visibility():
+    extensions_to_check = list(requires_extension.keys())
+    extensions = _extension_proxy.get_extensions()
+    for extension_uuid in extensions.keys():
+        if extension_uuid in extensions_to_check:
+            visible = extensions[extension_uuid]["enabled"]
+            for widget in requires_extension[extension_uuid]:
+                widget.set_visible(visible)
+            extensions_to_check.remove(extension_uuid)
+    for extension_uuid in extensions_to_check:
+        for widget in requires_extension[extension_uuid]:
+            widget.set_visible(False)
+
+
+def extensions_changed(setting, key):
+    if key == "enabled-extensions" or key == "disabled-extensions":
+        set_extension_widget_visibility()
 
 
 def parse_adjustment(data):
@@ -70,12 +88,12 @@ def parse_json(builder):
                 if group is None:
                     raise ValueError(f"Group {group_name} not found in the builder")
                 if data[group_name].get("requires_extension"):
-                    Gio.Settings.new("org.gnome.shell").connect(
-                        "changed", extension_specific_setting, group, data[group_name]["requires_extension"]
-                    )
+                    extension_uuid = data[group_name]["requires_extension"]
+                    if extension_uuid not in requires_extension:
+                        requires_extension[extension_uuid] = []
+                    requires_extension[extension_uuid].append(group)
                 for setting in data[group_name]["items"]:
                     setting_type = setting["type"]
-                    setting_widget = None
                     match setting_type.replace("_", "-"):
                         case "switch":
                             gsetting = GSetting.from_dict(setting["gsetting"])
@@ -116,12 +134,14 @@ def parse_json(builder):
                             setting_widget = group.add_extension_setting_button(
                                 setting["title"], subtitle, icon, setting["extension"]
                             )
-                            Gio.Settings.new("org.gnome.shell").connect(
-                                "changed", extension_specific_setting,
-                                setting_widget, setting["extension"]
-                            )
+                            if setting["extension"] not in requires_extension:
+                                requires_extension[setting["extension"]] = []
+                            requires_extension[setting["extension"]].append(setting_widget)
                     if setting.get("extension_required"):
-                        Gio.Settings.new("org.gnome.shell").connect(
-                            "changed", extension_specific_setting,
-                            setting_widget, setting["extension"]
-                        )
+                        if setting["extension_required"] not in requires_extension:
+                            requires_extension[setting["extension_required"]] = []
+                        requires_extension[setting["extension_required"]].append(setting_widget)
+    set_extension_widget_visibility()
+
+
+_shell_settings.connect("changed", extensions_changed)
