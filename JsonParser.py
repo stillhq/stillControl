@@ -7,6 +7,7 @@ import threading
 
 import Utils
 from __init__ import GSetting  # FIXME: Change this to absolute import
+import GSettingCustomComboFunctions
 
 import gi
 gi.require_version("Gtk", "4.0")
@@ -16,21 +17,6 @@ _SETTING_JSON_DIR = os.path.join(UI_DIR, "settings")
 _shell_settings = Gio.Settings.new("org.gnome.shell")
 _extension_proxy = Utils.ExtensionProxy()
 requires_extension = {}
-
-
-def legacy_themes_placeholder():
-    return (
-        ["Adwaita", "Adwaita-dark", "adw-gtk3", "adw-gtk3-dark"],
-        ["Adwaita", "Adwaita-dark", "adw-gtk3", "adw-gtk3-dark"],
-        ["Adwaita", "Adwaita-dark", "adw-gtk3", "adw-gtk3-dark"]
-    )
-
-
-function_ids = {
-    "legacy_themes": legacy_themes_placeholder,
-    "icon_themes": legacy_themes_placeholder,
-    "cursor_themes": legacy_themes_placeholder
-}
 
 
 def add_function_id(function_id, function):
@@ -124,14 +110,16 @@ def parse_json(builder):
                         case "combo":
                             gsetting = GSetting.from_dict(setting["gsetting"])
                             if setting.get("python_options"):
-                                displays, values, *display_subtitles = function_ids[setting["python_options"]]()
+                                item_function = GSettingCustomComboFunctions.function_ids[setting["python_options"]]
+                                displays, values, display_subtitles = item_function()
                             else:
                                 displays, values, *display_subtitles = parse_options(setting["options"])
                             setting_widget = group.add_combo(gsetting, values, displays)
                         case "detailed-combo":
                             gsetting = GSetting.from_dict(setting["gsetting"])
                             if setting.get("python_options"):
-                                displays, values, display_subtitles = function_ids[setting["python_options"]]()
+                                item_function = GSettingCustomComboFunctions.function_ids[setting["python_options"]]
+                                displays, values, display_subtitles = item_function()
                             else:
                                 displays, values, display_subtitles = parse_options(setting["options"])
                             setting_widget = group.add_detailed_combo(gsetting, values, displays, display_subtitles)

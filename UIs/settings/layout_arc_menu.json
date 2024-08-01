@@ -1,0 +1,51 @@
+{
+    "enable_arc_menu_group": {
+        "items": [
+            {
+                "type": "switch-extension",
+                "title": "Enable Arc Menu",
+                "subtitle": "Customizable Applicaiton Menu. Used for many layouts.",
+                "extension": "arcmenu@arcmenu.com"
+            }
+        ]
+    },
+    "arc_menu_group": {
+        "requires_extension": "arcmenu@arcmenu.com",
+        "items": [
+            {
+                "type": "combo",
+                "gsetting": {
+                    "title": "Position in Panel",
+                    "subtitle": "Choose where the Arc Menu is placed in the panel.",
+                    "schema": "org.gnome.shell.extensions.arcmenu",
+                    "key": "panel-in-position"
+                },
+                "options": [
+                    ["Left", "left"],
+                    ["Center", "center"],
+                    ["Right", "right"]
+                ]
+            },
+            {
+                "type": "switch",
+                "gsetting": {
+                    "title": "Display Arc Menu on All Monitors",
+                    "subtitle": "This feature only works when the Full Panel is enabled.",
+                    "schema": "org.gnome.shell.extensions.arcmenu",
+                    "key": "multi-monitor"
+                }
+            }
+        ]
+    },
+	"arc_advanced_settings": {
+		"requires_extension": "arcmenu@arcmenu.com",
+		"items": [
+		  {
+			"type": "extension-setting-button",
+			"title": "Advanced Arc Menu Settings",
+			"subtitle": "Go here to set your menu layout, hot keys, and more.",
+			"extension": "arcmenu@arcmenu.com"
+		  }
+		]
+	}
+}

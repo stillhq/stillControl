@@ -164,7 +164,15 @@
                                                     <property name="margin-bottom">20</property>
                                                     <property name="orientation">vertical</property>
                                                     <child>
-                                                      <object class="GSettingsGroup" id="enable_panel_menu_group"/>
+                                                      <object class="GSettingsGroup" id="arc_menu_group">
+                                                        <property name="title">Arc Menu</property>
+                                                      </object>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="arc_advanced_settings"/>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="enable_arc_menu_group"/>
                                                     </child>
                                                   </object>
                                                 </child>
@@ -172,8 +180,8 @@
                                             </child>
                                           </object>
                                         </property>
-                                        <property name="name">panel_menu</property>
-                                        <property name="title">Panel App Menu</property>
+                                        <property name="name">arc_menu</property>
+                                        <property name="title">Arc Menu</property>
                                       </object>
                                     </child>
                                     <child>
