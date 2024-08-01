@@ -53,10 +53,22 @@
           "key": "panel-positions"
         },
         "options": [
-          ["Top", "TOP"],
-          ["Bottom", "BOTTOM"],
-          ["Left", "LEFT"],
-          ["Right", "RIGHT"]
+          [
+            "Top",
+            "TOP"
+          ],
+          [
+            "Bottom",
+            "BOTTOM"
+          ],
+          [
+            "Left",
+            "LEFT"
+          ],
+          [
+            "Right",
+            "RIGHT"
+          ]
         ]
       },
       {
@@ -73,6 +85,100 @@
           "step_increment": 1
         }
       }
+    ]
+  },
+    "panel_appearance_group": {
+      "requires_extension": "dash-to-panel@jderose9.github.com",
+      "items": [
+        {
+            "type": "spin",
+            "gsetting": {
+                "title": "App Icon Margin",
+                "subtitle": "The space in between app icons on the panel.",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "appicon-margin"
+            },
+            "spin_type": "int",
+            "percent": false,
+            "adjustment": {
+              "lower": 0,
+              "upper": 32,
+              "step_increment": 1
+            }
+        },
+        {
+            "type": "spin",
+            "gsetting": {
+                "title": "App Icon Padding",
+                "subtitle": "Controls the size of each icon in the app icon area.",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "appicon-padding"
+            },
+            "spin_type": "int",
+            "percent": false,
+            "adjustment": {
+              "lower": 0,
+              "upper": 32,
+              "step_increment": 1
+            }
+        },
+        {
+          "type": "switch",
+          "gsetting": {
+            "title": "Highlight Focused Application",
+            "subtitle": "Highlights the background of the current focused application.",
+            "schema": "org.gnome.shell.extensions.dash-to-panel",
+            "key": "focus-highlight"
+          }
+        },
+        {
+          "type": "combo",
+          "gsetting": {
+            "title": "Running Indicator Position",
+            "subtitle": "The position of the running indicator on panel apps.",
+            "schema": "org.gnome.shell.extensions.dash-to-panel",
+            "key": "dot-position"
+          },
+          "options": [["Bottom", "BOTTOM"], ["Top", "TOP"], ["Left", "LEFT"], ["Right", "RIGHT"]]
+        },
+        {
+          "type": "combo",
+            "gsetting": {
+                "title": "Running Indicator Shape",
+                "subtitle": "The shape of the running indicator for each app.",
+                "schema": "org.gnome.shell.extensions.dash-to-panel",
+                "key": "dot-style-unfocused"
+            },
+            "options": [
+                ["Dots", "DOTS"],
+                ["Squares", "SQUARES"],
+                ["Dashes", "DASHES"],
+                ["Segmented", "SEGMENTED"],
+                ["Solid", "SOLID"],
+                ["Ciliora", "CILIORA"],
+                ["Metro", "METRO"],
+                ["Binary", "BINARY"]
+            ]
+        },
+        {
+          "type": "combo",
+          "gsetting": {
+              "title": "Focused Indicator Shape",
+              "subtitle": "The shape of the indicator for focused apps.",
+              "schema": "org.gnome.shell.extensions.dash-to-panel",
+              "key": "dot-style-focused"
+          },
+          "options": [
+                ["Dots", "DOTS"],
+                ["Squares", "SQUARES"],
+                ["Dashes", "DASHES"],
+                ["Segmented", "SEGMENTED"],
+                ["Solid", "SOLID"],
+                ["Ciliora", "CILIORA"],
+                ["Metro", "METRO"],
+                ["Binary", "BINARY"]
+            ]
+        }
     ]
   },
   "panel_behavior_group": {
@@ -120,7 +226,7 @@
           "title": "Show Window Previews on Hover",
           "subtitle": "Will show a preview of the window when hovering over open windows in the panel.",
           "schema": "org.gnome.shell.extensions.dash-to-panel",
-          "key": "group-apps"
+          "key": "show-window-previews"
         }
       },
       {

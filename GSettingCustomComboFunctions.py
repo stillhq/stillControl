@@ -15,7 +15,7 @@ def check_dir_for_file_to_list(input_list, directory, file_check):
 
 
 # Scans for icon themes because cursor themes can be
-# considered icon themes so they need to be filter out
+# considered icon themes, so they need to be filter out
 def check_dir_for_icon_theme(input_list, directory, file_check):
     if os.path.isdir(directory):
         for item in os.listdir(directory):

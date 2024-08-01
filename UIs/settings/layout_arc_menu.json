@@ -18,12 +18,12 @@
                     "title": "Position in Panel",
                     "subtitle": "Choose where the Arc Menu is placed in the panel.",
                     "schema": "org.gnome.shell.extensions.arcmenu",
-                    "key": "panel-in-position"
+                    "key": "position-in-panel"
                 },
                 "options": [
-                    ["Left", "left"],
-                    ["Center", "center"],
-                    ["Right", "right"]
+                    ["Left", "Left"],
+                    ["Center", "Center"],
+                    ["Right", "Right"]
                 ]
             },
             {

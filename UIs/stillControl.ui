@@ -91,6 +91,11 @@
                                                       </object>
                                                     </child>
                                                     <child>
+                                                      <object class="GSettingsGroup" id="panel_appearance_group">
+                                                        <property name="title">Panel Appearance</property>
+                                                      </object>
+                                                    </child>
+                                                    <child>
                                                       <object class="GSettingsGroup" id="panel_behavior_group">
                                                         <property name="title">Panel Behavior</property>
                                                       </object>
@@ -164,15 +169,15 @@
                                                     <property name="margin-bottom">20</property>
                                                     <property name="orientation">vertical</property>
                                                     <child>
+                                                      <object class="GSettingsGroup" id="enable_arc_menu_group"/>
+                                                    </child>
+                                                    <child>
                                                       <object class="GSettingsGroup" id="arc_menu_group">
                                                         <property name="title">Arc Menu</property>
                                                       </object>
                                                     </child>
                                                     <child>
                                                       <object class="GSettingsGroup" id="arc_advanced_settings"/>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GSettingsGroup" id="enable_arc_menu_group"/>
                                                     </child>
                                                   </object>
                                                 </child>
