@@ -59,7 +59,100 @@
 				  "upper": 128,
 				  "step_increment": 4
 				}
+			},
+			{
+				"type": "spin",
+				"gsetting": {
+					"title": "Dock Size Limit Percentage",
+					"subtitle": "Percentage of the screen the dock can take up.",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "height-fraction"
+				},
+				"spin_type": "double",
+				"percent": true,
+				"adjustment": {
+				  "lower": 0,
+				  "upper": 100,
+				  "step_increment": 5
+				}
+			},
+            {
+                "type": "switch",
+                "gsetting": {
+                    "title": "Shrink Dock",
+                    "subtitle": "Saves space by shrinking padding.",
+                    "schema": "org.gnome.shell.extensions.dash-to-dock",
+                    "key": "custom-theme-shrink"
+                }
+            }
+		]
+    },
+	"dock_behavior_group": {
+		"requires_extension": "dash-to-dock@micxgx.gmail.com",
+		"items": [
+			{
+				"type": "switch",
+				"gsetting": {
+					"title": "Show Pinned Applications",
+					"subtitle": "Pins favorited applications to the dock.",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "show-favorites"
+				}
+			},
+			{
+				"type": "switch",
+				"gsetting": {
+					"title": "Show Running Applications",
+					"subtitle": "Shows running applications on the dock.",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "show-running"
+				}
+			},
+			{
+				"type": "switch",
+				"gsetting": {
+					"title": "Isolate Monitors",
+					"subtitle": "Only show applications from the current monitor.",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "isolate-monitors"
+				}
+			},
+			{
+				"type": "switch",
+				"gsetting": {
+					"title": "Show Applications Icon",
+					"subtitle": "Show button to open application menu.",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "show-show-apps-button"
+				}
+			},
+			{
+				"type": "switch",
+				"gsetting": {
+					"title": "Show Trash Can",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "show-trash"
+				}
+			},
+			{
+				"type": "switch",
+				"gsetting": {
+					"title": "Show External Volumes and Drives",
+					"schema": "org.gnome.shell.extensions.dash-to-dock",
+					"key": "show-mounts"
+				}
 			}
-        ]
-    }
+		]
+	},
+	"dock_advanced_settings": {
+		"requires_extension": "dash-to-dock@micxgx.gmail.com",
+		"items": [
+		  {
+			"type": "extension-setting-button",
+			"title": "Advanced Dock Settings",
+			"subtitle": "Powered by Dash to Dock",
+			"extension": "dash-to-dock@micxgx.gmail.com"
+		  }
+		]
+	}
 }

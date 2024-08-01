@@ -78,6 +78,7 @@
                                               <object class="AdwClamp">
                                                 <property name="child">
                                                   <object class="GtkBox">
+                                                    <property name="margin-bottom">20</property>
                                                     <property name="orientation">vertical</property>
                                                     <child>
                                                       <object class="GSettingsGroup" id="panel_group">
@@ -121,6 +122,7 @@
                                                 <property name="unit">pt</property>
                                                 <child>
                                                   <object class="GtkBox">
+                                                    <property name="margin-bottom">20</property>
                                                     <property name="orientation">vertical</property>
                                                     <child>
                                                       <object class="GSettingsGroup" id="enable_dock_group"/>
@@ -130,6 +132,14 @@
                                                         <property name="title">Dock Positioning</property>
                                                       </object>
                                                     </child>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="dock_behavior_group">
+                                                        <property name="title">Dock Behavior</property>
+                                                      </object>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="dock_advanced_settings"/>
+                                                    </child>
                                                   </object>
                                                 </child>
                                               </object>
@@ -138,6 +148,32 @@
                                         </property>
                                         <property name="name">dock</property>
                                         <property name="title">Dock</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="child">
+                                          <object class="GtkScrolledWindow">
+                                            <child>
+                                              <object class="AdwClamp">
+                                                <property name="maximum-size">700</property>
+                                                <property name="tightening-threshold">300</property>
+                                                <property name="unit">pt</property>
+                                                <child>
+                                                  <object class="GtkBox">
+                                                    <property name="margin-bottom">20</property>
+                                                    <property name="orientation">vertical</property>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="enable_panel_menu_group"/>
+                                                    </child>
+                                                  </object>
+                                                </child>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </property>
+                                        <property name="name">panel_menu</property>
+                                        <property name="title">Panel App Menu</property>
                                       </object>
                                     </child>
                                     <child>
