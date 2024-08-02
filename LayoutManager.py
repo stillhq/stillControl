@@ -12,6 +12,7 @@ _monitor_specific_panel_settings = [
     "panel-lengths", "panel-positions", "panel-sizes"
 ]
 
+type_strings = ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]
 
 def import_settings(schema):
     schema_source = Gio.SettingsSchemaSource.get_default()
@@ -28,6 +29,53 @@ _shell_settings = import_settings("org.gnome.shell")
 _panel_settings = import_settings("org.gnome.shell.extensions.dash-to-panel")
 _dock_settings = import_settings("org.gnome.shell.extensions.dash-to-dock")
 _arc_settings = import_settings("org.gnome.shell.extensions.arcmenu")
+
+
+def set_unknown_type(setting, key, value):
+    #variant_type = setting.get_value(key).get_type()
+    str_type = setting.get_value(key).get_type_string()
+    #setting.set_value(key, GLib.Variant.parse(GLib.VariantType.new(str_type), str(value)))
+    match str_type:
+        case "b":
+            setting.set_boolean(key, value)
+        case "y":
+            setting.set_byte(key, value)
+        case "n":
+            setting.set_int16(key, value)
+        case "q":
+            setting.set_uint16(key, value)
+        case "i":
+            setting.set_int(key, value)
+        case "u":
+            setting.set_uint(key, value)
+        case "x":
+            setting.set_int64(key, value)
+        case "t":
+            setting.set_uint64(key, value)
+        case "d":
+            setting.set_double(key, value)
+        case "s":
+            setting.set_string(key, value)
+        case "as":
+            setting.set_strv(key, value)
+        case "ay":
+            setting.set_bytes(key, value)
+        case _:
+            print(setting.get_value(key).get_data_as_bytes().get_data())
+            value_bytes = GLib.Bytes.new(bytes(value, "utf-8"))
+            variant = GLib.Variant.new_from_bytes(
+                GLib.VariantType.new(str_type), value_bytes, True
+            )
+            setting.set_value(key, variant)
+
+
+def serialize_setting(setting, key):
+    value = setting.get_value(key)
+    if value.get_type_string() in type_strings:
+        return value.unpack()
+    else: # Serialize as bytes
+        return value.get_data_as_bytes().get_data()
+
 
 
 def set_extensions(to_enable, to_disable):
@@ -67,7 +115,7 @@ def set_panel_settings(settings):
         if key in _monitor_specific_panel_settings:
             set_monitor_specific_panel_setting(key, settings[key])
         else:
-            _panel_settings.set_value(key, settings[key])
+            set_unknown_type(_panel_settings, key, settings[key])
 
 
 def check_panel_settings(settings):
@@ -84,8 +132,7 @@ def check_panel_settings(settings):
 def set_dock_settings(settings):
     for key in settings:
         print(settings[key])
-        # TODO, write function that correctly sets the value based on the data type
-        _dock_settings.set_value(key, settings[key])
+        set_unknown_type(_dock_settings, key, settings[key])
 
 
 def check_dock_settings(settings):
@@ -99,7 +146,7 @@ def check_dock_settings(settings):
 
 def set_arc_settings(settings):
     for key in settings:
-        _arc_settings.set_value(key, settings[key])
+        set_unknown_type(_arc_settings, key, settings[key])
 
 
 def check_arc_settings(settings):

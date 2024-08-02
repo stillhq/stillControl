@@ -2,6 +2,15 @@
 import json
 from gi.repository import Gio, GLib
 
+
+def serialize_setting(setting, key):
+    value = setting.get_value(key)
+    if value.get_type_string() in ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]:
+        return value.unpack()
+    else: # Serialize as bytes
+        return str(value.get_data_as_bytes().get_data(), encoding='utf-8')
+
+
 shell_settings = Gio.Settings.new("org.gnome.shell")
 
 panel_settings = Gio.Settings.new("org.gnome.shell.extensions.dash-to-panel")
@@ -187,12 +196,12 @@ if "dash-to-panel@jderose9.github.com" in enabled_extensions:
     for key in panel_monitor_keys:
         layout_dict["panel"][key] = get_panel_monitor_setting(key)
     for key in panel_keys:
-        layout_dict["panel"][key] = panel_settings.get_value(key).unpack()
+        layout_dict["panel"][key] = serialize_setting(panel_settings, key)
 
 if "dash-to-dock@micxgx.gmail.com" in enabled_extensions:
     layout_dict["dock"] = {}
     for key in dock_keys:
-        layout_dict["dock"][key] = dock_settings.get_value(key).unpack()
+        layout_dict["dock"][key] = serialize_setting(dock_settings, key)
 
 if "arcmenu@arcmenu.com" in enabled_extensions:
     current_layout = arc_settings.get_string("menu-layout")
@@ -206,7 +215,7 @@ if "arcmenu@arcmenu.com" in enabled_extensions:
                 break
 
         if commit_key:
-            layout_dict["arc"][key] = arc_settings.get_value(key).unpack()
+            layout_dict["arc"][key] = serialize_setting(arc_settings, key)
 
 filename = f"{layout_name.replace(" ", "_").lower()}.json"
 with open(filename, "w") as f:
