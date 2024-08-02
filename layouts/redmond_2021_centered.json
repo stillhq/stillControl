@@ -1,0 +1,142 @@
+{
+    "name": "Redmond 2021 Centered",
+    "panel": {
+        "panel-anchors": "MIDDLE",
+        "panel-element-positions": [
+            {
+                "element": "showAppsButton",
+                "visible": false,
+                "position": "stackedTL"
+            },
+            {
+                "element": "leftBox",
+                "visible": true,
+                "position": "centerMonitor"
+            },
+            {
+                "element": "activitiesButton",
+                "visible": true,
+                "position": "centerMonitor"
+            },
+            {
+                "element": "taskbar",
+                "visible": true,
+                "position": "centerMonitor"
+            },
+            {
+                "element": "centerBox",
+                "visible": true,
+                "position": "centerMonitor"
+            },
+            {
+                "element": "rightBox",
+                "visible": true,
+                "position": "stackedBR"
+            },
+            {
+                "element": "dateMenu",
+                "visible": true,
+                "position": "stackedBR"
+            },
+            {
+                "element": "systemMenu",
+                "visible": true,
+                "position": "stackedBR"
+            },
+            {
+                "element": "desktopButton",
+                "visible": true,
+                "position": "stackedBR"
+            }
+        ],
+        "panel-lengths": 100,
+        "panel-positions": "BOTTOM",
+        "panel-sizes": 48,
+        "intellihide": false,
+        "appicon-margin": 4,
+        "appicon-padding": 4,
+        "focus-highlight": true,
+        "dot-position": "BOTTOM",
+        "dot-style-unfocused": "METRO",
+        "dot-style-focused": "METRO",
+        "show-favorites": true,
+        "show-running-apps": true,
+        "group-apps": true
+    },
+    "arc": {
+        "activate-on-hover": false,
+        "all-apps-button-action": "Categories_List",
+        "alphabetize-all-programs": true,
+        "apps-show-extra-details": false,
+        "arcmenu-extra-categories-links": "[(0, false), (1, false), (2, false), (3, false), (4, false)]",
+        "arcmenu-extra-categories-links-location": "Bottom",
+        "arcmenu-hotkey": [
+            "Super_L"
+        ],
+        "avatar-style": "Round",
+        "button-item-icon-size": "Default",
+        "button-padding": 10,
+        "category-icon-type": "Symbolic",
+        "custom-grid-icon-size": "{'width': 108, 'height': 108, 'iconSize': 62}",
+        "custom-menu-button-icon-size": 36.0,
+        "custom-menu-button-text": "Apps",
+        "dash-to-panel-standalone": false,
+        "disable-recently-installed-apps": false,
+        "disable-scrollview-fade-effect": false,
+        "disable-tooltips": false,
+        "disable-user-avatar": false,
+        "distro-icon": 0,
+        "eleven-disable-frequent-apps": false,
+        "eleven-layout-extra-shortcuts": "[{'id': 'org.gnome.Nautilus.desktop'}, {'id': 'org.gnome.Terminal.desktop'}, {'id': 'org.gnome.Settings.desktop'}]",
+        "enable-activities-shortcut": false,
+        "enable-clock-widget-raven": true,
+        "enable-clock-widget-unity": false,
+        "enable-horizontal-flip": false,
+        "enable-unity-homescreen": true,
+        "enable-weather-widget-raven": true,
+        "enable-weather-widget-unity": false,
+        "extra-categories": "[(0, true), (1, true), (2, false), (3, false), (4, false)]",
+        "force-menu-location": "BottomCentered",
+        "gnome-dash-show-applications": false,
+        "hide-overview-on-startup": false,
+        "highlight-search-result-terms": false,
+        "hotkey-open-primary-monitor": false,
+        "left-panel-width": 290,
+        "max-search-results": 5,
+        "menu-arrow-rise": "(false, 6)",
+        "menu-button-appearance": "Icon",
+        "menu-button-icon": "Menu_Icon",
+        "menu-button-left-click-action": "ArcMenu",
+        "menu-button-middle-click-action": "ArcMenu",
+        "menu-button-position-offset": 0,
+        "menu-button-right-click-action": "ContextMenu",
+        "menu-font-size": 11,
+        "menu-height": 750,
+        "menu-layout": "Eleven",
+        "menu-position-alignment": 50,
+        "menu-width-adjustment": 100,
+        "misc-item-icon-size": "Default",
+        "multi-lined-labels": true,
+        "multi-monitor": false,
+        "override-menu-theme": false,
+        "position-in-panel": "Left",
+        "power-display-style": "Default",
+        "quicklinks-item-icon-size": "Default",
+        "right-panel-width": 205,
+        "search-entry-border-radius": "(true, 25)",
+        "search-provider-open-windows": false,
+        "search-provider-recent-files": false,
+        "searchbar-default-bottom-location": "Bottom",
+        "searchbar-default-top-location": "Top",
+        "settings-height": 800,
+        "settings-width": 750,
+        "shortcut-icon-type": "Symbolic",
+        "show-activities-button": true,
+        "show-bookmarks": false,
+        "show-category-sub-menus": false,
+        "show-external-devices": false,
+        "show-hidden-recent-files": false,
+        "show-search-result-details": false,
+        "vert-separator": false
+    }
+}

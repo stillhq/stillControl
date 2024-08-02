@@ -37,7 +37,7 @@ dock_keys = [
 
 ]
 arc_settings = Gio.Settings.new("org.gnome.shell.extensions.arcmenu")
-arc_keys = arc_menu_settings = [
+arc_keys = [
     "activate-on-hover",
     "all-apps-button-action",
     "alphabetize-all-programs",

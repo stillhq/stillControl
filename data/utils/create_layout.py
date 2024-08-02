@@ -65,7 +65,6 @@ arc_keys = arc_menu_settings = [
     "button-item-icon-size",
     "button-padding",
     "category-icon-type",
-    "context-menu-items",
     "custom-grid-icon-size",
     "custom-menu-button-icon-size",
     "custom-menu-button-text",
@@ -104,11 +103,9 @@ arc_keys = arc_menu_settings = [
     "menu-button-position-offset",
     "menu-button-right-click-action",
     "menu-font-size",
-    "menu-foreground-color",
     "menu-height",
     "menu-layout",
     "menu-position-alignment",
-    "menu-separator-color",
     "menu-width-adjustment",
     "mint-layout-extra-shortcuts",
     "misc-item-icon-size",
@@ -182,7 +179,7 @@ panel_layouts = [
 
 def get_panel_monitor_setting(key):
     settings = json.loads(panel_settings.get_string(key))
-    return settings[list(settings.keys)[0]]
+    return settings[list(settings)[0]]
 
 
 layout_dict = {}
@@ -195,7 +192,12 @@ enabled_extensions = shell_settings.get_strv("enabled-extensions")
 if "dash-to-panel@jderose9.github.com" in enabled_extensions:
     layout_dict["panel"] = {}
     for key in panel_monitor_keys:
-        layout_dict["panel"][key] = get_panel_monitor_setting(key)
+        try:
+            layout_dict["panel"][key] = get_panel_monitor_setting(key)
+        except:
+            print("Skipping panel key: " + key)
+            layout_dict["panel"][key] = {}
+            print("value:\n" + panel_settings.get_string(key) + "\n")
     for key in panel_keys:
         layout_dict["panel"][key] = serialize_setting(panel_settings, key)
 
