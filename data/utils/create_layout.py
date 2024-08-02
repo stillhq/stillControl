@@ -3,12 +3,13 @@ import json
 from gi.repository import Gio, GLib
 
 
+_type_strings = ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]
 def serialize_setting(setting, key):
     value = setting.get_value(key)
-    if value.get_type_string() in ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]:
+    if value.get_type_string() in _type_strings:
         return value.unpack()
     else: # Serialize as bytes
-        return str(value.get_data_as_bytes().get_data(), encoding='utf-8')
+        return value.print_(True)
 
 
 shell_settings = Gio.Settings.new("org.gnome.shell")

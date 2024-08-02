@@ -14,6 +14,15 @@ _monitor_specific_panel_settings = [
 
 type_strings = ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]
 
+
+def serialize_setting(setting, key):
+    value = setting.get_value(key)
+    if value.get_type_string() in type_strings:
+        return value.unpack()
+    else: # Serialize as bytes
+        return value.print_(True)
+
+
 def import_settings(schema):
     schema_source = Gio.SettingsSchemaSource.get_default()
     if schema_source.lookup(schema, True):
@@ -32,9 +41,7 @@ _arc_settings = import_settings("org.gnome.shell.extensions.arcmenu")
 
 
 def set_unknown_type(setting, key, value):
-    #variant_type = setting.get_value(key).get_type()
     str_type = setting.get_value(key).get_type_string()
-    #setting.set_value(key, GLib.Variant.parse(GLib.VariantType.new(str_type), str(value)))
     match str_type:
         case "b":
             setting.set_boolean(key, value)
@@ -61,20 +68,11 @@ def set_unknown_type(setting, key, value):
         case "ay":
             setting.set_bytes(key, value)
         case _:
-            print(setting.get_value(key).get_data_as_bytes().get_data())
-            value_bytes = GLib.Bytes.new(bytes(value, "utf-8"))
-            variant = GLib.Variant.new_from_bytes(
-                GLib.VariantType.new(str_type), value_bytes, True
+            variant = GLib.Variant.parse(
+                GLib.VariantType.new(str_type), value, None, None
             )
             setting.set_value(key, variant)
 
-
-def serialize_setting(setting, key):
-    value = setting.get_value(key)
-    if value.get_type_string() in type_strings:
-        return value.unpack()
-    else: # Serialize as bytes
-        return value.get_data_as_bytes().get_data()
 
 
 
@@ -124,14 +122,13 @@ def check_panel_settings(settings):
             if not check_monitor_specific_panel_setting(key, settings[key]):
                 return False
         else:
-            if _panel_settings.get_value(key) != settings[key]:
+            if serialize_setting(_panel_settings, key) != settings[key]:
                 return False
     return True
 
 
 def set_dock_settings(settings):
     for key in settings:
-        print(settings[key])
         set_unknown_type(_dock_settings, key, settings[key])
 
 
@@ -139,7 +136,7 @@ def check_dock_settings(settings):
     if not _dock_settings:
         return False
     for key in settings:
-        if _dock_settings.get_value(key) != settings[key]:
+        if serialize_setting(_dock_settings, key) != settings[key]:
             return False
     return True
 
@@ -153,7 +150,7 @@ def check_arc_settings(settings):
     if not _arc_settings:
         return False
     for key in settings:
-        if _arc_settings.get_value(key) != settings[key]:
+        if serialize_setting(_arc_settings, key) != settings[key]:
             return False
     return True
 
@@ -180,7 +177,9 @@ def set_gsettings(json):
 def check_setting(setting, value):
     schema, key = split_setting(setting)
     settings = Gio.Settings.new(schema)
-    return settings.get_value(key) == value
+    if serialize_setting(settings, key) != value:
+        print(serialize_setting(settings, key), value)
+    return serialize_setting(settings, key) == value
 
 
 def check_gsettings(json):

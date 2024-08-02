@@ -1,5 +1,5 @@
 {
-    "name": "test3",
+    "name": "test4",
     "dock": {
         "intellihide": true,
         "dock-position": "BOTTOM",
@@ -21,7 +21,7 @@
         "all-apps-button-action": "Categories_List",
         "alphabetize-all-programs": true,
         "apps-show-extra-details": false,
-        "arcmenu-extra-categories-links": "b'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x04\\x00\\x00\\x00\\x00\\x00\\x00\\x00'",
+        "arcmenu-extra-categories-links": "[(0, false), (1, false), (2, false), (3, false), (4, false)]",
         "arcmenu-extra-categories-links-location": "Bottom",
         "arcmenu-hotkey": [
             "Super_L"
@@ -30,8 +30,8 @@
         "button-item-icon-size": "Default",
         "button-padding": -1,
         "category-icon-type": "Symbolic",
-        "context-menu-items": "b'id\\x00org.gnome.Extensions.desktop\\x00\\x03!id\\x00ArcMenu_Settings\\x00\\x03name\\x00ArcMenu Settings\\x00\\x05icon\\x00ArcMenu_ArcMenuIcon\\x00\\x05\\x15,Fid\\x00ArcMenu_PanelExtensionSettings\\x00\\x03name\\x00Panel Extension Settings\\x00\\x05icon\\x00application-x-addon-symbolic\\x00\\x05#Beid\\x00ArcMenu_Separator\\x00\\x03name\\x00Separator\\x00\\x05icon\\x00list-remove-symbolic\\x00\\x05\\x16&Aid\\x00ArcMenu_PowerOptions\\x00\\x03name\\x00Power Options\\x00\\x05icon\\x00system-shutdown-symbolic\\x00\\x05\\x19-Lid\\x00ArcMenu_ActivitiesOverview\\x00\\x03name\\x00Activities Overview\\x00\\x05icon\\x00view-fullscreen-symbolic\\x00\\x05\\x1f9Xid\\x00ArcMenu_ShowDesktop\\x00\\x03name\\x00Show Desktop\\x00\\x05icon\\x00computer-symbolic\\x00\\x05\\x18+C\"\\x00k\\x00\\xd3\\x00\\x17\\x01f\\x01\\xc1\\x01\\x07\\x02'",
-        "custom-grid-icon-size": "b'width\\x00\\x00\\x00l\\x00\\x00\\x00\\x06\\x00\\x00\\x00height\\x00\\x00l\\x00\\x00\\x00\\x07\\x00\\x00\\x00iconSize\\x00\\x00\\x00\\x00>\\x00\\x00\\x00\\t\\r\\x1d1'",
+        "context-menu-items": "[{'id': 'org.gnome.Extensions.desktop'}, {'id': 'ArcMenu_Settings', 'name': 'ArcMenu Settings', 'icon': 'ArcMenu_ArcMenuIcon'}, {'id': 'ArcMenu_PanelExtensionSettings', 'name': 'Panel Extension Settings', 'icon': 'application-x-addon-symbolic'}, {'id': 'ArcMenu_Separator', 'name': 'Separator', 'icon': 'list-remove-symbolic'}, {'id': 'ArcMenu_PowerOptions', 'name': 'Power Options', 'icon': 'system-shutdown-symbolic'}, {'id': 'ArcMenu_ActivitiesOverview', 'name': 'Activities Overview', 'icon': 'view-fullscreen-symbolic'}, {'id': 'ArcMenu_ShowDesktop', 'name': 'Show Desktop', 'icon': 'computer-symbolic'}]",
+        "custom-grid-icon-size": "{'width': 108, 'height': 108, 'iconSize': 62}",
         "custom-menu-button-icon-size": 20.0,
         "custom-menu-button-text": "Apps",
         "dash-to-panel-standalone": false,
@@ -50,7 +50,7 @@
         "enable-unity-homescreen": true,
         "enable-weather-widget-raven": true,
         "enable-weather-widget-unity": false,
-        "extra-categories": "b'\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x04\\x00\\x00\\x00\\x00\\x00\\x00\\x00'",
+        "extra-categories": "[(0, true), (1, true), (2, false), (3, false), (4, false)]",
         "force-menu-location": "Off",
         "gnome-dash-show-applications": false,
         "hide-overview-on-startup": false,
@@ -58,7 +58,7 @@
         "hotkey-open-primary-monitor": false,
         "left-panel-width": 290,
         "max-search-results": 5,
-        "menu-arrow-rise": "b'\\x00\\x00\\x00\\x00\\x06\\x00\\x00\\x00'",
+        "menu-arrow-rise": "(false, 6)",
         "menu-button-appearance": "Icon",
         "menu-button-icon": "Menu_Icon",
         "menu-button-left-click-action": "ArcMenu",
@@ -80,7 +80,7 @@
         "power-display-style": "Default",
         "quicklinks-item-icon-size": "Default",
         "right-panel-width": 205,
-        "search-entry-border-radius": "b'\\x01\\x00\\x00\\x00\\x19\\x00\\x00\\x00'",
+        "search-entry-border-radius": "(true, 25)",
         "search-provider-open-windows": false,
         "search-provider-recent-files": false,
         "searchbar-default-bottom-location": "Bottom",
