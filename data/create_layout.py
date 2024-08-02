@@ -1,6 +1,6 @@
 # Tool to create a layout from the current GNOME setup.
 import json
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 
 shell_settings = Gio.Settings.new("org.gnome.shell")
 
@@ -35,15 +35,145 @@ dock_keys = [
     "show-show-apps-button",
     "show-trash",
     "show-mounts",
-    "show-window-previews",
+    "show-windows-preview",
     "show-apps-at-top",
-    "show-apps-always-at-edge",
+    "show-apps-always-in-the-edge",
 
 ]
-arc_settings = Gio.Settings.new("org.gnome.shell.extensions.arc-menu")
-arc_keys = [
-
+arc_settings = Gio.Settings.new("org.gnome.shell.extensions.arcmenu")
+arc_keys = arc_menu_settings = [
+    "activate-on-hover",
+    "all-apps-button-action",
+    "alphabetize-all-programs",
+    "apps-show-extra-details",
+    "arcmenu-extra-categories-links",
+    "arcmenu-extra-categories-links-location",
+    "arcmenu-hotkey",
+    "avatar-style",
+    "az-layout-extra-shortcuts",
+    "brisk-layout-extra-shortcuts",
+    "button-item-icon-size",
+    "button-padding",
+    "category-icon-type",
+    "context-menu-items",
+    "custom-grid-icon-size",
+    "custom-menu-button-icon-size",
+    "custom-menu-button-text",
+    "dash-to-panel-standalone",
+    "default-menu-view",
+    "default-menu-view-redmond",
+    "default-menu-view-tognee",
+    "disable-recently-installed-apps",
+    "disable-scrollview-fade-effect",
+    "disable-tooltips",
+    "disable-user-avatar",
+    "distro-icon",
+    "eleven-disable-frequent-apps",
+    "eleven-layout-extra-shortcuts",
+    "enable-activities-shortcut",
+    "enable-clock-widget-raven",
+    "enable-clock-widget-unity",
+    "enable-horizontal-flip",
+    "enable-unity-homescreen",
+    "enable-weather-widget-raven",
+    "enable-weather-widget-unity",
+    "extra-categories",
+    "force-menu-location",
+    "gnome-dash-show-applications",
+    "hide-overview-on-startup",
+    "highlight-search-result-terms",
+    "hotkey-open-primary-monitor",
+    "insider-layout-extra-shortcuts",
+    "left-panel-width",
+    "max-search-results",
+    "menu-arrow-rise",
+    "menu-button-appearance",
+    "menu-button-icon",
+    "menu-button-left-click-action",
+    "menu-button-middle-click-action",
+    "menu-button-position-offset",
+    "menu-button-right-click-action",
+    "menu-font-size",
+    "menu-foreground-color",
+    "menu-height",
+    "menu-layout",
+    "menu-position-alignment",
+    "menu-separator-color",
+    "menu-width-adjustment",
+    "mint-layout-extra-shortcuts",
+    "misc-item-icon-size",
+    "multi-lined-labels",
+    "multi-monitor",
+    "override-menu-theme",
+    "plasma-enable-hover",
+    "pop-default-view",
+    "pop-folders-data",
+    "position-in-panel",
+    "power-display-style",
+    "quicklinks-item-icon-size",
+    "raven-position",
+    "raven-search-display-style",
+    "right-panel-width",
+    "runner-font-size",
+    "runner-hotkey",
+    "runner-hotkey-open-primary-monitor",
+    "runner-menu-height",
+    "runner-menu-width",
+    "runner-position",
+    "runner-search-display-style",
+    "runner-show-frequent-apps",
+    "search-entry-border-radius",
+    "search-provider-open-windows",
+    "search-provider-recent-files",
+    "searchbar-default-bottom-location",
+    "searchbar-default-top-location",
+    "settings-height",
+    "settings-width",
+    "shortcut-icon-type",
+    "show-activities-button",
+    "show-bookmarks",
+    "show-category-sub-menus",
+    "show-external-devices",
+    "show-hidden-recent-files",
+    "show-search-result-details",
+    "sleek-layout-extra-shortcuts",
+    "sleek-layout-panel-width",
+    "unity-layout-extra-shortcuts",
+    "vert-separator",
+    "windows-disable-frequent-apps",
+    "windows-disable-pinned-apps",
+    "windows-layout-extra-shortcuts"
 ]
+panel_layouts = [
+    'Default',
+    'Brisk',
+    'Whisker',
+    'GnomeMenu',
+    'Mint',
+    'Elementary',
+    'GnomeOverview',
+    'Redmond',
+    'Unity',
+    'Budgie',
+    'Insider',
+    'Runner',
+    'Chromebook',
+    'Raven',
+    'Tognee',
+    'Plasma',
+    'Windows',
+    'Eleven',
+    'AZ',
+    'Enterprise',
+    'Pop',
+    'Sleek'
+]
+
+
+def get_panel_monitor_setting(key):
+    settings = json.loads(panel_settings.get_string(key))
+    return settings[list(settings.keys)[0]]
+
 
 layout_dict = {}
 
@@ -53,5 +183,32 @@ layout_dict["name"] = layout_name
 enabled_extensions = shell_settings.get_strv("enabled-extensions")
 
 if "dash-to-panel@jderose9.github.com" in enabled_extensions:
-    layout_dict["panel"] = panel_settings.get_string("settings")
+    layout_dict["panel"] = {}
+    for key in panel_monitor_keys:
+        layout_dict["panel"][key] = get_panel_monitor_setting(key)
+    for key in panel_keys:
+        layout_dict["panel"][key] = panel_settings.get_value(key).unpack()
 
+if "dash-to-dock@micxgx.gmail.com" in enabled_extensions:
+    layout_dict["dock"] = {}
+    for key in dock_keys:
+        layout_dict["dock"][key] = dock_settings.get_value(key).unpack()
+
+if "arcmenu@arcmenu.com" in enabled_extensions:
+    current_layout = arc_settings.get_string("menu-layout")
+    layout_dict["arc"] = {}
+    for key in arc_keys:
+        # Make sure layout specifc settings are not included
+        commit_key = True
+        for layout in panel_layouts:
+            if key.startswith(layout.lower()) and layout != current_layout:
+                commit_key = False
+                break
+
+        if commit_key:
+            layout_dict["arc"][key] = arc_settings.get_value(key).unpack()
+
+filename = f"{layout_name.replace(" ", "_").lower()}.json"
+with open(filename, "w") as f:
+    json.dump(layout_dict, f, indent=4)
+    print(f"Layout saved to {filename}")

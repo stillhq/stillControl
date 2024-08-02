@@ -1,7 +1,7 @@
 import json
 import os
 
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 
 import constants
 
@@ -83,6 +83,8 @@ def check_panel_settings(settings):
 
 def set_dock_settings(settings):
     for key in settings:
+        print(settings[key])
+        # TODO, write function that correctly sets the value based on the data type
         _dock_settings.set_value(key, settings[key])
 
 

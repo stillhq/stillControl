@@ -46,7 +46,7 @@ class StillControl(Adw.Application):
 
     def setup_layout_page(self):
         available_layouts = LayoutManager.get_available_layouts()
-        if len(available_layouts) <= 2:
+        if len(available_layouts) >= 2:
             layout_box = self.builder.get_object("layout_box")
             last_button = LayoutButton.LayoutButton("custom", None)
             layout_box.append(last_button)
