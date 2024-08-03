@@ -1,0 +1,19 @@
+{
+    "name": "Cupertino",
+    "dock": {
+        "intellihide": true,
+        "dock-position": "BOTTOM",
+        "dash-max-icon-size": 48,
+        "height-fraction": 0.9,
+        "custom-theme-shrink": true,
+        "show-favorites": true,
+        "show-running": true,
+        "isolate-monitors": false,
+        "show-show-apps-button": true,
+        "show-trash": true,
+        "show-mounts": true,
+        "show-windows-preview": true,
+        "show-apps-at-top": false,
+        "show-apps-always-in-the-edge": true
+    }
+}
