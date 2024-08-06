@@ -6,18 +6,16 @@ from gi.repository import Gio, GLib
 import constants
 
 _LAYOUTS_UI = os.path.join(os.path.dirname(__file__), "layouts")
-
 _monitor_specific_panel_settings = [
     "panel-anchors", "panel-element-positions",
     "panel-lengths", "panel-positions", "panel-sizes"
 ]
-
-type_strings = ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]
+_type_strings = ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]
 
 
 def serialize_setting(setting, key):
     value = setting.get_value(key)
-    if value.get_type_string() in type_strings:
+    if value.get_type_string() in _type_strings:
         return value.unpack()
     else: # Serialize as bytes
         return value.print_(True)
@@ -27,7 +25,9 @@ def import_settings(schema):
     schema_source = Gio.SettingsSchemaSource.get_default()
     if schema_source.lookup(schema, True):
         try:
-            return Gio.Settings.new(schema)
+            setting = Gio.Settings.new(schema)
+            setting.delay()
+            return setting
         except Gio.Error:
             return None
     else:
@@ -38,6 +38,12 @@ _shell_settings = import_settings("org.gnome.shell")
 _panel_settings = import_settings("org.gnome.shell.extensions.dash-to-panel")
 _dock_settings = import_settings("org.gnome.shell.extensions.dash-to-dock")
 _arc_settings = import_settings("org.gnome.shell.extensions.arcmenu")
+
+
+def apply_settings():
+    for setting in [_shell_settings, _panel_settings, _dock_settings, _arc_settings]:
+        if setting:
+            setting.apply()
 
 
 def set_unknown_type(setting, key, value):
@@ -74,8 +80,6 @@ def set_unknown_type(setting, key, value):
             setting.set_value(key, variant)
 
 
-
-
 def set_extensions(to_enable, to_disable):
     enabled_extensions = _shell_settings.get_strv("enabled-extensions")
     disabled_extensions = _shell_settings.get_strv("disabled-extensions")
@@ -106,6 +110,17 @@ def check_extensions(enabled, disabled):
         if extension in enabled_extensions and extension not in disabled_extensions:
             return False
     return True
+
+
+def reset_settings():
+    for key in constants.PANEL_KEYS:
+        _panel_settings.reset(key)
+
+    for key in constants.DOCK_KEYS:
+        _dock_settings.reset(key)
+
+    for key in constants.ARC_KEYS:
+        _arc_settings.reset(key)
 
 
 def set_panel_settings(settings):
@@ -177,8 +192,6 @@ def set_gsettings(json):
 def check_setting(setting, value):
     schema, key = split_setting(setting)
     settings = Gio.Settings.new(schema)
-    if serialize_setting(settings, key) != value:
-        print(serialize_setting(settings, key), value)
     return serialize_setting(settings, key) == value
 
 
@@ -201,12 +214,19 @@ def check_monitor_specific_panel_setting(key, value):
 
 def set_monitor_specific_panel_setting(key, value):
     settings = json.loads(_panel_settings.get_string(key))
-    for monitor in settings:
-        settings[monitor] = value
+    if len(settings) != 0:
+        for monitor in settings:
+            settings[monitor] = value
+    else:
+        monitors = _panel_settings.get_value("available-monitors").unpack()
+        for monitor in monitors:
+            settings[str(monitor)] = value
+
     _panel_settings.set_string(key, json.dumps(settings))
 
-
 def set_layout_from_dict(layout: dict):
+    reset_settings()
+    
     # Figure out extensions to enable and disable
     if "panel" in layout:
         set_panel_settings(layout["panel"])
@@ -221,6 +241,8 @@ def set_layout_from_dict(layout: dict):
 
     if "gsettings" in layout:
         set_gsettings(layout["gsettings"])
+
+    apply_settings()
 
 
 def set_layout(layout: str):

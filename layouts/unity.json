@@ -1,6 +1,7 @@
 {
     "name": "Unity",
     "panel": {
+        "stockgs-keep-top-panel": true,
         "panel-anchors": "MIDDLE",
         "panel-element-positions": [
             {

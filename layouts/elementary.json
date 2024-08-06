@@ -32,7 +32,7 @@
         "category-icon-type": "Symbolic",
         "custom-grid-icon-size": "{'width': 108, 'height': 108, 'iconSize': 62}",
         "custom-menu-button-icon-size": 20.0,
-        "custom-menu-button-text": "  Applications",
+        "custom-menu-button-text": " Applications",
         "dash-to-panel-standalone": false,
         "disable-recently-installed-apps": false,
         "disable-scrollview-fade-effect": false,

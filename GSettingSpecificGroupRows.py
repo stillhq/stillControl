@@ -20,7 +20,10 @@ class DashToPanelMonitorComboRow(GSettingComboRow.GSettingComboRow):
 
     def get_setting_value(self):
         settings = json.loads(self.gsetting.settings.get_string(self.gsetting.key))
-        return list(settings.values())[0]
+        try:
+            return list(settings.values())[0]
+        except IndexError: 
+            return ""
 
     def set_setting_value(self, value):
         settings = json.loads(self.gsetting.settings.get_string(self.gsetting.key))
@@ -57,11 +60,15 @@ class DashToPanelMonitorComboRow(GSettingComboRow.GSettingComboRow):
 def dtp_monitor_spin_setting_changed(settings, key, spin_row, gsetting):
     if key == gsetting.key:
         settings = json.loads(gsetting.settings.get_string(gsetting.key))
-        new_value = list(settings.values())[0]
 
-        if int(spin_row.get_value()) != int(new_value):
-            spin_row.set_value(new_value)
+        try:
+            new_value = list(settings.values())[0]
 
+            if int(spin_row.get_value()) != int(new_value):
+                spin_row.set_value(new_value)
+
+        except IndexError: 
+            new_value = 0
 
 def dtp_monitor_spin_row_changed(spin_row, _value, gsetting):
     spin_row.set_sensitive(False)

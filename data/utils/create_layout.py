@@ -25,7 +25,9 @@ panel_keys = [
     "dot-style-focused",
     "show-favorites",
     "show-running-apps",
-    "group-apps"
+    "group-apps",
+    "group-apps-use-launchers",
+    "stockgs-keep-top-panel",
 ]
 panel_monitor_keys = [
     "panel-anchors", "panel-element-positions",
@@ -35,6 +37,7 @@ panel_monitor_keys = [
 dock_settings = Gio.Settings.new("org.gnome.shell.extensions.dash-to-dock")
 dock_keys = [
     "intellihide",
+    "extend-height",
     "dock-position",
     "dash-max-icon-size",
     "height-fraction",

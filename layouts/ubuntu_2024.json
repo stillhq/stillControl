@@ -1,8 +1,9 @@
 {
     "name": "Ubuntu 2024",
     "dock": {
-        "intellihide": true,
+        "intellihide": false,
         "dock-position": "LEFT",
+        "extend-height": true,
         "dash-max-icon-size": 48,
         "height-fraction": 0.9,
         "custom-theme-shrink": false,
