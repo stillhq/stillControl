@@ -1,20 +1,20 @@
 {
-    "name": "Alki 2024",
+    "name": "Googolplex",
     "panel": {
-        "appicon-margin": 2,
         "panel-lengths": 100,
-        "panel-positions": "TOP",
-        "panel-sizes": 40,
-        "animate-appicon-hover-animation-extent": "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}",
+        "dot-style-focused": "DASHES",
+        "panel-positions": "BOTTOM",
+        "dot-style-unfocused": "DOTS",
+        "panel-sizes": 48,
         "panel-element-positions": [
             {
                 "element": "showAppsButton",
-                "visible": true,
+                "visible": false,
                 "position": "stackedTL"
             },
             {
                 "element": "activitiesButton",
-                "visible": true,
+                "visible": false,
                 "position": "stackedTL"
             },
             {
@@ -25,7 +25,7 @@
             {
                 "element": "taskbar",
                 "visible": true,
-                "position": "stackedTL"
+                "position": "centerMonitor"
             },
             {
                 "element": "centerBox",
@@ -53,7 +53,14 @@
                 "position": "stackedBR"
             }
         ],
-        "isolate-workspaces": true,
-        "panel-anchors": "MIDDLE"
+        "isolate-workspaces": true
+    },
+    "arc": {
+        "menu-item-grid-icon-size": "Large_Rect",
+        "custom-menu-button-icon-size": 32.0,
+        "menu-height": 750,
+        "menu-width-adjustment": 175,
+        "menu-button-border-color": "(false, 'rgb(255,163,72)')",
+        "menu-layout": "Chromebook"
     }
 }
