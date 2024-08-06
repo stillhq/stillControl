@@ -32,7 +32,7 @@ def check_dir_for_icon_theme(input_list, directory, file_check):
 
 # Checks for Gtk theme
 def get_legacy_themes():
-    gtk_themes = []
+    gtk_themes = ["Adwaita", "Adwaita-dark"]
 
     gtk_themes = check_dir_for_file_to_list(
         gtk_themes,
