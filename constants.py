@@ -2,41 +2,19 @@ import os
 MAIN_DIR = os.path.dirname(__file__)
 UI_DIR = os.path.join(os.path.dirname(__file__), "UIs")
 
-
-PANEL_KEYS = [
-    "intellihide",
-    "appicon-margin",
-    "appicon-padding",
-    "focus-highlight",
-    "dot-position",
-    "dot-style-unfocused",
-    "dot-style-focused",
-    "show-favorites",
-    "show-running-apps",
-    "group-apps",
-    "group-apps-use-launchers",
-    "stockgs-keep-top-panel",
-    "panel-anchors", "panel-element-positions",
-    "panel-lengths", "panel-positions", "panel-sizes"
-]
-
-DOCK_KEYS = [
-    "intellihide",
-    "extend-height",
-    "dock-position",
-    "dash-max-icon-size",
-    "height-fraction",
-    "custom-theme-shrink",
-    "show-favorites",
-    "show-running",
-    "isolate-monitors",
-    "show-show-apps-button",
-    "show-trash",
-    "show-mounts",
-    "show-windows-preview",
-    "show-apps-at-top",
-    "show-apps-always-in-the-edge"
-]
+SETTINGS_FOR_RESET_EXCLUDE = {
+    "org.gnome.shell.extensions.dash-to-panel": [
+        "available-monitors"
+    ],
+    "org.gnome.shell.extensions.dash-to-dock": [
+        "preferred-monitor",
+        "preferred-monitor-by-connector"
+    ],
+    "org.gnome.shell.extensions.arcmenu": [
+        "application-shortcuts",
+        "pinned-apps"
+    ]
+}
 
 ARC_KEYS = [
     "activate-on-hover",

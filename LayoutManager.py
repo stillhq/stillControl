@@ -12,7 +12,6 @@ _monitor_specific_panel_settings = [
 ]
 _type_strings = ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]
 
-
 def serialize_setting(setting, key):
     value = setting.get_value(key)
     if value.get_type_string() in _type_strings:
@@ -22,28 +21,35 @@ def serialize_setting(setting, key):
 
 
 def import_settings(schema):
-    schema_source = Gio.SettingsSchemaSource.get_default()
-    if schema_source.lookup(schema, True):
-        try:
-            setting = Gio.Settings.new(schema)
-            setting.delay()
-            return setting
-        except Gio.Error:
-            return None
-    else:
-        return None
+    setting = Gio.Settings.new(schema)
+    setting.delay()
+    return setting
 
 
 _shell_settings = import_settings("org.gnome.shell")
 _panel_settings = import_settings("org.gnome.shell.extensions.dash-to-panel")
-_dock_settings = import_settings("org.gnome.shell.extensions.dash-to-dock")
-_arc_settings = import_settings("org.gnome.shell.extensions.arcmenu")
+
+_extension_settings = {  # Panel settings not included, needs to be treated separate due to monitor specific settings
+    "dash-to-dock@micxgx.gmail.com": import_settings("org.gnome.shell.extensions.dash-to-dock"),
+    "arcmenu@arcmenu.com": import_settings("org.gnome.shell.extensions.arcmenu"),
+    "just-perfection-desktop@just-perfection": import_settings("org.gnome.shell.extensions.just-perfection"),
+    "Move_Clock@rmy.pobox.com": None
+}
+
+
+def get_settings_list():
+    settings = [_panel_settings]
+    for ext in _extension_settings:
+        if _extension_settings[ext]:
+            settings.append(_extension_settings[ext])
+    return settings
 
 
 def apply_settings():
-    for setting in [_shell_settings, _panel_settings, _dock_settings, _arc_settings]:
-        if setting:
-            setting.apply()
+    settings = get_settings_list
+    settings.append(_shell_settings)
+    for setting in settings:
+        setting.apply()
 
 
 def set_unknown_type(setting, key, value):
@@ -113,14 +119,17 @@ def check_extensions(enabled, disabled):
 
 
 def reset_settings():
-    for key in constants.PANEL_KEYS:
-        _panel_settings.reset(key)
+    for setting in get_settings_list():
+        settings_schema = setting.props.settings_schema
+        keys_to_reset = settings_schema.list_keys()
 
-    for key in constants.DOCK_KEYS:
-        _dock_settings.reset(key)
-
-    for key in constants.ARC_KEYS:
-        _arc_settings.reset(key)
+        # check if there's exclusion rules
+        if settings_schema.get_id() in constants.SETTINGS_FOR_RESET_EXCLUDE.keys():
+            for key in constants.SETTINGS_FOR_RESET_EXCLUDE[settings_schema.get_id()]:
+                while key in keys_to_reset:
+                    keys_to_reset.remove(key)
+        for key in keys_to_reset:
+            setting.reset(key)
 
 
 def set_panel_settings(settings):
@@ -142,30 +151,12 @@ def check_panel_settings(settings):
     return True
 
 
-def set_dock_settings(settings):
+def check_extension_settings(extension_uuid, layout_settings):
+    if not _extension_settings[extension_uuid]:
+        return True
+    settings = _extension_settings[extension_uuid]
     for key in settings:
-        set_unknown_type(_dock_settings, key, settings[key])
-
-
-def check_dock_settings(settings):
-    if not _dock_settings:
-        return False
-    for key in settings:
-        if serialize_setting(_dock_settings, key) != settings[key]:
-            return False
-    return True
-
-
-def set_arc_settings(settings):
-    for key in settings:
-        set_unknown_type(_arc_settings, key, settings[key])
-
-
-def check_arc_settings(settings):
-    if not _arc_settings:
-        return False
-    for key in settings:
-        if serialize_setting(_arc_settings, key) != settings[key]:
+        if serialize_setting(settings, key) != layout_settings[key]:
             return False
     return True
 
@@ -263,26 +254,26 @@ def layout_as_dict(json_str: str):
         if d not in layout:
             layout[d] = []
 
-    if "panel" in layout:
-        if not _panel_settings:
-            layout["compatible"] = False
-        layout["enabled_extension"].append("dash-to-panel@jderose9.github.com")
-    else:
-        layout["disabled_extension"].append("dash-to-panel@jderose9.github.com")
-
-    if "dock" in layout:
-        if not _dock_settings:
-            layout["compatible"] = False
-        layout["enabled_extension"].append("dash-to-dock@micxgx.gmail.com")
-    else:
-        layout["disabled_extension"].append("dash-to-dock@micxgx.gmail.com")
-
-    if "arc" in layout:
-        if not _arc_settings:
-            layout["compatible"] = False
-        layout["enabled_extension"].append("arcmenu@arcmenu.com")
-    else:
-        layout["disabled_extension"].append("arcmenu@arcmenu.com")
+    # if "panel" in layout:
+    #     if not _panel_settings:
+    #         layout["compatible"] = False
+    #     layout["enabled_extension"].append("dash-to-panel@jderose9.github.com")
+    # else:
+    #     layout["disabled_extension"].append("dash-to-panel@jderose9.github.com")
+    #
+    # if "dock" in layout:
+    #     if not _dock_settings:
+    #         layout["compatible"] = False
+    #     layout["enabled_extension"].append("dash-to-dock@micxgx.gmail.com")
+    # else:
+    #     layout["disabled_extension"].append("dash-to-dock@micxgx.gmail.com")
+    #
+    # if "arc" in layout:
+    #     if not _arc_settings:
+    #         layout["compatible"] = False
+    #     layout["enabled_extension"].append("arcmenu@arcmenu.com")
+    # else:
+    #     layout["disabled_extension"].append("arcmenu@arcmenu.com")
     return layout
 
 

@@ -33,30 +33,6 @@ arc_exclude = [
     "application-shortcuts",
     "pinned-apps",
 ]
-panel_layouts = [
-    'Default',
-    'Brisk',
-    'Whisker',
-    'GnomeMenu',
-    'Mint',
-    'Elementary',
-    'GnomeOverview',
-    'Redmond',
-    'Unity',
-    'Budgie',
-    'Insider',
-    'Runner',
-    'Chromebook',
-    'Raven',
-    'Tognee',
-    'Plasma',
-    'Windows',
-    'Eleven',
-    'AZ',
-    'Enterprise',
-    'Pop',
-    'Sleek'
-]
 
 
 def get_panel_monitor_setting(key):

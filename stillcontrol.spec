@@ -9,6 +9,9 @@ Source0:        %{url}/archive/refs/heads/main.tar.gz
 BuildArch:      noarch
 
 Requires:  python3
+Requires:   gnome-shell-extension-dash-to-dock
+Requires:   gnome-shell-extension-dash-to-panel
+Requires:   gnome-shell-extension-arc-menu
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
