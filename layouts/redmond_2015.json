@@ -1,6 +1,6 @@
 {
     "name": "Redmond 2015",
-    "panel": {
+    "dash-to-panel@jderose9.github.com": {
         "appicon-margin": 4,
         "panel-lengths": 100,
         "panel-positions": "BOTTOM",
@@ -54,7 +54,7 @@
         ],
         "isolate-workspaces": true
     },
-    "arc": {
+    "arcmenu@arcmenu.com": {
         "custom-menu-button-icon-size": 36.0,
         "menu-height": 650,
         "show-activities-button": true,

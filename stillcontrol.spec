@@ -12,6 +12,7 @@ Requires:  python3
 Requires:   gnome-shell-extension-dash-to-dock
 Requires:   gnome-shell-extension-dash-to-panel
 Requires:   gnome-shell-extension-arc-menu
+Requires:   gnome-shell-extension-just-perfection
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
@@ -19,7 +20,7 @@ BuildRequires:  python3-setuptools
 stillControl is a tool used for customizing stillOS. It replaces GNOME Tweaks, Extension Manager, and more.
 Some features include:
   - A layout switcher
-  - Integration with Dash to Panel, Dash to Dock, and Arc Menu
+  - Integration with Dash to Panel, Dash to Dock, Arc Menu, and more
   - Extension Manager
 
 %prep

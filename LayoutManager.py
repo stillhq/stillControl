@@ -46,7 +46,7 @@ def get_settings_list():
 
 
 def apply_settings():
-    settings = get_settings_list
+    settings = get_settings_list()
     settings.append(_shell_settings)
     for setting in settings:
         setting.apply()
@@ -151,6 +151,12 @@ def check_panel_settings(settings):
     return True
 
 
+def set_extension_settings(extension_uuid, layout_settings):
+    if _extension_settings[extension_uuid]:
+        for key in layout_settings:
+            set_unknown_type(_extension_settings[extension_uuid], key, layout_settings[key])
+
+
 def check_extension_settings(extension_uuid, layout_settings):
     if not _extension_settings[extension_uuid]:
         return True
@@ -219,20 +225,19 @@ def set_layout_from_dict(layout: dict):
     reset_settings()
     
     # Figure out extensions to enable and disable
-    if "panel" in layout:
-        set_panel_settings(layout["panel"])
+    if "dash-to-panel@jderose9.github.com" in layout:
+        set_panel_settings(layout["dash-to-panel@jderose9.github.com"])
 
-    if "dock" in layout:
-        set_dock_settings(layout["dock"])
+    for ext in list(_extension_settings.keys()):
+        if ext in layout:
+            set_extension_settings(ext, layout[ext])
 
-    if "arc" in layout:
-        set_arc_settings(layout["arc"])
-
-    set_extensions(layout["enabled_extension"], layout["disabled_extension"])
+    set_extensions(layout["enabled_extensions"], layout["disabled_extensions"])
 
     if "gsettings" in layout:
         set_gsettings(layout["gsettings"])
 
+    print(layout)
     apply_settings()
 
 
@@ -248,50 +253,33 @@ def set_layout(layout: str):
 
 def layout_as_dict(json_str: str):
     layout = json.loads(json_str)
-    layout["compatible"] = _shell_settings is not None
 
-    for d in ["enabled_extension", "disabled_extension"]:
+    for d in ["enabled_extensions", "disabled_extensions"]:
         if d not in layout:
             layout[d] = []
 
-    # if "panel" in layout:
-    #     if not _panel_settings:
-    #         layout["compatible"] = False
-    #     layout["enabled_extension"].append("dash-to-panel@jderose9.github.com")
-    # else:
-    #     layout["disabled_extension"].append("dash-to-panel@jderose9.github.com")
-    #
-    # if "dock" in layout:
-    #     if not _dock_settings:
-    #         layout["compatible"] = False
-    #     layout["enabled_extension"].append("dash-to-dock@micxgx.gmail.com")
-    # else:
-    #     layout["disabled_extension"].append("dash-to-dock@micxgx.gmail.com")
-    #
-    # if "arc" in layout:
-    #     if not _arc_settings:
-    #         layout["compatible"] = False
-    #     layout["enabled_extension"].append("arcmenu@arcmenu.com")
-    # else:
-    #     layout["disabled_extension"].append("arcmenu@arcmenu.com")
+    extensions = ["dash-to-panel@jderose9.github.com"] + list(_extension_settings.keys())
+    for extension in extensions:
+        if extension in layout:
+            layout["enabled_extensions"].append(extension)
+        else:
+            layout["disabled_extensions"].append(extension)
+
     return layout
 
 
 def check_layout_dict(layout: dict):
-    if not check_extensions(layout["enabled_extension"], layout["disabled_extension"]):
+    if not check_extensions(layout["enabled_extensions"], layout["disabled_extensions"]):
         return False
 
-    if "panel" in layout:
-        if not check_panel_settings(layout["panel"]):
+    if "dash-to-panel@jderose9.github.com" in layout:
+        if not check_panel_settings(layout["dash-to-panel@jderose9.github.com"]):
             return False
 
-    if "dock" in layout:
-        if not check_dock_settings(layout["dock"]):
-            return False
-
-    if "arc" in layout:
-        if not check_arc_settings(layout["arc"]):
-            return False
+    for ext in _extension_settings:
+        if ext in layout:
+            if _extension_settings[ext]:
+                check_extension_settings(ext, layout[ext])
 
     if "gsettings" in layout:
         if not check_gsettings(layout["gsettings"]):
@@ -321,7 +309,5 @@ def get_available_layouts():
     layouts = []
     for layout in os.listdir(_LAYOUTS_UI):
         if layout.endswith(".json"):
-            with open(f"{_LAYOUTS_UI}/{layout}", "r") as file:
-                if layout_as_dict(file.read()).get("compatible"):
-                    layouts.append(layout.replace(".json", ""))
+            layouts.append(layout.replace(".json", ""))
     return layouts

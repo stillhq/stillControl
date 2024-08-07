@@ -1,6 +1,6 @@
 {
     "name": "Unity",
-    "panel": {
+    "dash-to-panel@jderose9.github.com": {
         "stockgs-keep-top-panel": true,
         "appicon-margin": 0,
         "panel-lengths": 100,
@@ -62,7 +62,7 @@
         "appicon-padding": 9,
         "panel-anchors": "MIDDLE"
     },
-    "arc": {
+    "arcmenu@arcmenu.com": {
         "extra-categories": "[(0, true), (1, true), (2, true), (3, false), (4, false)]",
         "enable-clock-widget-unity": true,
         "menu-item-grid-icon-size": "Large_Rect",
@@ -74,5 +74,6 @@
         "enable-weather-widget-unity": true,
         "menu-button-border-color": "(false, 'rgb(255,163,72)')",
         "menu-layout": "Unity"
-    }
+    },
+    "Move_Clock@rmy.pobox.com": null
 }

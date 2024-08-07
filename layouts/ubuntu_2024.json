@@ -1,6 +1,6 @@
 {
     "name": "Ubuntu 2024",
-    "dock": {
+    "dash-to-dock@micxgx.gmail.com": {
         "apply-custom-theme": true,
         "extend-height": true,
         "dock-fixed": true,

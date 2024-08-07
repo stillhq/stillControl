@@ -1,6 +1,6 @@
 {
     "name": "Googolplex",
-    "panel": {
+    "dash-to-panel@jderose9.github.com": {
         "panel-lengths": 100,
         "dot-style-focused": "DASHES",
         "panel-positions": "BOTTOM",

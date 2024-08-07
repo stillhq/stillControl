@@ -1,6 +1,6 @@
 {
     "name": "elementary",
-    "dock": {
+    "dash-to-dock@micxgx.gmail.com": {
         "apply-custom-theme": true,
         "apply-glossy-effect": false,
         "custom-theme-shrink": true,
@@ -10,11 +10,12 @@
         "show-mounts": false,
         "show-show-apps-button": false
     },
-    "arc": {
+    "arcmenu@arcmenu.com": {
         "menu-item-grid-icon-size": "Large_Rect",
         "menu-button-appearance": "Icon_Text",
         "menu-button-border-color": "(false, 'rgb(255,163,72)')",
         "menu-layout": "Elementary",
         "custom-menu-button-text": " Applications"
-    }
+    },
+    "Move_Clock@rmy.pobox.com": null
 }

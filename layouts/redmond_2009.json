@@ -1,6 +1,6 @@
 {
     "name": "Redmond 2009",
-    "panel": {
+    "dash-to-panel@jderose9.github.com": {
         "appicon-margin": 4,
         "panel-lengths": 100,
         "panel-positions": "BOTTOM",
@@ -53,7 +53,7 @@
             }
         ]
     },
-    "arc": {
+    "arcmenu@arcmenu.com": {
         "custom-menu-button-icon-size": 36.0,
         "button-padding": 10
     }

@@ -1,11 +1,12 @@
 {
     "name": "Cupertino",
-    "dock": {
+    "dash-to-dock@micxgx.gmail.com": {
         "apply-custom-theme": true,
         "apply-glossy-effect": false,
         "custom-theme-shrink": true,
         "custom-theme-running-dots-border-color": "rgb(255,255,255)",
         "custom-theme-running-dots-color": "rgb(255,255,255)",
         "dock-fixed": true
-    }
+    },
+    "Move_Clock@rmy.pobox.com": null
 }

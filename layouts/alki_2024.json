@@ -1,6 +1,6 @@
 {
     "name": "Alki 2024",
-    "panel": {
+    "dash-to-panel@jderose9.github.com": {
         "appicon-margin": 2,
         "panel-lengths": 100,
         "panel-positions": "TOP",
