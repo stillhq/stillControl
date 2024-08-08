@@ -17,10 +17,8 @@ _SETTING_JSON_DIR = os.path.join(UI_DIR, "settings")
 _shell_settings = Gio.Settings.new("org.gnome.shell")
 _extension_proxy = Utils.ExtensionProxy()
 requires_extension = {}
-
-
-def add_function_id(function_id, function):
-    function_ids[function_id] = function
+extension_conflicts = {}
+setting_conflicts = {}
 
 
 def parse_options(data):
@@ -54,6 +52,13 @@ def extensions_changed(dbus_proxy, sender, signal, params):
     if uuid in requires_extension:
         for widget in requires_extension[uuid]:
             widget.set_visible(state)
+    if uuid in extension_conflicts:
+        for widget in extension_conflicts[uuid]:
+            widget[0].set_visible(not state)
+            if not state:
+
+
+
 
 _extension_proxy.proxy.connect("g-signal::ExtensionStateChanged", extensions_changed)
 
@@ -147,8 +152,17 @@ def parse_json(builder):
                         case _:
                             raise ValueError(f"Unknown setting type {setting_type}")
 
+
+                    # Extra flags for settings:
+                    if setting.get("extension_conflicts"):
+                        for item in setting["extension_conflicts"]:
+                            if item not in extension_conflicts:
+                                extension_conflicts[item] = []
+                            extension_conflicts[item].append(setting_widget)
+                    if setting.get("setting_conflicts"):
+                        pass
                     if setting.get("extension_required"):
                         if setting["extension_required"] not in requires_extension:
-                            requires_extension[setting["extension_required"]] = []
-                        requires_extension[setting["extension_required"]].append(setting_widget)
+                            requires_extension[setting["extension_required"][0]] = []
+                        requires_extension[setting["extension_required"][0]].append((setting_widget, message, setting_widget.get_subtitle()))
     set_extension_widget_visibility_all()

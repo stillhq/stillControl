@@ -25,7 +25,7 @@ _extension_settings = {  # Panel settings not included, needs to be treated sepa
     "dash-to-dock@micxgx.gmail.com": import_settings("org.gnome.shell.extensions.dash-to-dock"),
     "arcmenu@arcmenu.com": import_settings("org.gnome.shell.extensions.arcmenu"),
     "just-perfection-desktop@just-perfection": import_settings("org.gnome.shell.extensions.just-perfection"),
-    "Move_Clock@rmy.pobox.com": None
+    "gtk4-ding@smedius.github.com": import_settings("org.gnome.shell.extensions.gtk4-ding")
 }
 
 

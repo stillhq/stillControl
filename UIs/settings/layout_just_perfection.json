@@ -1,5 +1,5 @@
 {
-  "jt_enable_group": {
+  "jp_enable_group": {
     "items": [
       {
         "type": "switch-extension",
@@ -9,7 +9,7 @@
       }
     ]
   },
-  "jt_appearance_group": {
+  "jp_appearance_group": {
     "requires_extension": "just-perfection-desktop@just-perfection",
     "items": [
       {
@@ -104,10 +104,165 @@
           ["Top", 0],
           ["Bottom", 1]
         ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Clock Position",
+          "subtitle": "Where the clock is positioned on the panel. Does not affect the Full Panel, set this instead in advanced panel settings.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "clock-menu-position"
+        },
+        "options": [
+          ["Left", 2],
+          ["Center", 0],
+          ["Right", 1]
+        ]
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Clock Position Offset",
+          "subtitle": "Offset the position of the clock, use this to position it when there's other indicators/buttons on the panel.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "clock-menu-position-offset"
+        },
+        "spin_type": "int",
+        "percent": false,
+        "adjustment": {
+          "lower": 0,
+          "upper": 20,
+          "step_increment": 1
+        }
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Workspace Switcher Size (in Overview)",
+          "subtitle": "Size of the workspace switcher in the overview (in percent).",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "workspace-switcher-size"
+        },
+        "spin_type": "int",
+        "percent": false,
+        "adjustment": {
+          "lower": 0,
+          "upper": 30,
+          "step_increment": 1
+        }
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Workspace Switcher Size (in Overview)",
+          "subtitle": "Size of the workspace switcher in the overview (in percent).",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "workspace-switcher-size"
+        },
+        "spin_type": "int",
+        "percent": false,
+        "adjustment": {
+          "lower": 0,
+          "upper": 30,
+          "step_increment": 1
+        }
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Dash Icon Size",
+          "subtitle": "Size of icons in the overview dash.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "dash-icon-size"
+        },
+        "options": [
+          ["Default", 0],
+          ["16px", 16],
+          ["22px", 22],
+          ["24px", 24],
+          ["32px", 32],
+          ["48px", 48],
+          ["56px", 56],
+          ["64px", 64]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Dash Icon Size",
+          "subtitle": "Size of icons in the overview dash.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "dash-icon-size"
+        },
+        "options": [
+          ["Top Left", 0],
+          ["Top Center (Default)", 1],
+          ["Top Right", 2],
+          ["Bottom Left", 3],
+          ["Bottom Center", 4],
+          ["Bottom Right", 5]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Notification Position",
+          "subtitle": "Where on screen notifications will appear.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "notification-banner-position"
+        },
+        "options": [
+          ["Top Left", 0],
+          ["Top Center (Default)", 1],
+          ["Top Right", 2],
+          ["Bottom Left", 3],
+          ["Bottom Center", 4],
+          ["Bottom Right", 5]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "OSD Position",
+          "subtitle": "Where on screen on screen displays will appear (volume, brightness, etc.).",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "osd-position"
+        },
+        "options": [
+          ["Top Left", 1],
+          ["Top Center (Default)", 2],
+          ["Top Right", 3],
+          ["Bottom Left", 4],
+          ["Bottom Center", 5],
+          ["Bottom Right", 6],
+          ["Center Left", 7],
+          ["Center", 8],
+          ["Center Right", 9]
+        ]
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "OSD Position",
+          "subtitle": "Where on screen on screen displays will appear (volume, brightness, etc.).",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "osd-position"
+        },
+        "options": [
+          ["Top Left", 1],
+          ["Top Center (Default)", 2],
+          ["Top Right", 3],
+          ["Bottom Left", 4],
+          ["Bottom Center", 5],
+          ["Bottom Right", 6],
+          ["Center Left", 7],
+          ["Center", 8],
+          ["Center Right", 9]
+        ]
       }
     ]
   },
-  "jt_behavior_group": {
+  "jp_behavior_group": {
     "requires_extension": "just-perfection-desktop@just-perfection",
     "items": [
       {
@@ -166,7 +321,7 @@
       }
     ]
   },
-  "jt_visibility_group": {
+  "jp_visibility_group": {
     "requires_extension": "just-perfection-desktop@just-perfection",
     "items": [
       {
@@ -447,6 +602,17 @@
           "schema": "org.gnome.shell.extensions.just-perfection",
           "key": "power-icon"
         }
+      }
+    ]
+  },
+  "jp_advanced_settings": {
+    "requires_extension": "just-perfection-desktop@just-perfection",
+    "items": [
+      {
+        "type": "extension-setting-button",
+        "title": "Advanced Just Perfection Settings",
+        "subtitle": "It's just perfect!",
+        "extension": "just-perfection-desktop@just-perfection"
       }
     ]
   }
