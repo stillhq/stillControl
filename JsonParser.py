@@ -46,18 +46,32 @@ def set_extension_widget_visibility_all():
             widget.set_visible(False)
 
 
+def check_extension_conflicts():
+    for ext in extension_conflicts:
+        state = ext in _shell_settings.get_strv("enabled-extensions")
+        for conflict in extension_conflicts[ext]:
+            widget, message, default_subtitle, fix, gsetting = conflict
+            if not state:
+                widget.set_visible(True)
+                widget.set_sensitive(True)
+                widget.set_subtitle(default_subtitle)
+            else:
+                if not message:
+                    widget.set_visible(False)
+                widget.set_sensitive(False)
+                widget.set_subtitle(message)
+                if fix and gsetting:
+                    if Utils.serialize_setting(gsetting.settings, gsetting.key) != fix:
+                        gsetting.settings.set_value(GLib.Variant.parse(fix))
+
+
 def extensions_changed(dbus_proxy, sender, signal, params):
     uuid = params[0]
     state = params[1]["enabled"]
     if uuid in requires_extension:
         for widget in requires_extension[uuid]:
             widget.set_visible(state)
-    if uuid in extension_conflicts:
-        for widget in extension_conflicts[uuid]:
-            widget[0].set_visible(not state)
-            if not state:
-
-
+    check_extension_conflicts()
 
 
 _extension_proxy.proxy.connect("g-signal::ExtensionStateChanged", extensions_changed)
@@ -85,11 +99,16 @@ def parse_json(builder):
                 group = builder.get_object(group_name)
                 if group is None:
                     raise ValueError(f"Group {group_name} not found in the builder")
+
+                # Extra Flags for GSetting Group
                 if data[group_name].get("requires_extension"):
                     extension_uuid = data[group_name]["requires_extension"]
                     if extension_uuid not in requires_extension:
                         requires_extension[extension_uuid] = []
                     requires_extension[extension_uuid].append(group)
+
+                # Adding items to GSetting Groups
+                # Case statement links to type.
                 for setting in data[group_name]["items"]:
                     setting_type = setting["type"]
                     match setting_type.replace("_", "-"):
@@ -156,13 +175,25 @@ def parse_json(builder):
                     # Extra flags for settings:
                     if setting.get("extension_conflicts"):
                         for item in setting["extension_conflicts"]:
-                            if item not in extension_conflicts:
-                                extension_conflicts[item] = []
-                            extension_conflicts[item].append(setting_widget)
+                            uuid = item.get("uuid")
+                            message = item.get("message")
+                            fix = item.get("fix")
+
+                            if uuid not in extension_conflicts:
+                                extension_conflicts[uuid] = []
+
+                            if not gsetting:
+                                gsetting = None
+
+                            extension_conflicts[uuid].append(
+                                (setting_widget, message, setting_widget.get_subtitle(), fix, gsetting)
+                            )
+
                     if setting.get("setting_conflicts"):
                         pass
                     if setting.get("extension_required"):
                         if setting["extension_required"] not in requires_extension:
-                            requires_extension[setting["extension_required"][0]] = []
-                        requires_extension[setting["extension_required"][0]].append((setting_widget, message, setting_widget.get_subtitle()))
+                            requires_extension[setting["extension_required"]] = []
+                        requires_extension[setting["extension_required"]].append(setting_widget)
     set_extension_widget_visibility_all()
+    check_extension_conflicts()

@@ -4,7 +4,7 @@
       {
         "type": "switch-extension",
         "title": "Enable Just Perfection",
-        "subtitle": "Enable or disable the Just Perfection extension",
+        "subtitle": "This extension lets you tweak many small parts of GNOME Shell. Used in many layouts.",
         "extension": "just-perfection-desktop@just-perfection"
       }
     ]
@@ -25,22 +25,6 @@
         "adjustment": {
           "lower": 0,
           "upper": 64,
-          "step_increment": 4
-        }
-      },
-      {
-        "type": "spin",
-        "gsetting": {
-          "title": "Panel Icon Size",
-          "subtitle": "Size in pixels of icons on the Panel. 0 sets the default size.\nOn the Full Panel this only affects indicator icons.",
-          "schema": "org.gnome.shell.extensions.just-perfection",
-          "key": "panel-icon-size"
-        },
-        "spin_type": "int",
-        "percent": false,
-        "adjustment": {
-          "lower": 0,
-          "upper": 60,
           "step_increment": 4
         }
       },
@@ -96,13 +80,20 @@
         "type": "combo",
         "gsetting": {
           "title": "Panel Position",
-          "subtitle": "Where the panel is positioned on screen. Setting this to the bottom will break the full panel.",
+          "subtitle": "Where the panel is positioned on screen.",
           "schema": "org.gnome.shell.extensions.just-perfection",
           "key": "top-panel-position"
         },
         "options": [
           ["Top", 0],
           ["Bottom", 1]
+        ],
+        "extension_conflicts": [
+          {
+            "uuid": "dash-to-panel@jderose9.github.com",
+            "message": "This setting will break the Full Panel. Set the panel position in the Panel page instead.",
+            "fix": 0
+          }
         ]
       },
       {
@@ -229,26 +220,7 @@
           "key": "osd-position"
         },
         "options": [
-          ["Top Left", 1],
-          ["Top Center (Default)", 2],
-          ["Top Right", 3],
-          ["Bottom Left", 4],
-          ["Bottom Center", 5],
-          ["Bottom Right", 6],
-          ["Center Left", 7],
-          ["Center", 8],
-          ["Center Right", 9]
-        ]
-      },
-      {
-        "type": "combo",
-        "gsetting": {
-          "title": "OSD Position",
-          "subtitle": "Where on screen on screen displays will appear (volume, brightness, etc.).",
-          "schema": "org.gnome.shell.extensions.just-perfection",
-          "key": "osd-position"
-        },
-        "options": [
+          ["Default", 0],
           ["Top Left", 1],
           ["Top Center (Default)", 2],
           ["Top Right", 3],

@@ -1,4 +1,4 @@
-from gi.repository import GObject, Gio
+from gi.repository import GObject, Gio, GLib
 
 
 class GSetting(GObject.GObject):
