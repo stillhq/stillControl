@@ -94,7 +94,7 @@
 				"type": "switch",
 				"gsetting": {
 					"title": "Show Pinned Applications",
-					"subtitle": "Pins favorited applications to the dock.",
+					"subtitle": "Pins your favorited applications to the dock.",
 					"schema": "org.gnome.shell.extensions.dash-to-dock",
 					"key": "show-favorites"
 				}

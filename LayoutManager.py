@@ -161,7 +161,7 @@ def check_extension_settings(extension_uuid, layout_settings):
     if not _extension_settings[extension_uuid]:
         return True
     settings = _extension_settings[extension_uuid]
-    for key in settings:
+    for key in layout_settings:
         if serialize_setting(settings, key) != layout_settings[key]:
             return False
     return True

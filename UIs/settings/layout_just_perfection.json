@@ -1,0 +1,296 @@
+{
+  "jt_enable_group": {
+    "items": [
+      {
+        "type": "switch-extension",
+        "title": "Enable Just Perfection",
+        "subtitle": "Enable or disable the Just Perfection extension",
+        "extension": "just-perfection-desktop@just-perfection"
+      }
+    ]
+  },
+  "jt_visibility_group": {
+    "requires_extension": "just-perfection-desktop@just-perfection",
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Panel",
+          "subtitle": "Show or hide the top panel. Does not affect the Full Panel.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "panel"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Panel in Overview",
+          "subtitle": "Show or hide the top panel in overview.\nOnly works if the panel is disabled, and does not affect the Full Panel.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "panel-in-overview"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Activities Button",
+          "subtitle": "Show or hide the activities in overview.\nIf you are using the Full Panel, disable this in the advanced panel settings instead in the panel page.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "activities-button"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Date Menu",
+          "subtitle": "Show or hide the clock in the panel.\nIf you are using the Full Panel, disable this in the advanced panel settings instead in the panel page.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "clock-menu"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Keyboard Layout Menu",
+          "subtitle": "Show or hide the keyboard layout switcher in the panel.\nWhen this is enabled, it is only shown if more than one keyboard input is enabled.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "keyboard-layout"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Accessibility Menu",
+          "subtitle": "Show or hide the accessibility menu in the panel.\nWhen this is enabled, it is only shown if any accessibility features are enabled.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "accessibility-menu"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Quick Settings / System Menu",
+          "subtitle": "Show or hide the quick settings menu in the panel.\nIf your are using the Full Panel, disable this in the advanced panel settings instead in the panel page.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "quick-settings"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Dark Mode Button (in Quick Settings)",
+          "subtitle": "Show or hide the dark mode toggle in the quick settings menu.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "quick-settings-dark-mode"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Screen Sharing Indicator",
+          "subtitle": "Privacy feature that shows an indicator when your screen is shared to an application.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "screen-sharing-indicator"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Screen Recording Indicator",
+          "subtitle": "Privacy feature that shows an indicator when an application is recording your screen.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "screen-recording-indicator"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Screen Sharing Indicator",
+          "subtitle": "Privacy feature that shows an indicator when your screen is shared to an application.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "screen-sharing-indicator"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Calendar (in Date Menu)",
+          "subtitle": "Displays world clocks in the date menu.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "calendar"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "World Clock (in Date Menu)",
+          "subtitle": "Displays world clocks in the date menu under the calendar.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "world-clock"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Weather (in Date Menu)",
+          "subtitle": "Displays the weather in the date menu under the calendar.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "weather"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Events (in Date Menu)",
+          "subtitle": "Displays upcoming calendar events in the date menu.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "events-button"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Search Bar (in Overview)",
+          "subtitle": "Hides the Search Bar in the Overview. Will become visible again if you start typing.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "search"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Dash (in Overview)",
+          "subtitle": "The dash shows favorited and running applications icons in the overview.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "dash"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Dash Seperator",
+          "subtitle": "Show or hide the seperator line between your favorites and running applications on the dash.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "dash-seperator"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Show Apps Button",
+          "subtitle": "Show or hides the show applications button on the dash.\n\nIf using the Full Panel, disable this in the advanced panel settings instead in the panel page, or enable Arc Menu.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "show-apps-button"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "On Screen Display (OSD)",
+          "subtitle": "Toggles the volume/brightness screen display if you change either of those with a keyboard shortcut.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "osd"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Workspace Popup",
+          "subtitle": "Toggles the workspace indicator popup if you switch workspaces with a keyboard shortcut.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "workspace-popup"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Overview Workspace Preview",
+          "subtitle": "Toggles the workspace indicators in the Overview.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "workspace"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "App Grid Workspace Preview",
+          "subtitle": "Toggles the workspace indicators in the App Grid.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "workspace-in-app-grid"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Window Close Button in Overview",
+          "subtitle": "Toggles the close button when hovering over windows previews in the Overview.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "window-preview-close-button"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Window Preview Captions",
+          "subtitle": "Toggles the caption with the window name when hovering over windows previews in the Overview.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "window-preview-caption"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Window Preview Icons",
+          "subtitle": "Shows the window icon under window previews in the Overview.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "window-picker-icon"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Desktop Background Menu",
+          "subtitle": "Toggles menu when right clicking on the desktop.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "background-menu"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Hotcorner Ripple",
+          "subtitle": "Toggles the ripple animation for the hotcorner.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "ripple-box"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Screenshot Option in Window Menu",
+          "subtitle": "Show/hide the \"Take Screenshot\" option when right clicking a Window titlebar.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "window-menu-take-screenshot-button"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Notification Icon",
+          "subtitle": "Shows an icon next to the clock if there is an unread notification.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "panel-notification-icons"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Battery Icon",
+          "subtitle": "Shows the battery icon in the panel's indicators.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "power-icon"
+        }
+      }
+    ]
+  }
+}
