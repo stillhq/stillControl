@@ -19,6 +19,7 @@ _extension_proxy = Utils.ExtensionProxy()
 requires_extension = {}
 extension_conflicts = {}
 setting_conflicts = {}
+conflicting_settings = []
 
 
 def parse_options(data):
@@ -51,18 +52,39 @@ def check_extension_conflicts():
         state = ext in _shell_settings.get_strv("enabled-extensions")
         for conflict in extension_conflicts[ext]:
             widget, message, default_subtitle, fix, gsetting = conflict
-            if not state:
-                widget.set_visible(True)
-                widget.set_sensitive(True)
-                widget.set_subtitle(default_subtitle)
-            else:
+            if state:
                 if not message:
                     widget.set_visible(False)
                 widget.set_sensitive(False)
                 widget.set_subtitle(message)
-                if fix and gsetting:
+                if fix is not None and gsetting is not None:
                     if Utils.serialize_setting(gsetting.settings, gsetting.key) != fix:
-                        gsetting.settings.set_value(GLib.Variant.parse(fix))
+                        Utils.set_unknown_type(gsetting.settings, gsetting.key, fix)
+                break
+
+            widget.set_visible(True)
+            widget.set_sensitive(True)
+            widget.set_subtitle(default_subtitle)
+
+
+def check_setting_conflicts(settings, _key, *args):
+    print("checking setting conflict")
+    for conflict in setting_conflicts[settings.props.schema_id]:
+        key, value, widget, message, default_subtitle, fix, gsetting = conflict
+        is_broken = Utils.serialize_setting(settings, key) == value
+        if is_broken:
+            if not message:
+                widget.set_visible(False)
+            widget.set_sensitive(False)
+            widget.set_subtitle(message)
+            if fix is not None and gsetting is not None:
+                if Utils.serialize_setting(gsetting.settings, gsetting.key) != fix:
+                    Utils.set_unknown_type(gsetting.settings, gsetting.key, fix)
+            break
+
+        widget.set_visible(True)
+        widget.set_sensitive(True)
+        widget.set_subtitle(default_subtitle)
 
 
 def extensions_changed(dbus_proxy, sender, signal, params):
@@ -190,10 +212,32 @@ def parse_json(builder):
                             )
 
                     if setting.get("setting_conflicts"):
-                        pass
+                        for item in setting["setting_conflicts"]:
+                            schema = item["schema"]
+                            settings = Gio.Settings.new(schema)
+                            key = item["key"]
+                            value = item["value"]
+                            message = item.get("message")
+                            fix = item.get("fix")
+
+                            if schema not in setting_conflicts:
+                                setting_conflicts[schema] = []
+
+                            setting_conflicts[schema].append(
+                                (key, value, setting_widget, message, setting_widget.get_subtitle(), fix, gsetting)
+                            )
+                            if schema not in conflicting_settings:
+                                conflicting_settings.append(schema)
+                                settings.connect(f"changed", check_setting_conflicts)
+
                     if setting.get("extension_required"):
                         if setting["extension_required"] not in requires_extension:
                             requires_extension[setting["extension_required"]] = []
                         requires_extension[setting["extension_required"]].append(setting_widget)
+
     set_extension_widget_visibility_all()
     check_extension_conflicts()
+
+    for setting in setting_conflicts.keys():
+        check_setting_conflicts(Gio.Settings.new(setting), None, schema)
+

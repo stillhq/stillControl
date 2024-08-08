@@ -303,7 +303,14 @@
           "subtitle": "Show or hide the top panel. Does not affect the Full Panel.",
           "schema": "org.gnome.shell.extensions.just-perfection",
           "key": "panel"
-        }
+        },
+        "extension_conflicts": [
+          {
+            "uuid": "dash-to-panel@jderose9.github.com",
+            "message": "This setting will break the Full Panel. Disable the full panel before disabling this setting.",
+            "fix": true
+          }
+        ]
       },
       {
         "type": "switch",
@@ -312,7 +319,21 @@
           "subtitle": "Show or hide the top panel in overview.\nOnly works if the panel is disabled, and does not affect the Full Panel.",
           "schema": "org.gnome.shell.extensions.just-perfection",
           "key": "panel-in-overview"
-        }
+        },
+        "setting_conflicts": [
+          {
+            "schema": "org.gnome.shell.extensions.just-perfection",
+            "key": "panel",
+            "value": false,
+            "message": "This setting only shows applies if the panel is already hidden."
+          },
+          {
+            "schema": "org.gnome.shell.extensions.dash-to-panel",
+            "key": "stockgs-keep-top-panel",
+            "value": false,
+            "message": "This setting only works on the regular top bar."
+          }
+        ]
       },
       {
         "type": "switch",

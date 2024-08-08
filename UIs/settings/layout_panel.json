@@ -5,7 +5,15 @@
         "type": "switch-extension",
         "title": "Enable Full Panel",
         "subtitle": "This enables a full panel which is more customizable but heavier on resources.\nCan not be enabled at the same time as the Floating Dock.",
-        "extension": "dash-to-panel@jderose9.github.com"
+        "extension": "dash-to-panel@jderose9.github.com",
+        "setting_conflicts": [
+          {
+            "schema": "org.gnome.shell.extensions.just-perfection",
+            "key": "panel",
+            "value": false,
+            "message": "Re-enable the panel in the Just Perfection page to enable the Full Panel."
+          }
+        ]
       },
       {
         "type": "switch-extension",
