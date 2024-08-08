@@ -9,6 +9,163 @@
       }
     ]
   },
+  "jt_appearance_group": {
+    "requires_extension": "just-perfection-desktop@just-perfection",
+    "items": [
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Panel Size",
+          "subtitle": "Size of the Panel. 0 sets the default size.\nDoes not affect the Full Panel.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "panel-size"
+        },
+        "spin_type": "int",
+        "percent": false,
+        "adjustment": {
+          "lower": 0,
+          "upper": 64,
+          "step_increment": 4
+        }
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Panel Icon Size",
+          "subtitle": "Size in pixels of icons on the Panel. 0 sets the default size.\nOn the Full Panel this only affects indicator icons.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "panel-icon-size"
+        },
+        "spin_type": "int",
+        "percent": false,
+        "adjustment": {
+          "lower": 0,
+          "upper": 60,
+          "step_increment": 4
+        }
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Panel Icon Size",
+          "subtitle": "Size in pixels of the Panel. 0 sets the default size.\nDoes not affect the Full Panel.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "panel-icon-size"
+        },
+        "spin_type": "int",
+        "percent": false,
+        "adjustment": {
+          "lower": 0,
+          "upper": 60,
+          "step_increment": 4
+        }
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Panel Button Padding",
+          "subtitle": "The size in pixels of the padding for buttons in the panel.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "panel-button-padding-size"
+        },
+        "spin_type": "int",
+        "percent": false,
+        "adjustment": {
+          "lower": 0,
+          "upper": 60,
+          "step_increment": 4
+        }
+      },
+      {
+        "type": "spin",
+        "gsetting": {
+          "title": "Panel Indicator Padding",
+          "subtitle": "The size in pixels of the padding for indicators in the panel.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "panel-indicator-padding-size"
+        },
+        "spin_type": "int",
+        "percent": false,
+        "adjustment": {
+          "lower": 0,
+          "upper": 60,
+          "step_increment": 4
+        }
+      },
+      {
+        "type": "combo",
+        "gsetting": {
+          "title": "Panel Position",
+          "subtitle": "Where the panel is positioned on screen. Setting this to the bottom will break the full panel.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "top-panel-position"
+        },
+        "options": [
+          ["Top", 0],
+          ["Bottom", 1]
+        ]
+      }
+    ]
+  },
+  "jt_behavior_group": {
+    "requires_extension": "just-perfection-desktop@just-perfection",
+    "items": [
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Workspace Peek",
+          "subtitle": "Shows the previous and next workspace in the overview.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "workspace-peek"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Window Demands Attention Focus",
+          "subtitle": "Removes Window is Ready notification and automatically focuses on the window.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "window-demands-attention-focus"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Maximize New Windows",
+          "subtitle": "Maximizes newly created windows by default.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "window-maximized-on-create"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Type to Search",
+          "subtitle": "Allows you to just start typing to search in the overview.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "type-to-search"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Always Show the Workspace Switcher",
+          "subtitle": "Shows the workspace switcher when only one workspace is used.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "workspace-switcher-should-show"
+        }
+      },
+      {
+        "type": "switch",
+        "gsetting": {
+          "title": "Popup Delay",
+          "subtitle": "Removes the popup delay for popups such as Alt-Tab.",
+          "schema": "org.gnome.shell.extensions.just-perfection",
+          "key": "switcher-popup-delay"
+        }
+      }
+    ]
+  },
   "jt_visibility_group": {
     "requires_extension": "just-perfection-desktop@just-perfection",
     "items": [
@@ -151,7 +308,7 @@
         "type": "switch",
         "gsetting": {
           "title": "Search Bar (in Overview)",
-          "subtitle": "Hides the Search Bar in the Overview. Will become visible again if you start typing.",
+          "subtitle": "Hides the Search Bar in the Overview. Will become visible again if you start typing and type to search is enabled.",
           "schema": "org.gnome.shell.extensions.just-perfection",
           "key": "search"
         }
@@ -171,7 +328,7 @@
           "title": "Dash Seperator",
           "subtitle": "Show or hide the seperator line between your favorites and running applications on the dash.",
           "schema": "org.gnome.shell.extensions.just-perfection",
-          "key": "dash-seperator"
+          "key": "dash-separator"
         }
       },
       {
@@ -216,7 +373,7 @@
           "title": "App Grid Workspace Preview",
           "subtitle": "Toggles the workspace indicators in the App Grid.",
           "schema": "org.gnome.shell.extensions.just-perfection",
-          "key": "workspace-in-app-grid"
+          "key": "workspaces-in-app-grid"
         }
       },
       {
@@ -279,7 +436,7 @@
           "title": "Notification Icon",
           "subtitle": "Shows an icon next to the clock if there is an unread notification.",
           "schema": "org.gnome.shell.extensions.just-perfection",
-          "key": "panel-notification-icons"
+          "key": "panel-notification-icon"
         }
       },
       {

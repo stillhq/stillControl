@@ -48,6 +48,26 @@
                                             <property name="child">
                                               <object class="AdwClamp">
                                                 <property name="maximum-size">700</property>
+                                                <property name="tightening-threshold">300</property>
+                                                <child>
+                                                  <object class="GtkBox">
+                                                    <property name="orientation">vertical</property>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="jt_enable_group"/>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="jt_appearance_group">
+                                                        <property name="title">Appearance</property>
+                                                      </object>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="jt_behavior_group"/>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GSettingsGroup" id="jt_visibility_group"/>
+                                                    </child>
+                                                  </object>
+                                                </child>
                                               </object>
                                             </property>
                                           </object>

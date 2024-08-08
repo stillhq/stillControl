@@ -3,21 +3,13 @@ import os
 
 from gi.repository import Gio, GLib
 
-import constants
+import constants, Utils
 
 _LAYOUTS_UI = os.path.join(os.path.dirname(__file__), "layouts")
 _monitor_specific_panel_settings = [
     "panel-anchors", "panel-element-positions",
     "panel-lengths", "panel-positions", "panel-sizes"
 ]
-_type_strings = ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]
-
-def serialize_setting(setting, key):
-    value = setting.get_value(key)
-    if value.get_type_string() in _type_strings:
-        return value.unpack()
-    else: # Serialize as bytes
-        return value.print_(True)
 
 
 def import_settings(schema):
@@ -50,40 +42,6 @@ def apply_settings():
     settings.append(_shell_settings)
     for setting in settings:
         setting.apply()
-
-
-def set_unknown_type(setting, key, value):
-    str_type = setting.get_value(key).get_type_string()
-    match str_type:
-        case "b":
-            setting.set_boolean(key, value)
-        case "y":
-            setting.set_byte(key, value)
-        case "n":
-            setting.set_int16(key, value)
-        case "q":
-            setting.set_uint16(key, value)
-        case "i":
-            setting.set_int(key, value)
-        case "u":
-            setting.set_uint(key, value)
-        case "x":
-            setting.set_int64(key, value)
-        case "t":
-            setting.set_uint64(key, value)
-        case "d":
-            setting.set_double(key, value)
-        case "s":
-            setting.set_string(key, value)
-        case "as":
-            setting.set_strv(key, value)
-        case "ay":
-            setting.set_bytes(key, value)
-        case _:
-            variant = GLib.Variant.parse(
-                GLib.VariantType.new(str_type), value, None, None
-            )
-            setting.set_value(key, variant)
 
 
 def set_extensions(to_enable, to_disable):
@@ -137,7 +95,7 @@ def set_panel_settings(settings):
         if key in _monitor_specific_panel_settings:
             set_monitor_specific_panel_setting(key, settings[key])
         else:
-            set_unknown_type(_panel_settings, key, settings[key])
+            Utils.set_unknown_type(_panel_settings, key, settings[key])
 
 
 def check_panel_settings(settings):
@@ -146,7 +104,7 @@ def check_panel_settings(settings):
             if not check_monitor_specific_panel_setting(key, settings[key]):
                 return False
         else:
-            if serialize_setting(_panel_settings, key) != settings[key]:
+            if Utils.serialize_setting(_panel_settings, key) != settings[key]:
                 return False
     return True
 
@@ -154,7 +112,7 @@ def check_panel_settings(settings):
 def set_extension_settings(extension_uuid, layout_settings):
     if _extension_settings[extension_uuid]:
         for key in layout_settings:
-            set_unknown_type(_extension_settings[extension_uuid], key, layout_settings[key])
+            Utils.set_unknown_type(_extension_settings[extension_uuid], key, layout_settings[key])
 
 
 def check_extension_settings(extension_uuid, layout_settings):
@@ -162,7 +120,7 @@ def check_extension_settings(extension_uuid, layout_settings):
         return True
     settings = _extension_settings[extension_uuid]
     for key in layout_settings:
-        if serialize_setting(settings, key) != layout_settings[key]:
+        if Utils.serialize_setting(settings, key) != layout_settings[key]:
             return False
     return True
 
@@ -189,7 +147,7 @@ def set_gsettings(json):
 def check_setting(setting, value):
     schema, key = split_setting(setting)
     settings = Gio.Settings.new(schema)
-    return serialize_setting(settings, key) == value
+    return Utils.serialize_setting(settings, key) == value
 
 
 def check_gsettings(json):

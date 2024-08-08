@@ -1,6 +1,7 @@
 import os
 from typing import List
 
+import Utils
 import constants
 import gi
 
@@ -24,7 +25,7 @@ class GSettingComboRow(Adw.ComboRow):
         self.display_list_store = Gio.ListStore()
 
         for display_item in display:
-            self.display_list_store.append(Gtk.StringObject.new(display_item))
+            self.display_list_store.append(Gtk.StringObject.new(str(display_item)))
         self.set_model(self.display_list_store)
 
         self.on_setting_changed(self.gsetting.settings, self.gsetting.key)
@@ -34,12 +35,12 @@ class GSettingComboRow(Adw.ComboRow):
 
     def on_setting_changed(self, settings: Gio.Settings, key: str):
         if key == self.gsetting.key:
-            current_value = settings.get_string(key)
+            current_value = Utils.serialize_setting(settings, key)
             if current_value != self.values[self.get_selected()]:
                 try:
                     index = self.values.index(current_value)
                 except ValueError:
-                    self.display_list_store.append(Gtk.StringObject.new(current_value))
+                    self.display_list_store.append(Gtk.StringObject.new(str(current_value)))
                     self.values.append(current_value)
                     self.add_css_class("error")
                     index = len(self.values) - 1
@@ -53,6 +54,6 @@ class GSettingComboRow(Adw.ComboRow):
                 self.display_list_store.remove(self.display_list_store.get_n_items() - 1)
             self.remove_css_class("error")
 
-        current_value = self.gsetting.settings.get_string(self.gsetting.key)
+        current_value = Utils.serialize_setting(self.gsetting.settings, self.gsetting.key)
         if current_value != self.values[row.get_selected()]:
-            self.gsetting.settings.set_string(self.gsetting.key, self.values[value_index])
+            Utils.set_unknown_type(self.gsetting.settings, self.gsetting.key, self.values[value_index])

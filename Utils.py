@@ -1,10 +1,54 @@
 import math
 import os
 
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 import json
 
 import requests
+
+import constants
+
+
+def serialize_setting(setting, key):
+    value = setting.get_value(key)
+    if value.get_type_string() in constants.TYPE_STRINGS:
+        return value.unpack()
+    else: # Serialize as bytes
+        return value.print_(True)
+
+
+def set_unknown_type(setting, key, value):
+    str_type = setting.get_value(key).get_type_string()
+    match str_type:
+        case "b":
+            setting.set_boolean(key, value)
+        case "y":
+            setting.set_byte(key, value)
+        case "n":
+            setting.set_int16(key, value)
+        case "q":
+            setting.set_uint16(key, value)
+        case "i":
+            setting.set_int(key, value)
+        case "u":
+            setting.set_uint(key, value)
+        case "x":
+            setting.set_int64(key, value)
+        case "t":
+            setting.set_uint64(key, value)
+        case "d":
+            setting.set_double(key, value)
+        case "s":
+            setting.set_string(key, value)
+        case "as":
+            setting.set_strv(key, value)
+        case "ay":
+            setting.set_bytes(key, value)
+        case _:
+            variant = GLib.Variant.parse(
+                GLib.VariantType.new(str_type), value, None, None
+            )
+            setting.set_value(key, variant)
 
 
 class ExtensionProxy:

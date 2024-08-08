@@ -2,6 +2,8 @@ import os
 MAIN_DIR = os.path.dirname(__file__)
 UI_DIR = os.path.join(os.path.dirname(__file__), "UIs")
 
+TYPE_STRINGS = ["b", "y", "n", "q", "i", "u", "x", "t", "d", "s", "as", "ay"]
+
 SETTINGS_FOR_RESET_EXCLUDE = {
     "org.gnome.shell.extensions.dash-to-panel": [
         "available-monitors"
