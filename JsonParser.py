@@ -19,7 +19,7 @@ _extension_proxy = Utils.ExtensionProxy()
 requires_extension = {}
 extension_conflicts = {}
 setting_conflicts = {}
-conflicting_settings = []
+_conflicting_settings = []
 
 
 def parse_options(data):
@@ -61,17 +61,17 @@ def check_extension_conflicts():
                     if Utils.serialize_setting(gsetting.settings, gsetting.key) != fix:
                         Utils.set_unknown_type(gsetting.settings, gsetting.key, fix)
                 break
-
-            widget.set_visible(True)
-            widget.set_sensitive(True)
-            widget.set_subtitle(default_subtitle)
+            else:
+                widget.set_visible(True)
+                widget.set_sensitive(True)
+                widget.set_subtitle(default_subtitle)
 
 
 def check_setting_conflicts(settings, _key, *args):
-    print("checking setting conflict")
     for conflict in setting_conflicts[settings.props.schema_id]:
         key, value, widget, message, default_subtitle, fix, gsetting = conflict
         is_broken = Utils.serialize_setting(settings, key) == value
+        print(f"Checking {settings.props.schema_id} {widget.get_title()} {key} {value} {is_broken}")
         if is_broken:
             if not message:
                 widget.set_visible(False)
@@ -80,16 +80,17 @@ def check_setting_conflicts(settings, _key, *args):
             if fix is not None and gsetting is not None:
                 if Utils.serialize_setting(gsetting.settings, gsetting.key) != fix:
                     Utils.set_unknown_type(gsetting.settings, gsetting.key, fix)
-            break
+        else:
+            widget.set_visible(True)
+            widget.set_sensitive(True)
+            widget.set_subtitle(default_subtitle)
 
-        widget.set_visible(True)
-        widget.set_sensitive(True)
-        widget.set_subtitle(default_subtitle)
 
 
 def extensions_changed(dbus_proxy, sender, signal, params):
     uuid = params[0]
     state = params[1]["enabled"]
+    print(f"Extension {uuid} state changed to {state}")
     if uuid in requires_extension:
         for widget in requires_extension[uuid]:
             widget.set_visible(state)
@@ -223,12 +224,16 @@ def parse_json(builder):
                             if schema not in setting_conflicts:
                                 setting_conflicts[schema] = []
 
+                                # Prevents python from garbage collecting the settings object
+                                # And preventing the connection from working
+                                _conflicting_settings.append(settings)
+
+                                settings.connect(f"changed", check_setting_conflicts)
+                                print(setting_conflicts)
+
                             setting_conflicts[schema].append(
                                 (key, value, setting_widget, message, setting_widget.get_subtitle(), fix, gsetting)
                             )
-                            if schema not in conflicting_settings:
-                                conflicting_settings.append(schema)
-                                settings.connect(f"changed", check_setting_conflicts)
 
                     if setting.get("extension_required"):
                         if setting["extension_required"] not in requires_extension:
@@ -239,5 +244,5 @@ def parse_json(builder):
     check_extension_conflicts()
 
     for setting in setting_conflicts.keys():
-        check_setting_conflicts(Gio.Settings.new(setting), None, schema)
+        check_setting_conflicts(Gio.Settings.new(setting), None)
 

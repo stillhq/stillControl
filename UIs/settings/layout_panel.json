@@ -12,7 +12,14 @@
             "key": "panel",
             "value": false,
             "message": "Re-enable the panel in the Just Perfection page to enable the Full Panel."
+          },
+          {
+            "schema": "org.gnome.shell.extensions.just-perfection",
+            "key": "top-panel-position",
+            "value": 1,
+            "message": "To enable the Full Panel, change the panel position in Just Perfection from Bottom to Top."
           }
+
         ]
       },
       {
