@@ -1,0 +1,168 @@
+{
+    "desktop_group": {
+        "items": [
+            {
+                "type": "switch-extension",
+                "title": "Enable Desktop Icons",
+                "subtitle": "Store files and shortcuts on the desktop.",
+                "extension": "gtk4-ding@smedius.gitlab.com"
+            },
+            {
+                "type": "combo",
+                "gsetting": {
+                    "title": "Wallpaper Adjustment",
+                    "subtitle": "Determines how the positioning of the wallpaper is rendered.",
+                    "schema": "org.gnome.desktop.background",
+                    "key": "picture-options"
+                },
+                "options": [
+                    ["Centered", "centered"],
+                    ["Scaled", "scaled"],
+                    ["Stretched", "stretched"],
+                    ["Zoomed", "zoom"],
+                    ["Spanned", "spanned"]
+                ]
+            }
+        ]
+    },
+    "ding_group": {
+        "requires_extension": "gtk4-ding@smedius.github.com",
+        "items": [
+          {
+            "type": "combo",
+            "gsetting": {
+              "title": "Icon Size",
+              "subtitle": "The size of the icons on the desktop.",
+              "schema": "org.gnome.shell.extensions.gtk4-ding",
+              "key": "icon-size"
+            },
+            "options": [
+              ["Tiny", "tiny"],
+              ["Small", "small"],
+              ["Standard", "standard"],
+              ["Large", "large"]
+            ]
+          },
+
+          {
+            "type": "combo",
+            "gsetting": {
+              "title": "New Icon Alignment",
+              "subtitle": "Position on the desktop where new icons are placed.",
+              "schema": "org.gnome.shell.extensions.gtk4-ding",
+              "key": "start-corner"
+            },
+            "options": [
+              ["Top Left", "top-left"],
+              ["Top Right", "top-right"],
+              ["Bottom Left", "bottom-left"],
+              ["Bottom Right", "bottom-right"]
+            ]
+          },
+          {
+            "type": "switch",
+            "gsetting": {
+              "title": "Add new icons to the second monitor first if available",
+              "subtitle": "If you have a second monitor, this option will place new icons on it first.",
+              "schema": "org.gnome.shell.extensions.gtk4-ding",
+              "key": "show-second-monitor"
+            }
+          },
+          {
+            "type": "switch",
+            "gsetting": {
+              "title": "Free Icons from Grid",
+              "subtitle": "Allows moving icons anywhere without locking icons to the grid.",
+              "schema": "org.gnome.shell.extensions.gtk4-ding",
+              "key": "free-position-icons"
+            }
+          },
+          {
+            "type": "switch",
+            "gsetting": {
+              "title": "Highlight The Grid Drop",
+              "subtitle": "Highlights the grid position an icon will move to when it is being dragged and dropped.",
+              "schema": "org.gnome.shell.extensions.gtk4-ding",
+              "key": "show-drop-place"
+            }
+          },
+          {
+            "type": "switch",
+            "gsetting": {
+              "title": "Add an Emblem to Soft Links",
+              "subtitle": "Shows a link emblem to shortcuts on the desktop.",
+              "schema": "org.gnome.shell.extensions.gtk4-ding",
+              "key": "show-link-emblem"
+            }
+          },
+          {
+            "type": "switch",
+            "gsetting": {
+              "title": "Free Icons from Grid",
+              "subtitle": "Allows moving icons anywhere without locking icons to the grid.",
+              "schema": "org.gnome.shell.extensions.gtk4-ding",
+              "key": "free-position-icons"
+            }
+          },
+          {
+            "type": "switch",
+            "gsetting": {
+              "title": "Dark Icon Labels",
+              "subtitle": "Changes the icon labels to be dark, useful for bright wallpapers.",
+              "schema": "org.gnome.shell.extensions.gtk4-ding",
+              "key": "dark-text-in-labels"
+            }
+          }
+        ]
+    },
+    "ding_volume_group": {
+        "requires_extension": "gtk4-ding@smedius.github.com",
+        "items": [
+            {
+              "type": "switch",
+                "gsetting": {
+                    "title": "Show Home Folder",
+                    "subtitle": "Show the home folder icon on the desktop.",
+                    "schema": "org.gnome.shell.extensions.gtk4-ding",
+                    "key": "show-home"
+                }
+            },
+          {
+              "type": "switch",
+                "gsetting": {
+                    "title": "Show Trahs",
+                    "subtitle": "Show the trash can icon on the desktop.",
+                    "schema": "org.gnome.shell.extensions.gtk4-ding",
+                    "key": "show-trash"
+                }
+          },
+          {
+              "type": "switch",
+                "gsetting": {
+                    "title": "Show External Drives",
+                    "subtitle": "Shows external storage devices such as drives, CDs, and USB on the desktop.",
+                    "schema": "org.gnome.shell.extensions.gtk4-ding",
+                    "key": "show-volumes"
+                }
+          },
+        {
+              "type": "switch",
+                "gsetting": {
+                    "title": "Show Network Volumes",
+                    "subtitle": "Shows network drives/shares on the desktop.",
+                    "schema": "org.gnome.shell.extensions.gtk4-ding",
+                    "key": "show-network-volumes"
+                }
+          },
+          {
+              "type": "switch",
+              "gsetting": {
+                  "title": "Add new drives to the opposite side of the desktop",
+                  "subtitle": "Places drives on the opposite side to keep the desktop organized.",
+                  "schema": "org.gnome.shell.extensions.gtk4-ding",
+                  "key": "add-volumes-opposite"
+              }
+          }
+        ]
+    }
+}

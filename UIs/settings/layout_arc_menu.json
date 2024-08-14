@@ -4,7 +4,7 @@
             {
                 "type": "switch-extension",
                 "title": "Enable Arc Menu",
-                "subtitle": "Customizable Applicaiton Menu. Used for many layouts.",
+                "subtitle": "Customizable Application Menu. Used for many layouts.",
                 "extension": "arcmenu@arcmenu.com"
             }
         ]

@@ -179,6 +179,7 @@ def set_monitor_specific_panel_setting(key, value):
 
     _panel_settings.set_string(key, json.dumps(settings))
 
+
 def set_layout_from_dict(layout: dict):
     reset_settings()
     
