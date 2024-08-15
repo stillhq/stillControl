@@ -13,6 +13,7 @@ Requires:   gnome-shell-extension-dash-to-dock
 Requires:   gnome-shell-extension-dash-to-panel
 Requires:   gnome-shell-extension-arc-menu
 Requires:   gnome-shell-extension-just-perfection
+BuildRequires:  glib2-devel
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
@@ -27,6 +28,9 @@ Some features include:
 %autosetup -n stillControl-main
 
 %build
+rm -f data/io.stillhq.control.gresource  # Incase it already exists from a test run
+glib-compile-resources --sourcedir data --generate data/io.stillhq.control.gresource.xml
+
 %install
 mkdir -p %{buildroot}%{python3_sitelib}/stillControl/data
 mkdir -p %{buildroot}%{python3_sitelib}/stillControl/layouts

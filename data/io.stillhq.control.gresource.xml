@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/io/stillhq/control/icons/scalable/actions/">
+    <file preprocess="xml-stripblanks">object-packing-symbolic.svg</file>
+  </gresource>
+</gresources>

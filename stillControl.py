@@ -72,3 +72,4 @@ class StillControl(Adw.Application):
         # Builder for some reason breaks if I try to set the stacks
         self.main_stack.set_visible_child_name("layout_view")
         self.layout_stack.set_visible_child_name("layout_page")
+
