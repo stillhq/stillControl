@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Tweaks
+Comment=Tweak advanced GNOME settings
+Icon=stillControl
+Exec=still-control
+Terminal=false
+Type=Application
+StartupNotify=true
+StartupWMClass=still-control
+Categories=GNOME;GTK;Utility;stillHQ;
+Keywords=Settings;Advanced;Preferences;Fonts;Theme;XKB;Keyboard;Typing;Tweaks;
+OnlyShowIn=GNOME;

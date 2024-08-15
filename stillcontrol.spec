@@ -32,10 +32,16 @@ mkdir -p %{buildroot}%{python3_sitelib}/stillControl/data
 mkdir -p %{buildroot}%{python3_sitelib}/stillControl/layouts
 mkdir -p %{buildroot}%{python3_sitelib}/stillControl/UIs
 mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps
+mkdir -p %{buildroot}%{_datadir}/applications/
+install -m 0755 data/stillControl.desktop %{buildroot}%{_datadir}/applications/stillControl.desktop
 install -d -m 0755 . %{buildroot}%{python3_sitelib}/stillControl
 install -m 0755 __main__.py %{buildroot}%{_bindir}/still-control
+cp stillControl.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/stillControl.svg
 
 %files
+%{_datadir}/icons/hicolor/scalable/apps/stillControl.svg
+%{_datadir}/applications/stillControl.desktop
 %{_bindir}/still-control
 %{python3_sitelib}/stillControl
 

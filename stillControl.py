@@ -27,7 +27,6 @@ class StillControl(Adw.Application):
         self.layout_stack = self.builder.get_object("layout_stack")
         self.setup_layout_page()
         self.setup_extension_page()
-        # self.connect("activate", self.do_activate)
 
     def setup_extension_page(self):
         ManageExtensionsPage.set_builder(self.builder)
@@ -69,3 +68,7 @@ class StillControl(Adw.Application):
     def do_activate(self):
         self.main_window.set_application(self)
         self.main_window.present()
+
+        # Builder for some reason breaks if I try to set the stacks
+        self.main_stack.set_visible_child_name("layout_view")
+        self.layout_stack.set_visible_child_name("layout_page")
