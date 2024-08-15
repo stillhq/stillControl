@@ -23,3 +23,14 @@ stillOS integrates many settings from GNOME Tweaks automatically, saving the tim
 ![image](https://github.com/user-attachments/assets/1432b29c-403b-4693-80e8-6832bce0a0bc)
 
 stillOS has a built in extension manager that allows managing extensions as well as installing third party extensions from the store.
+
+
+# Running
+This app is designed specifically for stillOS (and preinstalled), however it can run on any distribution as long as it has the following extension dependencies:
+- gnome-shell-extension-dash-to-dock
+- gnome-shell-extension-dash-to-panel
+- gnome-shell-extension-arc-menu
+- gnome-shell-extension-just-perfection
+- gnome-shell-extension-gtk4-desktop-icons-ng
+
+There is an rpm spec to build RPMs for RPM-based distros
