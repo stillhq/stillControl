@@ -6,18 +6,21 @@ from ExtensionSearchPage import ExtensionSearchPage
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Gtk, Adw
+from gi.repository import Gtk, Adw, Gio
 
 import ManageExtensionsPage
 import LayoutManager
 import LayoutButton
 
+import constants
 from __init__ import GSetting  # FIXME: Change this to absolute import
 
 
 class StillControl(Adw.Application):
     def __init__(self):
         super().__init__(application_id="io.stillhq.Control")
+        resource = Gio.resource_load(os.path.join(constants.MAIN_DIR, "data", "io.stillhq.control.gresource"))
+        Gio.Resource._register(resource)
 
         self.builder = Gtk.Builder()
         self.builder.add_from_file(os.path.join(constants.UI_DIR, "stillControl.ui"))

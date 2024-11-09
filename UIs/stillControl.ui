@@ -83,6 +83,7 @@
                                                 <child>
                                                   <object class="GtkBox">
                                                     <property name="margin-bottom">20</property>
+                                                    <property name="margin-top">20</property>
                                                     <property name="orientation">vertical</property>
                                                     <child>
                                                       <object class="GSettingsGroup" id="desktop_group"/>
@@ -389,7 +390,7 @@
                             <property name="vexpand">True</property>
                           </object>
                         </property>
-                        <property name="icon-name">object-packing-symbolic</property>
+                        <property name="icon-name">/io/stillhq/control/icons/scalable/actions/object-packing-symbolic</property>
                         <property name="name">layout_view</property>
                         <property name="title">Layout</property>
                       </object>
